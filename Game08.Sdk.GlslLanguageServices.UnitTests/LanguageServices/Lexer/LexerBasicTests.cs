@@ -29,13 +29,6 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.Lexer
             "*"
         };
 
-        private readonly HashSet<int> integerLiteralPartTypes = new HashSet<int>
-        {
-            GLSL_ES300Lexer.DecimalLiteral,
-            GLSL_ES300Lexer.OctalLiteral,
-            GLSL_ES300Lexer.HexadecimalLiteral
-        };
-
         [Test]
         public void CanParseIdentifiers()
         {
@@ -59,23 +52,24 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.Lexer
         }
 
         [Test]
-        [TestCase("10", GLSL_ES300Lexer.DecimalLiteral)]
-        [TestCase("199999", GLSL_ES300Lexer.DecimalLiteral)]
-        [TestCase("06", GLSL_ES300Lexer.OctalLiteral)]
-        [TestCase("067777", GLSL_ES300Lexer.OctalLiteral)]
-        [TestCase("0x456a", GLSL_ES300Lexer.HexadecimalLiteral)]
-        [TestCase("0X456a", GLSL_ES300Lexer.HexadecimalLiteral)]
-        [TestCase("0xffffff", GLSL_ES300Lexer.HexadecimalLiteral)]        
-        public void CanParseIntegerLiteralParts(string payload, int expectedTokenType)
+        [TestCase("10", GLSL_ES300Lexer.IntegerLiteral)]
+        [TestCase("199999", GLSL_ES300Lexer.IntegerLiteral)]
+        [TestCase("06", GLSL_ES300Lexer.IntegerLiteral)]
+        [TestCase("067777", GLSL_ES300Lexer.IntegerLiteral)]
+        [TestCase("0x456a", GLSL_ES300Lexer.IntegerLiteral)]
+        [TestCase("0X456a", GLSL_ES300Lexer.IntegerLiteral)]
+        [TestCase("0xffffff", GLSL_ES300Lexer.IntegerLiteral)]        
+        public void CanParseIntegerLiterals(string payload, int expectedTokenType)
         {
             var lexer = TestUtils.SetupLexer(payload);
             var tokens = lexer.GetAllTokens();
             Assert.AreEqual(1, tokens.Count);
             Assert.AreEqual(expectedTokenType, tokens[0].Type);
+            Assert.AreEqual(payload, tokens[0].Text);
         }
 
         [Test]
-        public void CanParseSuffix()
+        public void CanParseIntegerSuffix()
         {
             var payload = "10u";
             var lexer = TestUtils.SetupLexer(payload);
@@ -83,6 +77,29 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.Lexer
 
             Assert.AreEqual(1, tokens.Count);
             Assert.AreEqual(GLSL_ES300Lexer.IntegerLiteral, tokens[0].Type);
+            Assert.AreEqual(payload, tokens[0].Text);
+        }
+
+        [Test]
+        [TestCase("0.1")]
+        [TestCase("1.1")]
+        [TestCase("123.123")]
+        [TestCase(".123")]
+        [TestCase("123.")]
+        [TestCase("123.")]
+        [TestCase("123e-20")]
+        [TestCase("123e20")]
+        [TestCase("123e+20")]
+        [TestCase("123.6e+20")]
+        [TestCase("123.6e+20f")]
+        [TestCase("123.6e+20F")]
+        public void CanParseFloatingLiterals(string payload)
+        {
+            var lexer = TestUtils.SetupLexer(payload);
+            var tokens = lexer.GetAllTokens();
+            Assert.AreEqual(1, tokens.Count);
+            Assert.AreEqual(GLSL_ES300Lexer.FloatingLiteral, tokens[0].Type);
+            Assert.AreEqual(payload, tokens[0].Text);
         }
     }
 }

@@ -61,4 +61,34 @@ public interface IGLSL_ES300ParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitLiteral([NotNull] GLSL_ES300Parser.LiteralContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDeclarators([NotNull] GLSL_ES300Parser.DeclaratorsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.memberdeclaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMemberdeclaration([NotNull] GLSL_ES300Parser.MemberdeclarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.structdefinition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStructdefinition([NotNull] GLSL_ES300Parser.StructdefinitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.typequalifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTypequalifier([NotNull] GLSL_ES300Parser.TypequalifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.typename"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTypename([NotNull] GLSL_ES300Parser.TypenameContext context);
 }

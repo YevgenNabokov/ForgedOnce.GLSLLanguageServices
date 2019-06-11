@@ -36,50 +36,57 @@ public partial class GLSL_ES300Parser : Parser {
 	protected static DFA[] decisionToDFA;
 	protected static PredictionContextCache sharedContextCache = new PredictionContextCache();
 	public const int
-		IdentifierNonDigit=1, Identifier=2, IntegerSuffix=3, DecimalLiteral=4, 
-		OctalLiteral=5, HexadecimalLiteral=6, IntegerLiteral=7, Whitespace=8, 
-		Newline=9, BlockComment=10, LineComment=11, Void_type=12, Bool_type=13, 
-		Int_type=14, Uint_type=15, Float_type=16, Vec2_type=17, Vec3_type=18, 
-		Vec4_type=19, Bvec2_type=20, Bvec3_type=21, Bvec4_type=22, Ivec2_type=23, 
-		Ivec3_type=24, Ivec4_type=25, Uvec2_type=26, Uvec3_type=27, Uvec4_type=28, 
-		Mat2_type=29, Mat3_type=30, Mat4_type=31, Mat2x2_type=32, Mat2x3_type=33, 
-		Mat2x4_type=34, Mat3x2_type=35, Mat3x3_type=36, Mat3x4_type=37, Mat4x2_type=38, 
-		Mat4x3_type=39, Mat4x4_type=40, Sampler2D_type=41, Sampler3D_type=42, 
-		SamplerCube_type=43, SamplerCubeShadow_type=44, Sampler2DShadow_type=45, 
-		Sampler2DArray_type=46, Sampler2DArrayShadow_type=47, Isampler2D_type=48, 
-		Isampler3D_type=49, IsamplerCube_type=50, Isampler2DArray_type=51, Usampler2D_type=52, 
-		Usampler3D_type=53, UsamplerCube_type=54, Usampler2DArray_type=55;
+		IdentifierNonDigit=1, Identifier=2, FloatingLiteral=3, IntegerLiteral=4, 
+		Whitespace=5, Newline=6, BlockComment=7, LineComment=8, Struct=9, Const=10, 
+		In=11, Out=12, Uniform=13, CentroidIn=14, CentroidOut=15, Semicolon=16, 
+		Colon=17, Comma=18, OpenCurlyBrace=19, CloseCurlyBrace=20, Void_type=21, 
+		Bool_type=22, Int_type=23, Uint_type=24, Float_type=25, Vec2_type=26, 
+		Vec3_type=27, Vec4_type=28, Bvec2_type=29, Bvec3_type=30, Bvec4_type=31, 
+		Ivec2_type=32, Ivec3_type=33, Ivec4_type=34, Uvec2_type=35, Uvec3_type=36, 
+		Uvec4_type=37, Mat2_type=38, Mat3_type=39, Mat4_type=40, Mat2x2_type=41, 
+		Mat2x3_type=42, Mat2x4_type=43, Mat3x2_type=44, Mat3x3_type=45, Mat3x4_type=46, 
+		Mat4x2_type=47, Mat4x3_type=48, Mat4x4_type=49, Sampler2D_type=50, Sampler3D_type=51, 
+		SamplerCube_type=52, SamplerCubeShadow_type=53, Sampler2DShadow_type=54, 
+		Sampler2DArray_type=55, Sampler2DArrayShadow_type=56, Isampler2D_type=57, 
+		Isampler3D_type=58, IsamplerCube_type=59, Isampler2DArray_type=60, Usampler2D_type=61, 
+		Usampler3D_type=62, UsamplerCube_type=63, Usampler2DArray_type=64;
 	public const int
 		RULE_root = 0, RULE_declaration = 1, RULE_declarationlist = 2, RULE_variabledeclaration = 3, 
-		RULE_literal = 4;
+		RULE_literal = 4, RULE_declarators = 5, RULE_memberdeclaration = 6, RULE_structdefinition = 7, 
+		RULE_typequalifier = 8, RULE_typename = 9;
 	public static readonly string[] ruleNames = {
-		"root", "declaration", "declarationlist", "variabledeclaration", "literal"
+		"root", "declaration", "declarationlist", "variabledeclaration", "literal", 
+		"declarators", "memberdeclaration", "structdefinition", "typequalifier", 
+		"typename"
 	};
 
 	private static readonly string[] _LiteralNames = {
-		null, null, null, null, null, null, null, null, null, null, null, null, 
-		"'void'", "'bool'", "'int'", "'uint'", "'float'", "'vec2'", "'vec3'", 
-		"'vec4'", "'bvec2'", "'bvec3'", "'bvec4'", "'ivec2'", "'ivec3'", "'ivec4'", 
-		"'uvec2'", "'uvec3'", "'uvec4'", "'mat2'", "'mat3'", "'mat4'", "'mat2x2'", 
-		"'mat2x3'", "'mat2x4'", "'mat3x2'", "'mat3x3'", "'mat3x4'", "'mat4x2'", 
-		"'mat4x3'", "'mat4x4'", "'sampler2D'", "'sampler3D'", "'samplerCube'", 
-		"'samplerCubeShadow'", "'sampler2DShadow'", "'sampler2DArray'", "'sampler2DArrayShadow'", 
-		"'isampler2D'", "'isampler3D'", "'isamplerCube'", "'isampler2DArray'", 
-		"'usampler2D'", "'usampler3D'", "'usamplerCube'", "'usampler2DArray'"
+		null, null, null, null, null, null, null, null, null, "'struct'", "'const'", 
+		"'in'", "'out'", "'uniform'", "'centroid in'", "'centroid out'", "';'", 
+		"':'", "','", "'{'", "'}'", "'void'", "'bool'", "'int'", "'uint'", "'float'", 
+		"'vec2'", "'vec3'", "'vec4'", "'bvec2'", "'bvec3'", "'bvec4'", "'ivec2'", 
+		"'ivec3'", "'ivec4'", "'uvec2'", "'uvec3'", "'uvec4'", "'mat2'", "'mat3'", 
+		"'mat4'", "'mat2x2'", "'mat2x3'", "'mat2x4'", "'mat3x2'", "'mat3x3'", 
+		"'mat3x4'", "'mat4x2'", "'mat4x3'", "'mat4x4'", "'sampler2D'", "'sampler3D'", 
+		"'samplerCube'", "'samplerCubeShadow'", "'sampler2DShadow'", "'sampler2DArray'", 
+		"'sampler2DArrayShadow'", "'isampler2D'", "'isampler3D'", "'isamplerCube'", 
+		"'isampler2DArray'", "'usampler2D'", "'usampler3D'", "'usamplerCube'", 
+		"'usampler2DArray'"
 	};
 	private static readonly string[] _SymbolicNames = {
-		null, "IdentifierNonDigit", "Identifier", "IntegerSuffix", "DecimalLiteral", 
-		"OctalLiteral", "HexadecimalLiteral", "IntegerLiteral", "Whitespace", 
-		"Newline", "BlockComment", "LineComment", "Void_type", "Bool_type", "Int_type", 
-		"Uint_type", "Float_type", "Vec2_type", "Vec3_type", "Vec4_type", "Bvec2_type", 
-		"Bvec3_type", "Bvec4_type", "Ivec2_type", "Ivec3_type", "Ivec4_type", 
-		"Uvec2_type", "Uvec3_type", "Uvec4_type", "Mat2_type", "Mat3_type", "Mat4_type", 
-		"Mat2x2_type", "Mat2x3_type", "Mat2x4_type", "Mat3x2_type", "Mat3x3_type", 
-		"Mat3x4_type", "Mat4x2_type", "Mat4x3_type", "Mat4x4_type", "Sampler2D_type", 
-		"Sampler3D_type", "SamplerCube_type", "SamplerCubeShadow_type", "Sampler2DShadow_type", 
-		"Sampler2DArray_type", "Sampler2DArrayShadow_type", "Isampler2D_type", 
-		"Isampler3D_type", "IsamplerCube_type", "Isampler2DArray_type", "Usampler2D_type", 
-		"Usampler3D_type", "UsamplerCube_type", "Usampler2DArray_type"
+		null, "IdentifierNonDigit", "Identifier", "FloatingLiteral", "IntegerLiteral", 
+		"Whitespace", "Newline", "BlockComment", "LineComment", "Struct", "Const", 
+		"In", "Out", "Uniform", "CentroidIn", "CentroidOut", "Semicolon", "Colon", 
+		"Comma", "OpenCurlyBrace", "CloseCurlyBrace", "Void_type", "Bool_type", 
+		"Int_type", "Uint_type", "Float_type", "Vec2_type", "Vec3_type", "Vec4_type", 
+		"Bvec2_type", "Bvec3_type", "Bvec4_type", "Ivec2_type", "Ivec3_type", 
+		"Ivec4_type", "Uvec2_type", "Uvec3_type", "Uvec4_type", "Mat2_type", "Mat3_type", 
+		"Mat4_type", "Mat2x2_type", "Mat2x3_type", "Mat2x4_type", "Mat3x2_type", 
+		"Mat3x3_type", "Mat3x4_type", "Mat4x2_type", "Mat4x3_type", "Mat4x4_type", 
+		"Sampler2D_type", "Sampler3D_type", "SamplerCube_type", "SamplerCubeShadow_type", 
+		"Sampler2DShadow_type", "Sampler2DArray_type", "Sampler2DArrayShadow_type", 
+		"Isampler2D_type", "Isampler3D_type", "IsamplerCube_type", "Isampler2DArray_type", 
+		"Usampler2D_type", "Usampler3D_type", "UsamplerCube_type", "Usampler2DArray_type"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -146,16 +153,16 @@ public partial class GLSL_ES300Parser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 11;
+			State = 21;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			if (_la==Identifier) {
 				{
-				State = 10; declarationlist(0);
+				State = 20; declarationlist(0);
 				}
 			}
 
-			State = 13; Match(Eof);
+			State = 23; Match(Eof);
 			}
 		}
 		catch (RecognitionException re) {
@@ -200,7 +207,7 @@ public partial class GLSL_ES300Parser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 15; variabledeclaration();
+			State = 25; variabledeclaration();
 			}
 		}
 		catch (RecognitionException re) {
@@ -258,10 +265,10 @@ public partial class GLSL_ES300Parser : Parser {
 			EnterOuterAlt(_localctx, 1);
 			{
 			{
-			State = 18; declaration();
+			State = 28; declaration();
 			}
 			Context.Stop = TokenStream.LT(-1);
-			State = 24;
+			State = 34;
 			ErrorHandler.Sync(this);
 			_alt = Interpreter.AdaptivePredict(TokenStream,1,Context);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.INVALID_ALT_NUMBER ) {
@@ -273,13 +280,13 @@ public partial class GLSL_ES300Parser : Parser {
 					{
 					_localctx = new DeclarationlistContext(_parentctx, _parentState);
 					PushNewRecursionContext(_localctx, _startState, RULE_declarationlist);
-					State = 20;
+					State = 30;
 					if (!(Precpred(Context, 1))) throw new FailedPredicateException(this, "Precpred(Context, 1)");
-					State = 21; declaration();
+					State = 31; declaration();
 					}
 					} 
 				}
-				State = 26;
+				State = 36;
 				ErrorHandler.Sync(this);
 				_alt = Interpreter.AdaptivePredict(TokenStream,1,Context);
 			}
@@ -325,7 +332,7 @@ public partial class GLSL_ES300Parser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 27; Match(Identifier);
+			State = 37; Match(Identifier);
 			}
 		}
 		catch (RecognitionException re) {
@@ -341,6 +348,7 @@ public partial class GLSL_ES300Parser : Parser {
 
 	public partial class LiteralContext : ParserRuleContext {
 		public ITerminalNode IntegerLiteral() { return GetToken(GLSL_ES300Parser.IntegerLiteral, 0); }
+		public ITerminalNode FloatingLiteral() { return GetToken(GLSL_ES300Parser.FloatingLiteral, 0); }
 		public LiteralContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -365,10 +373,400 @@ public partial class GLSL_ES300Parser : Parser {
 	public LiteralContext literal() {
 		LiteralContext _localctx = new LiteralContext(Context, State);
 		EnterRule(_localctx, 8, RULE_literal);
+		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 29; Match(IntegerLiteral);
+			State = 39;
+			_la = TokenStream.LA(1);
+			if ( !(_la==FloatingLiteral || _la==IntegerLiteral) ) {
+			ErrorHandler.RecoverInline(this);
+			}
+			else {
+				ErrorHandler.ReportMatch(this);
+			    Consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class DeclaratorsContext : ParserRuleContext {
+		public ITerminalNode Identifier() { return GetToken(GLSL_ES300Parser.Identifier, 0); }
+		public DeclaratorsContext declarators() {
+			return GetRuleContext<DeclaratorsContext>(0);
+		}
+		public ITerminalNode Comma() { return GetToken(GLSL_ES300Parser.Comma, 0); }
+		public DeclaratorsContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_declarators; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IGLSL_ES300ParserListener typedListener = listener as IGLSL_ES300ParserListener;
+			if (typedListener != null) typedListener.EnterDeclarators(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IGLSL_ES300ParserListener typedListener = listener as IGLSL_ES300ParserListener;
+			if (typedListener != null) typedListener.ExitDeclarators(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IGLSL_ES300ParserVisitor<TResult> typedVisitor = visitor as IGLSL_ES300ParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDeclarators(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public DeclaratorsContext declarators() {
+		return declarators(0);
+	}
+
+	private DeclaratorsContext declarators(int _p) {
+		ParserRuleContext _parentctx = Context;
+		int _parentState = State;
+		DeclaratorsContext _localctx = new DeclaratorsContext(Context, _parentState);
+		DeclaratorsContext _prevctx = _localctx;
+		int _startState = 10;
+		EnterRecursionRule(_localctx, 10, RULE_declarators, _p);
+		try {
+			int _alt;
+			EnterOuterAlt(_localctx, 1);
+			{
+			{
+			State = 42; Match(Identifier);
+			}
+			Context.Stop = TokenStream.LT(-1);
+			State = 49;
+			ErrorHandler.Sync(this);
+			_alt = Interpreter.AdaptivePredict(TokenStream,2,Context);
+			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					if ( ParseListeners!=null )
+						TriggerExitRuleEvent();
+					_prevctx = _localctx;
+					{
+					{
+					_localctx = new DeclaratorsContext(_parentctx, _parentState);
+					PushNewRecursionContext(_localctx, _startState, RULE_declarators);
+					State = 44;
+					if (!(Precpred(Context, 1))) throw new FailedPredicateException(this, "Precpred(Context, 1)");
+					State = 45; Match(Comma);
+					State = 46; Match(Identifier);
+					}
+					} 
+				}
+				State = 51;
+				ErrorHandler.Sync(this);
+				_alt = Interpreter.AdaptivePredict(TokenStream,2,Context);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			UnrollRecursionContexts(_parentctx);
+		}
+		return _localctx;
+	}
+
+	public partial class MemberdeclarationContext : ParserRuleContext {
+		public TypenameContext typename() {
+			return GetRuleContext<TypenameContext>(0);
+		}
+		public DeclaratorsContext declarators() {
+			return GetRuleContext<DeclaratorsContext>(0);
+		}
+		public ITerminalNode Semicolon() { return GetToken(GLSL_ES300Parser.Semicolon, 0); }
+		public MemberdeclarationContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_memberdeclaration; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IGLSL_ES300ParserListener typedListener = listener as IGLSL_ES300ParserListener;
+			if (typedListener != null) typedListener.EnterMemberdeclaration(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IGLSL_ES300ParserListener typedListener = listener as IGLSL_ES300ParserListener;
+			if (typedListener != null) typedListener.ExitMemberdeclaration(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IGLSL_ES300ParserVisitor<TResult> typedVisitor = visitor as IGLSL_ES300ParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMemberdeclaration(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public MemberdeclarationContext memberdeclaration() {
+		MemberdeclarationContext _localctx = new MemberdeclarationContext(Context, State);
+		EnterRule(_localctx, 12, RULE_memberdeclaration);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 52; typename();
+			State = 53; declarators(0);
+			State = 54; Match(Semicolon);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class StructdefinitionContext : ParserRuleContext {
+		public ITerminalNode Struct() { return GetToken(GLSL_ES300Parser.Struct, 0); }
+		public ITerminalNode OpenCurlyBrace() { return GetToken(GLSL_ES300Parser.OpenCurlyBrace, 0); }
+		public ITerminalNode CloseCurlyBrace() { return GetToken(GLSL_ES300Parser.CloseCurlyBrace, 0); }
+		public DeclaratorsContext declarators() {
+			return GetRuleContext<DeclaratorsContext>(0);
+		}
+		public ITerminalNode Semicolon() { return GetToken(GLSL_ES300Parser.Semicolon, 0); }
+		public TypequalifierContext typequalifier() {
+			return GetRuleContext<TypequalifierContext>(0);
+		}
+		public ITerminalNode Identifier() { return GetToken(GLSL_ES300Parser.Identifier, 0); }
+		public MemberdeclarationContext[] memberdeclaration() {
+			return GetRuleContexts<MemberdeclarationContext>();
+		}
+		public MemberdeclarationContext memberdeclaration(int i) {
+			return GetRuleContext<MemberdeclarationContext>(i);
+		}
+		public StructdefinitionContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_structdefinition; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IGLSL_ES300ParserListener typedListener = listener as IGLSL_ES300ParserListener;
+			if (typedListener != null) typedListener.EnterStructdefinition(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IGLSL_ES300ParserListener typedListener = listener as IGLSL_ES300ParserListener;
+			if (typedListener != null) typedListener.ExitStructdefinition(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IGLSL_ES300ParserVisitor<TResult> typedVisitor = visitor as IGLSL_ES300ParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStructdefinition(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public StructdefinitionContext structdefinition() {
+		StructdefinitionContext _localctx = new StructdefinitionContext(Context, State);
+		EnterRule(_localctx, 14, RULE_structdefinition);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 57;
+			ErrorHandler.Sync(this);
+			_la = TokenStream.LA(1);
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut))) != 0)) {
+				{
+				State = 56; typequalifier();
+				}
+			}
+
+			State = 59; Match(Struct);
+			State = 61;
+			ErrorHandler.Sync(this);
+			_la = TokenStream.LA(1);
+			if (_la==Identifier) {
+				{
+				State = 60; Match(Identifier);
+				}
+			}
+
+			State = 63; Match(OpenCurlyBrace);
+			State = 65;
+			ErrorHandler.Sync(this);
+			_la = TokenStream.LA(1);
+			do {
+				{
+				{
+				State = 64; memberdeclaration();
+				}
+				}
+				State = 67;
+				ErrorHandler.Sync(this);
+				_la = TokenStream.LA(1);
+			} while ( ((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (Identifier - 2)) | (1L << (Void_type - 2)) | (1L << (Bool_type - 2)) | (1L << (Int_type - 2)) | (1L << (Uint_type - 2)) | (1L << (Float_type - 2)) | (1L << (Vec2_type - 2)) | (1L << (Vec3_type - 2)) | (1L << (Vec4_type - 2)) | (1L << (Bvec2_type - 2)) | (1L << (Bvec3_type - 2)) | (1L << (Bvec4_type - 2)) | (1L << (Ivec2_type - 2)) | (1L << (Ivec3_type - 2)) | (1L << (Ivec4_type - 2)) | (1L << (Uvec2_type - 2)) | (1L << (Uvec3_type - 2)) | (1L << (Uvec4_type - 2)) | (1L << (Mat2_type - 2)) | (1L << (Mat3_type - 2)) | (1L << (Mat4_type - 2)) | (1L << (Mat2x2_type - 2)) | (1L << (Mat2x3_type - 2)) | (1L << (Mat2x4_type - 2)) | (1L << (Mat3x2_type - 2)) | (1L << (Mat3x3_type - 2)) | (1L << (Mat3x4_type - 2)) | (1L << (Mat4x2_type - 2)) | (1L << (Mat4x3_type - 2)) | (1L << (Mat4x4_type - 2)) | (1L << (Sampler2D_type - 2)) | (1L << (Sampler3D_type - 2)) | (1L << (SamplerCube_type - 2)) | (1L << (SamplerCubeShadow_type - 2)) | (1L << (Sampler2DShadow_type - 2)) | (1L << (Sampler2DArray_type - 2)) | (1L << (Sampler2DArrayShadow_type - 2)) | (1L << (Isampler2D_type - 2)) | (1L << (Isampler3D_type - 2)) | (1L << (IsamplerCube_type - 2)) | (1L << (Isampler2DArray_type - 2)) | (1L << (Usampler2D_type - 2)) | (1L << (Usampler3D_type - 2)) | (1L << (UsamplerCube_type - 2)) | (1L << (Usampler2DArray_type - 2)))) != 0) );
+			State = 69; Match(CloseCurlyBrace);
+			State = 70; declarators(0);
+			State = 71; Match(Semicolon);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class TypequalifierContext : ParserRuleContext {
+		public ITerminalNode Const() { return GetToken(GLSL_ES300Parser.Const, 0); }
+		public ITerminalNode In() { return GetToken(GLSL_ES300Parser.In, 0); }
+		public ITerminalNode Out() { return GetToken(GLSL_ES300Parser.Out, 0); }
+		public ITerminalNode Uniform() { return GetToken(GLSL_ES300Parser.Uniform, 0); }
+		public ITerminalNode CentroidIn() { return GetToken(GLSL_ES300Parser.CentroidIn, 0); }
+		public ITerminalNode CentroidOut() { return GetToken(GLSL_ES300Parser.CentroidOut, 0); }
+		public TypequalifierContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_typequalifier; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IGLSL_ES300ParserListener typedListener = listener as IGLSL_ES300ParserListener;
+			if (typedListener != null) typedListener.EnterTypequalifier(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IGLSL_ES300ParserListener typedListener = listener as IGLSL_ES300ParserListener;
+			if (typedListener != null) typedListener.ExitTypequalifier(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IGLSL_ES300ParserVisitor<TResult> typedVisitor = visitor as IGLSL_ES300ParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTypequalifier(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public TypequalifierContext typequalifier() {
+		TypequalifierContext _localctx = new TypequalifierContext(Context, State);
+		EnterRule(_localctx, 16, RULE_typequalifier);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 73;
+			_la = TokenStream.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut))) != 0)) ) {
+			ErrorHandler.RecoverInline(this);
+			}
+			else {
+				ErrorHandler.ReportMatch(this);
+			    Consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class TypenameContext : ParserRuleContext {
+		public ITerminalNode Void_type() { return GetToken(GLSL_ES300Parser.Void_type, 0); }
+		public ITerminalNode Bool_type() { return GetToken(GLSL_ES300Parser.Bool_type, 0); }
+		public ITerminalNode Int_type() { return GetToken(GLSL_ES300Parser.Int_type, 0); }
+		public ITerminalNode Uint_type() { return GetToken(GLSL_ES300Parser.Uint_type, 0); }
+		public ITerminalNode Float_type() { return GetToken(GLSL_ES300Parser.Float_type, 0); }
+		public ITerminalNode Vec2_type() { return GetToken(GLSL_ES300Parser.Vec2_type, 0); }
+		public ITerminalNode Vec3_type() { return GetToken(GLSL_ES300Parser.Vec3_type, 0); }
+		public ITerminalNode Vec4_type() { return GetToken(GLSL_ES300Parser.Vec4_type, 0); }
+		public ITerminalNode Bvec2_type() { return GetToken(GLSL_ES300Parser.Bvec2_type, 0); }
+		public ITerminalNode Bvec3_type() { return GetToken(GLSL_ES300Parser.Bvec3_type, 0); }
+		public ITerminalNode Bvec4_type() { return GetToken(GLSL_ES300Parser.Bvec4_type, 0); }
+		public ITerminalNode Ivec2_type() { return GetToken(GLSL_ES300Parser.Ivec2_type, 0); }
+		public ITerminalNode Ivec3_type() { return GetToken(GLSL_ES300Parser.Ivec3_type, 0); }
+		public ITerminalNode Ivec4_type() { return GetToken(GLSL_ES300Parser.Ivec4_type, 0); }
+		public ITerminalNode Uvec2_type() { return GetToken(GLSL_ES300Parser.Uvec2_type, 0); }
+		public ITerminalNode Uvec3_type() { return GetToken(GLSL_ES300Parser.Uvec3_type, 0); }
+		public ITerminalNode Uvec4_type() { return GetToken(GLSL_ES300Parser.Uvec4_type, 0); }
+		public ITerminalNode Mat2_type() { return GetToken(GLSL_ES300Parser.Mat2_type, 0); }
+		public ITerminalNode Mat3_type() { return GetToken(GLSL_ES300Parser.Mat3_type, 0); }
+		public ITerminalNode Mat4_type() { return GetToken(GLSL_ES300Parser.Mat4_type, 0); }
+		public ITerminalNode Mat2x2_type() { return GetToken(GLSL_ES300Parser.Mat2x2_type, 0); }
+		public ITerminalNode Mat2x3_type() { return GetToken(GLSL_ES300Parser.Mat2x3_type, 0); }
+		public ITerminalNode Mat2x4_type() { return GetToken(GLSL_ES300Parser.Mat2x4_type, 0); }
+		public ITerminalNode Mat3x2_type() { return GetToken(GLSL_ES300Parser.Mat3x2_type, 0); }
+		public ITerminalNode Mat3x3_type() { return GetToken(GLSL_ES300Parser.Mat3x3_type, 0); }
+		public ITerminalNode Mat3x4_type() { return GetToken(GLSL_ES300Parser.Mat3x4_type, 0); }
+		public ITerminalNode Mat4x2_type() { return GetToken(GLSL_ES300Parser.Mat4x2_type, 0); }
+		public ITerminalNode Mat4x3_type() { return GetToken(GLSL_ES300Parser.Mat4x3_type, 0); }
+		public ITerminalNode Mat4x4_type() { return GetToken(GLSL_ES300Parser.Mat4x4_type, 0); }
+		public ITerminalNode Sampler2D_type() { return GetToken(GLSL_ES300Parser.Sampler2D_type, 0); }
+		public ITerminalNode Sampler3D_type() { return GetToken(GLSL_ES300Parser.Sampler3D_type, 0); }
+		public ITerminalNode SamplerCube_type() { return GetToken(GLSL_ES300Parser.SamplerCube_type, 0); }
+		public ITerminalNode SamplerCubeShadow_type() { return GetToken(GLSL_ES300Parser.SamplerCubeShadow_type, 0); }
+		public ITerminalNode Sampler2DShadow_type() { return GetToken(GLSL_ES300Parser.Sampler2DShadow_type, 0); }
+		public ITerminalNode Sampler2DArray_type() { return GetToken(GLSL_ES300Parser.Sampler2DArray_type, 0); }
+		public ITerminalNode Sampler2DArrayShadow_type() { return GetToken(GLSL_ES300Parser.Sampler2DArrayShadow_type, 0); }
+		public ITerminalNode Isampler2D_type() { return GetToken(GLSL_ES300Parser.Isampler2D_type, 0); }
+		public ITerminalNode Isampler3D_type() { return GetToken(GLSL_ES300Parser.Isampler3D_type, 0); }
+		public ITerminalNode IsamplerCube_type() { return GetToken(GLSL_ES300Parser.IsamplerCube_type, 0); }
+		public ITerminalNode Isampler2DArray_type() { return GetToken(GLSL_ES300Parser.Isampler2DArray_type, 0); }
+		public ITerminalNode Usampler2D_type() { return GetToken(GLSL_ES300Parser.Usampler2D_type, 0); }
+		public ITerminalNode Usampler3D_type() { return GetToken(GLSL_ES300Parser.Usampler3D_type, 0); }
+		public ITerminalNode UsamplerCube_type() { return GetToken(GLSL_ES300Parser.UsamplerCube_type, 0); }
+		public ITerminalNode Usampler2DArray_type() { return GetToken(GLSL_ES300Parser.Usampler2DArray_type, 0); }
+		public ITerminalNode Identifier() { return GetToken(GLSL_ES300Parser.Identifier, 0); }
+		public TypenameContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_typename; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IGLSL_ES300ParserListener typedListener = listener as IGLSL_ES300ParserListener;
+			if (typedListener != null) typedListener.EnterTypename(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IGLSL_ES300ParserListener typedListener = listener as IGLSL_ES300ParserListener;
+			if (typedListener != null) typedListener.ExitTypename(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IGLSL_ES300ParserVisitor<TResult> typedVisitor = visitor as IGLSL_ES300ParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTypename(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public TypenameContext typename() {
+		TypenameContext _localctx = new TypenameContext(Context, State);
+		EnterRule(_localctx, 18, RULE_typename);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 75;
+			_la = TokenStream.LA(1);
+			if ( !(((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (Identifier - 2)) | (1L << (Void_type - 2)) | (1L << (Bool_type - 2)) | (1L << (Int_type - 2)) | (1L << (Uint_type - 2)) | (1L << (Float_type - 2)) | (1L << (Vec2_type - 2)) | (1L << (Vec3_type - 2)) | (1L << (Vec4_type - 2)) | (1L << (Bvec2_type - 2)) | (1L << (Bvec3_type - 2)) | (1L << (Bvec4_type - 2)) | (1L << (Ivec2_type - 2)) | (1L << (Ivec3_type - 2)) | (1L << (Ivec4_type - 2)) | (1L << (Uvec2_type - 2)) | (1L << (Uvec3_type - 2)) | (1L << (Uvec4_type - 2)) | (1L << (Mat2_type - 2)) | (1L << (Mat3_type - 2)) | (1L << (Mat4_type - 2)) | (1L << (Mat2x2_type - 2)) | (1L << (Mat2x3_type - 2)) | (1L << (Mat2x4_type - 2)) | (1L << (Mat3x2_type - 2)) | (1L << (Mat3x3_type - 2)) | (1L << (Mat3x4_type - 2)) | (1L << (Mat4x2_type - 2)) | (1L << (Mat4x3_type - 2)) | (1L << (Mat4x4_type - 2)) | (1L << (Sampler2D_type - 2)) | (1L << (Sampler3D_type - 2)) | (1L << (SamplerCube_type - 2)) | (1L << (SamplerCubeShadow_type - 2)) | (1L << (Sampler2DShadow_type - 2)) | (1L << (Sampler2DArray_type - 2)) | (1L << (Sampler2DArrayShadow_type - 2)) | (1L << (Isampler2D_type - 2)) | (1L << (Isampler3D_type - 2)) | (1L << (IsamplerCube_type - 2)) | (1L << (Isampler2DArray_type - 2)) | (1L << (Usampler2D_type - 2)) | (1L << (Usampler3D_type - 2)) | (1L << (UsamplerCube_type - 2)) | (1L << (Usampler2DArray_type - 2)))) != 0)) ) {
+			ErrorHandler.RecoverInline(this);
+			}
+			else {
+				ErrorHandler.ReportMatch(this);
+			    Consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -385,6 +783,7 @@ public partial class GLSL_ES300Parser : Parser {
 	public override bool Sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
 		case 2: return declarationlist_sempred((DeclarationlistContext)_localctx, predIndex);
+		case 5: return declarators_sempred((DeclaratorsContext)_localctx, predIndex);
 		}
 		return true;
 	}
@@ -394,34 +793,76 @@ public partial class GLSL_ES300Parser : Parser {
 		}
 		return true;
 	}
+	private bool declarators_sempred(DeclaratorsContext _localctx, int predIndex) {
+		switch (predIndex) {
+		case 1: return Precpred(Context, 1);
+		}
+		return true;
+	}
 
 	private static char[] _serializedATN = {
 		'\x3', '\x608B', '\xA72A', '\x8133', '\xB9ED', '\x417C', '\x3BE7', '\x7786', 
-		'\x5964', '\x3', '\x39', '\"', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', 
+		'\x5964', '\x3', '\x42', 'P', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', 
 		'\t', '\x3', '\x4', '\x4', '\t', '\x4', '\x4', '\x5', '\t', '\x5', '\x4', 
-		'\x6', '\t', '\x6', '\x3', '\x2', '\x5', '\x2', '\xE', '\n', '\x2', '\x3', 
-		'\x2', '\x3', '\x2', '\x3', '\x3', '\x3', '\x3', '\x3', '\x4', '\x3', 
-		'\x4', '\x3', '\x4', '\x3', '\x4', '\x3', '\x4', '\a', '\x4', '\x19', 
-		'\n', '\x4', '\f', '\x4', '\xE', '\x4', '\x1C', '\v', '\x4', '\x3', '\x5', 
-		'\x3', '\x5', '\x3', '\x6', '\x3', '\x6', '\x3', '\x6', '\x2', '\x3', 
-		'\x6', '\a', '\x2', '\x4', '\x6', '\b', '\n', '\x2', '\x2', '\x2', '\x1E', 
-		'\x2', '\r', '\x3', '\x2', '\x2', '\x2', '\x4', '\x11', '\x3', '\x2', 
-		'\x2', '\x2', '\x6', '\x13', '\x3', '\x2', '\x2', '\x2', '\b', '\x1D', 
-		'\x3', '\x2', '\x2', '\x2', '\n', '\x1F', '\x3', '\x2', '\x2', '\x2', 
-		'\f', '\xE', '\x5', '\x6', '\x4', '\x2', '\r', '\f', '\x3', '\x2', '\x2', 
-		'\x2', '\r', '\xE', '\x3', '\x2', '\x2', '\x2', '\xE', '\xF', '\x3', '\x2', 
-		'\x2', '\x2', '\xF', '\x10', '\a', '\x2', '\x2', '\x3', '\x10', '\x3', 
-		'\x3', '\x2', '\x2', '\x2', '\x11', '\x12', '\x5', '\b', '\x5', '\x2', 
-		'\x12', '\x5', '\x3', '\x2', '\x2', '\x2', '\x13', '\x14', '\b', '\x4', 
-		'\x1', '\x2', '\x14', '\x15', '\x5', '\x4', '\x3', '\x2', '\x15', '\x1A', 
-		'\x3', '\x2', '\x2', '\x2', '\x16', '\x17', '\f', '\x3', '\x2', '\x2', 
-		'\x17', '\x19', '\x5', '\x4', '\x3', '\x2', '\x18', '\x16', '\x3', '\x2', 
-		'\x2', '\x2', '\x19', '\x1C', '\x3', '\x2', '\x2', '\x2', '\x1A', '\x18', 
-		'\x3', '\x2', '\x2', '\x2', '\x1A', '\x1B', '\x3', '\x2', '\x2', '\x2', 
-		'\x1B', '\a', '\x3', '\x2', '\x2', '\x2', '\x1C', '\x1A', '\x3', '\x2', 
-		'\x2', '\x2', '\x1D', '\x1E', '\a', '\x4', '\x2', '\x2', '\x1E', '\t', 
-		'\x3', '\x2', '\x2', '\x2', '\x1F', ' ', '\a', '\t', '\x2', '\x2', ' ', 
-		'\v', '\x3', '\x2', '\x2', '\x2', '\x4', '\r', '\x1A',
+		'\x6', '\t', '\x6', '\x4', '\a', '\t', '\a', '\x4', '\b', '\t', '\b', 
+		'\x4', '\t', '\t', '\t', '\x4', '\n', '\t', '\n', '\x4', '\v', '\t', '\v', 
+		'\x3', '\x2', '\x5', '\x2', '\x18', '\n', '\x2', '\x3', '\x2', '\x3', 
+		'\x2', '\x3', '\x3', '\x3', '\x3', '\x3', '\x4', '\x3', '\x4', '\x3', 
+		'\x4', '\x3', '\x4', '\x3', '\x4', '\a', '\x4', '#', '\n', '\x4', '\f', 
+		'\x4', '\xE', '\x4', '&', '\v', '\x4', '\x3', '\x5', '\x3', '\x5', '\x3', 
+		'\x6', '\x3', '\x6', '\x3', '\a', '\x3', '\a', '\x3', '\a', '\x3', '\a', 
+		'\x3', '\a', '\x3', '\a', '\a', '\a', '\x32', '\n', '\a', '\f', '\a', 
+		'\xE', '\a', '\x35', '\v', '\a', '\x3', '\b', '\x3', '\b', '\x3', '\b', 
+		'\x3', '\b', '\x3', '\t', '\x5', '\t', '<', '\n', '\t', '\x3', '\t', '\x3', 
+		'\t', '\x5', '\t', '@', '\n', '\t', '\x3', '\t', '\x3', '\t', '\x6', '\t', 
+		'\x44', '\n', '\t', '\r', '\t', '\xE', '\t', '\x45', '\x3', '\t', '\x3', 
+		'\t', '\x3', '\t', '\x3', '\t', '\x3', '\n', '\x3', '\n', '\x3', '\v', 
+		'\x3', '\v', '\x3', '\v', '\x2', '\x4', '\x6', '\f', '\f', '\x2', '\x4', 
+		'\x6', '\b', '\n', '\f', '\xE', '\x10', '\x12', '\x14', '\x2', '\x5', 
+		'\x3', '\x2', '\x5', '\x6', '\x3', '\x2', '\f', '\x11', '\x4', '\x2', 
+		'\x4', '\x4', '\x17', '\x42', '\x2', 'K', '\x2', '\x17', '\x3', '\x2', 
+		'\x2', '\x2', '\x4', '\x1B', '\x3', '\x2', '\x2', '\x2', '\x6', '\x1D', 
+		'\x3', '\x2', '\x2', '\x2', '\b', '\'', '\x3', '\x2', '\x2', '\x2', '\n', 
+		')', '\x3', '\x2', '\x2', '\x2', '\f', '+', '\x3', '\x2', '\x2', '\x2', 
+		'\xE', '\x36', '\x3', '\x2', '\x2', '\x2', '\x10', ';', '\x3', '\x2', 
+		'\x2', '\x2', '\x12', 'K', '\x3', '\x2', '\x2', '\x2', '\x14', 'M', '\x3', 
+		'\x2', '\x2', '\x2', '\x16', '\x18', '\x5', '\x6', '\x4', '\x2', '\x17', 
+		'\x16', '\x3', '\x2', '\x2', '\x2', '\x17', '\x18', '\x3', '\x2', '\x2', 
+		'\x2', '\x18', '\x19', '\x3', '\x2', '\x2', '\x2', '\x19', '\x1A', '\a', 
+		'\x2', '\x2', '\x3', '\x1A', '\x3', '\x3', '\x2', '\x2', '\x2', '\x1B', 
+		'\x1C', '\x5', '\b', '\x5', '\x2', '\x1C', '\x5', '\x3', '\x2', '\x2', 
+		'\x2', '\x1D', '\x1E', '\b', '\x4', '\x1', '\x2', '\x1E', '\x1F', '\x5', 
+		'\x4', '\x3', '\x2', '\x1F', '$', '\x3', '\x2', '\x2', '\x2', ' ', '!', 
+		'\f', '\x3', '\x2', '\x2', '!', '#', '\x5', '\x4', '\x3', '\x2', '\"', 
+		' ', '\x3', '\x2', '\x2', '\x2', '#', '&', '\x3', '\x2', '\x2', '\x2', 
+		'$', '\"', '\x3', '\x2', '\x2', '\x2', '$', '%', '\x3', '\x2', '\x2', 
+		'\x2', '%', '\a', '\x3', '\x2', '\x2', '\x2', '&', '$', '\x3', '\x2', 
+		'\x2', '\x2', '\'', '(', '\a', '\x4', '\x2', '\x2', '(', '\t', '\x3', 
+		'\x2', '\x2', '\x2', ')', '*', '\t', '\x2', '\x2', '\x2', '*', '\v', '\x3', 
+		'\x2', '\x2', '\x2', '+', ',', '\b', '\a', '\x1', '\x2', ',', '-', '\a', 
+		'\x4', '\x2', '\x2', '-', '\x33', '\x3', '\x2', '\x2', '\x2', '.', '/', 
+		'\f', '\x3', '\x2', '\x2', '/', '\x30', '\a', '\x14', '\x2', '\x2', '\x30', 
+		'\x32', '\a', '\x4', '\x2', '\x2', '\x31', '.', '\x3', '\x2', '\x2', '\x2', 
+		'\x32', '\x35', '\x3', '\x2', '\x2', '\x2', '\x33', '\x31', '\x3', '\x2', 
+		'\x2', '\x2', '\x33', '\x34', '\x3', '\x2', '\x2', '\x2', '\x34', '\r', 
+		'\x3', '\x2', '\x2', '\x2', '\x35', '\x33', '\x3', '\x2', '\x2', '\x2', 
+		'\x36', '\x37', '\x5', '\x14', '\v', '\x2', '\x37', '\x38', '\x5', '\f', 
+		'\a', '\x2', '\x38', '\x39', '\a', '\x12', '\x2', '\x2', '\x39', '\xF', 
+		'\x3', '\x2', '\x2', '\x2', ':', '<', '\x5', '\x12', '\n', '\x2', ';', 
+		':', '\x3', '\x2', '\x2', '\x2', ';', '<', '\x3', '\x2', '\x2', '\x2', 
+		'<', '=', '\x3', '\x2', '\x2', '\x2', '=', '?', '\a', '\v', '\x2', '\x2', 
+		'>', '@', '\a', '\x4', '\x2', '\x2', '?', '>', '\x3', '\x2', '\x2', '\x2', 
+		'?', '@', '\x3', '\x2', '\x2', '\x2', '@', '\x41', '\x3', '\x2', '\x2', 
+		'\x2', '\x41', '\x43', '\a', '\x15', '\x2', '\x2', '\x42', '\x44', '\x5', 
+		'\xE', '\b', '\x2', '\x43', '\x42', '\x3', '\x2', '\x2', '\x2', '\x44', 
+		'\x45', '\x3', '\x2', '\x2', '\x2', '\x45', '\x43', '\x3', '\x2', '\x2', 
+		'\x2', '\x45', '\x46', '\x3', '\x2', '\x2', '\x2', '\x46', 'G', '\x3', 
+		'\x2', '\x2', '\x2', 'G', 'H', '\a', '\x16', '\x2', '\x2', 'H', 'I', '\x5', 
+		'\f', '\a', '\x2', 'I', 'J', '\a', '\x12', '\x2', '\x2', 'J', '\x11', 
+		'\x3', '\x2', '\x2', '\x2', 'K', 'L', '\t', '\x3', '\x2', '\x2', 'L', 
+		'\x13', '\x3', '\x2', '\x2', '\x2', 'M', 'N', '\t', '\x4', '\x2', '\x2', 
+		'N', '\x15', '\x3', '\x2', '\x2', '\x2', '\b', '\x17', '$', '\x33', ';', 
+		'?', '\x45',
 	};
 
 	public static readonly ATN _ATN =

@@ -11,12 +11,12 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.Parser
     public class ParserBasicTests
     {        
         [Test]
-        [TestCase("10", false, GLSL_ES300Lexer.DecimalLiteral)]
+        [TestCase("10", false, GLSL_ES300Lexer.IntegerLiteral)]
         [TestCase("10u", true, GLSL_ES300Lexer.IntegerLiteral)]
         [TestCase("10U", true, GLSL_ES300Lexer.IntegerLiteral)]
-        [TestCase("0677", false, GLSL_ES300Lexer.OctalLiteral)]
+        [TestCase("0677", false, GLSL_ES300Lexer.IntegerLiteral)]
         [TestCase("0677u", true, GLSL_ES300Lexer.IntegerLiteral)]
-        [TestCase("0x112f", false, GLSL_ES300Lexer.HexadecimalLiteral)]
+        [TestCase("0x112f", false, GLSL_ES300Lexer.IntegerLiteral)]
         [TestCase("0x112fu", true, GLSL_ES300Lexer.IntegerLiteral)]
         public void CanParseIntLiterals(string payload, bool hasSuffix, int expectedTokenType)
         {
@@ -26,6 +26,21 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.Parser
 
             Assert.IsTrue(context.children[0] is ITerminalNode);
             Assert.AreEqual(expectedTokenType, ((ITerminalNode)context.children[0]).Symbol.Type);
+        }
+
+        [Test]
+        public void CanParseStruct()
+        {
+            string payload = @"struct A 
+            {
+                f1 int;
+                f2 float;
+            } s1";
+
+            var parser = TestUtils.SetupParser(payload);
+            var context = parser.structdefinition();
+
+            Assert.IsNull(context.exception);
         }
     }
 }

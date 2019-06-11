@@ -94,6 +94,66 @@ public partial class GLSL_ES300ParserBaseListener : IGLSL_ES300ParserListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitLiteral([NotNull] GLSL_ES300Parser.LiteralContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.declarators"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDeclarators([NotNull] GLSL_ES300Parser.DeclaratorsContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.declarators"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDeclarators([NotNull] GLSL_ES300Parser.DeclaratorsContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.memberdeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMemberdeclaration([NotNull] GLSL_ES300Parser.MemberdeclarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.memberdeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMemberdeclaration([NotNull] GLSL_ES300Parser.MemberdeclarationContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.structdefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterStructdefinition([NotNull] GLSL_ES300Parser.StructdefinitionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.structdefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitStructdefinition([NotNull] GLSL_ES300Parser.StructdefinitionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.typequalifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTypequalifier([NotNull] GLSL_ES300Parser.TypequalifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.typequalifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTypequalifier([NotNull] GLSL_ES300Parser.TypequalifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.typename"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTypename([NotNull] GLSL_ES300Parser.TypenameContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.typename"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTypename([NotNull] GLSL_ES300Parser.TypenameContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

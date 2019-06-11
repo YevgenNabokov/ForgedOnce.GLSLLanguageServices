@@ -9,6 +9,10 @@ Identifier
    : IdentifierNonDigit (IdentifierNonDigit | DIGIT)*
    ;
 
+fragment SIGN
+   : [-+]
+   ;
+
 fragment NONDIGIT
    : [a-zA-Z_]
    ;
@@ -33,20 +37,39 @@ fragment BINARYDIGIT
    : [01]
    ;
 
-IntegerSuffix
+fragment IntegerSuffix
    : [uU]
    ;
 
-DecimalLiteral
+fragment FloatingSuffix
+   : [fF]
+   ;
+
+fragment DecimalLiteral
    : NONZERODIGIT DIGIT*
    ;
 
-OctalLiteral
+fragment OctalLiteral
    : '0' OCTALDIGIT*
    ;
 
-HexadecimalLiteral
+fragment HexadecimalLiteral
    : ('0x' | '0X') HEXADECIMALDIGIT*
+   ;
+
+fragment ExponentialPart
+   : [eE] SIGN? DIGIT+
+   ;
+
+fragment FractionalLiteral
+   : DIGIT+ '.' DIGIT+
+   | DIGIT+ '.'
+   | '.' DIGIT+
+   ;
+
+FloatingLiteral
+   : FractionalLiteral ExponentialPart? FloatingSuffix?
+   | DIGIT+ ExponentialPart FloatingSuffix?
    ;
 
 IntegerLiteral
@@ -70,6 +93,24 @@ BlockComment
 LineComment
    : '//' ~[\r\n]* -> channel (COMMENTS)
    ;
+
+/* Keywords */
+
+Struct: 'struct' ;
+Const: 'const' ;
+In: 'in' ;
+Out: 'out' ;
+Uniform: 'uniform' ;
+CentroidIn: 'centroid in' ;
+CentroidOut: 'centroid out' ;
+
+/* Chars */
+
+Semicolon: ';' ;
+Colon: ':' ;
+Comma: ',' ;
+OpenCurlyBrace: '{' ;
+CloseCurlyBrace: '}' ;
 
 /* Basic types */
 
