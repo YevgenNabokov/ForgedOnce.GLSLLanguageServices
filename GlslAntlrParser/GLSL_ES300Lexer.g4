@@ -2,13 +2,6 @@ lexer grammar GLSL_ES300Lexer;
 
 channels { COMMENTS, PREPROCESSOR }
 
-IdentifierNonDigit
-   : NONDIGIT;
-
-Identifier
-   : IdentifierNonDigit (IdentifierNonDigit | DIGIT)*
-   ;
-
 fragment SIGN
    : [-+]
    ;
@@ -100,6 +93,7 @@ Struct: 'struct' ;
 Const: 'const' ;
 In: 'in' ;
 Out: 'out' ;
+InOut: 'inout' ;
 Uniform: 'uniform' ;
 CentroidIn: 'centroid in' ;
 CentroidOut: 'centroid out' ;
@@ -109,8 +103,12 @@ CentroidOut: 'centroid out' ;
 Semicolon: ';' ;
 Colon: ':' ;
 Comma: ',' ;
-OpenCurlyBrace: '{' ;
-CloseCurlyBrace: '}' ;
+LeftBrace: '{' ;
+RightBrace: '}' ;
+LeftParen: '(' ;
+RightParen: ')' ;
+LeftBracket: '[' ;
+RightBracket: ']' ;
 
 /* Basic types */
 
@@ -288,6 +286,17 @@ UsamplerCube_type
 
 Usampler2DArray_type
    : 'usampler2DArray'
+   ;
+
+IdentifierNonDigit
+   : NONDIGIT;
+
+Identifier
+   : IdentifierNonDigit (IdentifierNonDigit | DIGIT)*
+   ;
+
+NotImplemented
+   : 'NA'
    ;
 
 

@@ -2,21 +2,71 @@ parser grammar GLSL_ES300Parser;
 
 options { tokenVocab = GLSL_ES300Lexer; }
 
-root
-   : declarationlist? EOF
+translationunit
+   : externaldeclaration+ EOF
+   ;
+
+externaldeclaration
+   : functiondefinition
+   | declaration
+   ;
+
+functiondefinition
+   : functionprototype compoundstatement
    ;
 
 declaration
-   : variabledeclaration
+   : functionprototype Semicolon
+   | NotImplemented
    ;
 
-declarationlist
-   : declaration 
-   | declarationlist declaration
+functionprototype
+   : functiondeclarator RightParen
    ;
 
-variabledeclaration
-   : Identifier
+functiondeclarator
+   : functionheader
+   | functionheaderwithparameters
+   ;
+
+functionheader
+   : fullyspecifiedtype Identifier LeftParen
+   ;
+
+functionheaderwithparameters
+   : functionheader parameterdeclaration
+   | functionheaderwithparameters Comma parameterdeclaration
+   ;
+
+parameterdeclaration
+   : parametertypequalifier? parameterqualifier parameterdeclarator
+   | parametertypequalifier? parameterqualifier typespecifier
+   ;
+
+parameterdeclarator
+   : typespecifier Identifier (LeftBracket constantexpression RightBracket)?
+   ;
+
+parameterqualifier
+   : In
+   | Out
+   | InOut
+   ;
+
+parametertypequalifier
+   : Const
+   ;
+
+compoundstatement
+   : NotImplemented
+   ;
+
+constantexpression
+   : NotImplemented
+   ;
+
+fullyspecifiedtype
+   : typequalifier? typespecifier
    ;
 
 literal
@@ -30,11 +80,15 @@ declarators
    ;
 
 memberdeclaration
-   : typename declarators Semicolon
+   : typespecifier declarators Semicolon
+   ;
+
+structspecifier
+   : Struct Identifier? LeftBrace memberdeclaration+ RightBrace
    ;
 
 structdefinition
-   : typequalifier? Struct Identifier? OpenCurlyBrace memberdeclaration+ CloseCurlyBrace declarators Semicolon
+   : typequalifier? Struct Identifier? LeftBrace memberdeclaration+ RightBrace declarators Semicolon
    ;
 
 typequalifier
@@ -46,7 +100,7 @@ typequalifier
    | CentroidOut
    ;
 
-typename
+typespecifier
    : Void_type
    | Bool_type
    | Int_type
@@ -91,6 +145,7 @@ typename
    | Usampler3D_type
    | UsamplerCube_type
    | Usampler2DArray_type
+   | structspecifier
    | Identifier
    ;
 

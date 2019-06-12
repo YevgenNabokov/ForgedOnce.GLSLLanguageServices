@@ -36,20 +36,20 @@ public partial class GLSL_ES300Parser : Parser {
 	protected static DFA[] decisionToDFA;
 	protected static PredictionContextCache sharedContextCache = new PredictionContextCache();
 	public const int
-		IdentifierNonDigit=1, Identifier=2, FloatingLiteral=3, IntegerLiteral=4, 
-		Whitespace=5, Newline=6, BlockComment=7, LineComment=8, Struct=9, Const=10, 
-		In=11, Out=12, Uniform=13, CentroidIn=14, CentroidOut=15, Semicolon=16, 
-		Colon=17, Comma=18, OpenCurlyBrace=19, CloseCurlyBrace=20, Void_type=21, 
-		Bool_type=22, Int_type=23, Uint_type=24, Float_type=25, Vec2_type=26, 
-		Vec3_type=27, Vec4_type=28, Bvec2_type=29, Bvec3_type=30, Bvec4_type=31, 
-		Ivec2_type=32, Ivec3_type=33, Ivec4_type=34, Uvec2_type=35, Uvec3_type=36, 
-		Uvec4_type=37, Mat2_type=38, Mat3_type=39, Mat4_type=40, Mat2x2_type=41, 
-		Mat2x3_type=42, Mat2x4_type=43, Mat3x2_type=44, Mat3x3_type=45, Mat3x4_type=46, 
-		Mat4x2_type=47, Mat4x3_type=48, Mat4x4_type=49, Sampler2D_type=50, Sampler3D_type=51, 
-		SamplerCube_type=52, SamplerCubeShadow_type=53, Sampler2DShadow_type=54, 
-		Sampler2DArray_type=55, Sampler2DArrayShadow_type=56, Isampler2D_type=57, 
-		Isampler3D_type=58, IsamplerCube_type=59, Isampler2DArray_type=60, Usampler2D_type=61, 
-		Usampler3D_type=62, UsamplerCube_type=63, Usampler2DArray_type=64;
+		FloatingLiteral=1, IntegerLiteral=2, Whitespace=3, Newline=4, BlockComment=5, 
+		LineComment=6, Struct=7, Const=8, In=9, Out=10, Uniform=11, CentroidIn=12, 
+		CentroidOut=13, Semicolon=14, Colon=15, Comma=16, OpenCurlyBrace=17, CloseCurlyBrace=18, 
+		Void_type=19, Bool_type=20, Int_type=21, Uint_type=22, Float_type=23, 
+		Vec2_type=24, Vec3_type=25, Vec4_type=26, Bvec2_type=27, Bvec3_type=28, 
+		Bvec4_type=29, Ivec2_type=30, Ivec3_type=31, Ivec4_type=32, Uvec2_type=33, 
+		Uvec3_type=34, Uvec4_type=35, Mat2_type=36, Mat3_type=37, Mat4_type=38, 
+		Mat2x2_type=39, Mat2x3_type=40, Mat2x4_type=41, Mat3x2_type=42, Mat3x3_type=43, 
+		Mat3x4_type=44, Mat4x2_type=45, Mat4x3_type=46, Mat4x4_type=47, Sampler2D_type=48, 
+		Sampler3D_type=49, SamplerCube_type=50, SamplerCubeShadow_type=51, Sampler2DShadow_type=52, 
+		Sampler2DArray_type=53, Sampler2DArrayShadow_type=54, Isampler2D_type=55, 
+		Isampler3D_type=56, IsamplerCube_type=57, Isampler2DArray_type=58, Usampler2D_type=59, 
+		Usampler3D_type=60, UsamplerCube_type=61, Usampler2DArray_type=62, IdentifierNonDigit=63, 
+		Identifier=64;
 	public const int
 		RULE_root = 0, RULE_declaration = 1, RULE_declarationlist = 2, RULE_variabledeclaration = 3, 
 		RULE_literal = 4, RULE_declarators = 5, RULE_memberdeclaration = 6, RULE_structdefinition = 7, 
@@ -61,9 +61,9 @@ public partial class GLSL_ES300Parser : Parser {
 	};
 
 	private static readonly string[] _LiteralNames = {
-		null, null, null, null, null, null, null, null, null, "'struct'", "'const'", 
-		"'in'", "'out'", "'uniform'", "'centroid in'", "'centroid out'", "';'", 
-		"':'", "','", "'{'", "'}'", "'void'", "'bool'", "'int'", "'uint'", "'float'", 
+		null, null, null, null, null, null, null, "'struct'", "'const'", "'in'", 
+		"'out'", "'uniform'", "'centroid in'", "'centroid out'", "';'", "':'", 
+		"','", "'{'", "'}'", "'void'", "'bool'", "'int'", "'uint'", "'float'", 
 		"'vec2'", "'vec3'", "'vec4'", "'bvec2'", "'bvec3'", "'bvec4'", "'ivec2'", 
 		"'ivec3'", "'ivec4'", "'uvec2'", "'uvec3'", "'uvec4'", "'mat2'", "'mat3'", 
 		"'mat4'", "'mat2x2'", "'mat2x3'", "'mat2x4'", "'mat3x2'", "'mat3x3'", 
@@ -74,19 +74,19 @@ public partial class GLSL_ES300Parser : Parser {
 		"'usampler2DArray'"
 	};
 	private static readonly string[] _SymbolicNames = {
-		null, "IdentifierNonDigit", "Identifier", "FloatingLiteral", "IntegerLiteral", 
-		"Whitespace", "Newline", "BlockComment", "LineComment", "Struct", "Const", 
-		"In", "Out", "Uniform", "CentroidIn", "CentroidOut", "Semicolon", "Colon", 
-		"Comma", "OpenCurlyBrace", "CloseCurlyBrace", "Void_type", "Bool_type", 
-		"Int_type", "Uint_type", "Float_type", "Vec2_type", "Vec3_type", "Vec4_type", 
-		"Bvec2_type", "Bvec3_type", "Bvec4_type", "Ivec2_type", "Ivec3_type", 
-		"Ivec4_type", "Uvec2_type", "Uvec3_type", "Uvec4_type", "Mat2_type", "Mat3_type", 
-		"Mat4_type", "Mat2x2_type", "Mat2x3_type", "Mat2x4_type", "Mat3x2_type", 
-		"Mat3x3_type", "Mat3x4_type", "Mat4x2_type", "Mat4x3_type", "Mat4x4_type", 
-		"Sampler2D_type", "Sampler3D_type", "SamplerCube_type", "SamplerCubeShadow_type", 
-		"Sampler2DShadow_type", "Sampler2DArray_type", "Sampler2DArrayShadow_type", 
-		"Isampler2D_type", "Isampler3D_type", "IsamplerCube_type", "Isampler2DArray_type", 
-		"Usampler2D_type", "Usampler3D_type", "UsamplerCube_type", "Usampler2DArray_type"
+		null, "FloatingLiteral", "IntegerLiteral", "Whitespace", "Newline", "BlockComment", 
+		"LineComment", "Struct", "Const", "In", "Out", "Uniform", "CentroidIn", 
+		"CentroidOut", "Semicolon", "Colon", "Comma", "OpenCurlyBrace", "CloseCurlyBrace", 
+		"Void_type", "Bool_type", "Int_type", "Uint_type", "Float_type", "Vec2_type", 
+		"Vec3_type", "Vec4_type", "Bvec2_type", "Bvec3_type", "Bvec4_type", "Ivec2_type", 
+		"Ivec3_type", "Ivec4_type", "Uvec2_type", "Uvec3_type", "Uvec4_type", 
+		"Mat2_type", "Mat3_type", "Mat4_type", "Mat2x2_type", "Mat2x3_type", "Mat2x4_type", 
+		"Mat3x2_type", "Mat3x3_type", "Mat3x4_type", "Mat4x2_type", "Mat4x3_type", 
+		"Mat4x4_type", "Sampler2D_type", "Sampler3D_type", "SamplerCube_type", 
+		"SamplerCubeShadow_type", "Sampler2DShadow_type", "Sampler2DArray_type", 
+		"Sampler2DArrayShadow_type", "Isampler2D_type", "Isampler3D_type", "IsamplerCube_type", 
+		"Isampler2DArray_type", "Usampler2D_type", "Usampler3D_type", "UsamplerCube_type", 
+		"Usampler2DArray_type", "IdentifierNonDigit", "Identifier"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -610,7 +610,7 @@ public partial class GLSL_ES300Parser : Parser {
 				State = 67;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
-			} while ( ((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (Identifier - 2)) | (1L << (Void_type - 2)) | (1L << (Bool_type - 2)) | (1L << (Int_type - 2)) | (1L << (Uint_type - 2)) | (1L << (Float_type - 2)) | (1L << (Vec2_type - 2)) | (1L << (Vec3_type - 2)) | (1L << (Vec4_type - 2)) | (1L << (Bvec2_type - 2)) | (1L << (Bvec3_type - 2)) | (1L << (Bvec4_type - 2)) | (1L << (Ivec2_type - 2)) | (1L << (Ivec3_type - 2)) | (1L << (Ivec4_type - 2)) | (1L << (Uvec2_type - 2)) | (1L << (Uvec3_type - 2)) | (1L << (Uvec4_type - 2)) | (1L << (Mat2_type - 2)) | (1L << (Mat3_type - 2)) | (1L << (Mat4_type - 2)) | (1L << (Mat2x2_type - 2)) | (1L << (Mat2x3_type - 2)) | (1L << (Mat2x4_type - 2)) | (1L << (Mat3x2_type - 2)) | (1L << (Mat3x3_type - 2)) | (1L << (Mat3x4_type - 2)) | (1L << (Mat4x2_type - 2)) | (1L << (Mat4x3_type - 2)) | (1L << (Mat4x4_type - 2)) | (1L << (Sampler2D_type - 2)) | (1L << (Sampler3D_type - 2)) | (1L << (SamplerCube_type - 2)) | (1L << (SamplerCubeShadow_type - 2)) | (1L << (Sampler2DShadow_type - 2)) | (1L << (Sampler2DArray_type - 2)) | (1L << (Sampler2DArrayShadow_type - 2)) | (1L << (Isampler2D_type - 2)) | (1L << (Isampler3D_type - 2)) | (1L << (IsamplerCube_type - 2)) | (1L << (Isampler2DArray_type - 2)) | (1L << (Usampler2D_type - 2)) | (1L << (Usampler3D_type - 2)) | (1L << (UsamplerCube_type - 2)) | (1L << (Usampler2DArray_type - 2)))) != 0) );
+			} while ( ((((_la - 19)) & ~0x3f) == 0 && ((1L << (_la - 19)) & ((1L << (Void_type - 19)) | (1L << (Bool_type - 19)) | (1L << (Int_type - 19)) | (1L << (Uint_type - 19)) | (1L << (Float_type - 19)) | (1L << (Vec2_type - 19)) | (1L << (Vec3_type - 19)) | (1L << (Vec4_type - 19)) | (1L << (Bvec2_type - 19)) | (1L << (Bvec3_type - 19)) | (1L << (Bvec4_type - 19)) | (1L << (Ivec2_type - 19)) | (1L << (Ivec3_type - 19)) | (1L << (Ivec4_type - 19)) | (1L << (Uvec2_type - 19)) | (1L << (Uvec3_type - 19)) | (1L << (Uvec4_type - 19)) | (1L << (Mat2_type - 19)) | (1L << (Mat3_type - 19)) | (1L << (Mat4_type - 19)) | (1L << (Mat2x2_type - 19)) | (1L << (Mat2x3_type - 19)) | (1L << (Mat2x4_type - 19)) | (1L << (Mat3x2_type - 19)) | (1L << (Mat3x3_type - 19)) | (1L << (Mat3x4_type - 19)) | (1L << (Mat4x2_type - 19)) | (1L << (Mat4x3_type - 19)) | (1L << (Mat4x4_type - 19)) | (1L << (Sampler2D_type - 19)) | (1L << (Sampler3D_type - 19)) | (1L << (SamplerCube_type - 19)) | (1L << (SamplerCubeShadow_type - 19)) | (1L << (Sampler2DShadow_type - 19)) | (1L << (Sampler2DArray_type - 19)) | (1L << (Sampler2DArrayShadow_type - 19)) | (1L << (Isampler2D_type - 19)) | (1L << (Isampler3D_type - 19)) | (1L << (IsamplerCube_type - 19)) | (1L << (Isampler2DArray_type - 19)) | (1L << (Usampler2D_type - 19)) | (1L << (Usampler3D_type - 19)) | (1L << (UsamplerCube_type - 19)) | (1L << (Usampler2DArray_type - 19)) | (1L << (Identifier - 19)))) != 0) );
 			State = 69; Match(CloseCurlyBrace);
 			State = 70; declarators(0);
 			State = 71; Match(Semicolon);
@@ -760,7 +760,7 @@ public partial class GLSL_ES300Parser : Parser {
 			{
 			State = 75;
 			_la = TokenStream.LA(1);
-			if ( !(((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (Identifier - 2)) | (1L << (Void_type - 2)) | (1L << (Bool_type - 2)) | (1L << (Int_type - 2)) | (1L << (Uint_type - 2)) | (1L << (Float_type - 2)) | (1L << (Vec2_type - 2)) | (1L << (Vec3_type - 2)) | (1L << (Vec4_type - 2)) | (1L << (Bvec2_type - 2)) | (1L << (Bvec3_type - 2)) | (1L << (Bvec4_type - 2)) | (1L << (Ivec2_type - 2)) | (1L << (Ivec3_type - 2)) | (1L << (Ivec4_type - 2)) | (1L << (Uvec2_type - 2)) | (1L << (Uvec3_type - 2)) | (1L << (Uvec4_type - 2)) | (1L << (Mat2_type - 2)) | (1L << (Mat3_type - 2)) | (1L << (Mat4_type - 2)) | (1L << (Mat2x2_type - 2)) | (1L << (Mat2x3_type - 2)) | (1L << (Mat2x4_type - 2)) | (1L << (Mat3x2_type - 2)) | (1L << (Mat3x3_type - 2)) | (1L << (Mat3x4_type - 2)) | (1L << (Mat4x2_type - 2)) | (1L << (Mat4x3_type - 2)) | (1L << (Mat4x4_type - 2)) | (1L << (Sampler2D_type - 2)) | (1L << (Sampler3D_type - 2)) | (1L << (SamplerCube_type - 2)) | (1L << (SamplerCubeShadow_type - 2)) | (1L << (Sampler2DShadow_type - 2)) | (1L << (Sampler2DArray_type - 2)) | (1L << (Sampler2DArrayShadow_type - 2)) | (1L << (Isampler2D_type - 2)) | (1L << (Isampler3D_type - 2)) | (1L << (IsamplerCube_type - 2)) | (1L << (Isampler2DArray_type - 2)) | (1L << (Usampler2D_type - 2)) | (1L << (Usampler3D_type - 2)) | (1L << (UsamplerCube_type - 2)) | (1L << (Usampler2DArray_type - 2)))) != 0)) ) {
+			if ( !(((((_la - 19)) & ~0x3f) == 0 && ((1L << (_la - 19)) & ((1L << (Void_type - 19)) | (1L << (Bool_type - 19)) | (1L << (Int_type - 19)) | (1L << (Uint_type - 19)) | (1L << (Float_type - 19)) | (1L << (Vec2_type - 19)) | (1L << (Vec3_type - 19)) | (1L << (Vec4_type - 19)) | (1L << (Bvec2_type - 19)) | (1L << (Bvec3_type - 19)) | (1L << (Bvec4_type - 19)) | (1L << (Ivec2_type - 19)) | (1L << (Ivec3_type - 19)) | (1L << (Ivec4_type - 19)) | (1L << (Uvec2_type - 19)) | (1L << (Uvec3_type - 19)) | (1L << (Uvec4_type - 19)) | (1L << (Mat2_type - 19)) | (1L << (Mat3_type - 19)) | (1L << (Mat4_type - 19)) | (1L << (Mat2x2_type - 19)) | (1L << (Mat2x3_type - 19)) | (1L << (Mat2x4_type - 19)) | (1L << (Mat3x2_type - 19)) | (1L << (Mat3x3_type - 19)) | (1L << (Mat3x4_type - 19)) | (1L << (Mat4x2_type - 19)) | (1L << (Mat4x3_type - 19)) | (1L << (Mat4x4_type - 19)) | (1L << (Sampler2D_type - 19)) | (1L << (Sampler3D_type - 19)) | (1L << (SamplerCube_type - 19)) | (1L << (SamplerCubeShadow_type - 19)) | (1L << (Sampler2DShadow_type - 19)) | (1L << (Sampler2DArray_type - 19)) | (1L << (Sampler2DArrayShadow_type - 19)) | (1L << (Isampler2D_type - 19)) | (1L << (Isampler3D_type - 19)) | (1L << (IsamplerCube_type - 19)) | (1L << (Isampler2DArray_type - 19)) | (1L << (Usampler2D_type - 19)) | (1L << (Usampler3D_type - 19)) | (1L << (UsamplerCube_type - 19)) | (1L << (Usampler2DArray_type - 19)) | (1L << (Identifier - 19)))) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
 			}
 			else {
@@ -819,50 +819,49 @@ public partial class GLSL_ES300Parser : Parser {
 		'\t', '\x3', '\t', '\x3', '\t', '\x3', '\n', '\x3', '\n', '\x3', '\v', 
 		'\x3', '\v', '\x3', '\v', '\x2', '\x4', '\x6', '\f', '\f', '\x2', '\x4', 
 		'\x6', '\b', '\n', '\f', '\xE', '\x10', '\x12', '\x14', '\x2', '\x5', 
-		'\x3', '\x2', '\x5', '\x6', '\x3', '\x2', '\f', '\x11', '\x4', '\x2', 
-		'\x4', '\x4', '\x17', '\x42', '\x2', 'K', '\x2', '\x17', '\x3', '\x2', 
-		'\x2', '\x2', '\x4', '\x1B', '\x3', '\x2', '\x2', '\x2', '\x6', '\x1D', 
-		'\x3', '\x2', '\x2', '\x2', '\b', '\'', '\x3', '\x2', '\x2', '\x2', '\n', 
-		')', '\x3', '\x2', '\x2', '\x2', '\f', '+', '\x3', '\x2', '\x2', '\x2', 
-		'\xE', '\x36', '\x3', '\x2', '\x2', '\x2', '\x10', ';', '\x3', '\x2', 
-		'\x2', '\x2', '\x12', 'K', '\x3', '\x2', '\x2', '\x2', '\x14', 'M', '\x3', 
-		'\x2', '\x2', '\x2', '\x16', '\x18', '\x5', '\x6', '\x4', '\x2', '\x17', 
-		'\x16', '\x3', '\x2', '\x2', '\x2', '\x17', '\x18', '\x3', '\x2', '\x2', 
-		'\x2', '\x18', '\x19', '\x3', '\x2', '\x2', '\x2', '\x19', '\x1A', '\a', 
-		'\x2', '\x2', '\x3', '\x1A', '\x3', '\x3', '\x2', '\x2', '\x2', '\x1B', 
-		'\x1C', '\x5', '\b', '\x5', '\x2', '\x1C', '\x5', '\x3', '\x2', '\x2', 
-		'\x2', '\x1D', '\x1E', '\b', '\x4', '\x1', '\x2', '\x1E', '\x1F', '\x5', 
-		'\x4', '\x3', '\x2', '\x1F', '$', '\x3', '\x2', '\x2', '\x2', ' ', '!', 
-		'\f', '\x3', '\x2', '\x2', '!', '#', '\x5', '\x4', '\x3', '\x2', '\"', 
-		' ', '\x3', '\x2', '\x2', '\x2', '#', '&', '\x3', '\x2', '\x2', '\x2', 
-		'$', '\"', '\x3', '\x2', '\x2', '\x2', '$', '%', '\x3', '\x2', '\x2', 
-		'\x2', '%', '\a', '\x3', '\x2', '\x2', '\x2', '&', '$', '\x3', '\x2', 
-		'\x2', '\x2', '\'', '(', '\a', '\x4', '\x2', '\x2', '(', '\t', '\x3', 
-		'\x2', '\x2', '\x2', ')', '*', '\t', '\x2', '\x2', '\x2', '*', '\v', '\x3', 
-		'\x2', '\x2', '\x2', '+', ',', '\b', '\a', '\x1', '\x2', ',', '-', '\a', 
-		'\x4', '\x2', '\x2', '-', '\x33', '\x3', '\x2', '\x2', '\x2', '.', '/', 
-		'\f', '\x3', '\x2', '\x2', '/', '\x30', '\a', '\x14', '\x2', '\x2', '\x30', 
-		'\x32', '\a', '\x4', '\x2', '\x2', '\x31', '.', '\x3', '\x2', '\x2', '\x2', 
-		'\x32', '\x35', '\x3', '\x2', '\x2', '\x2', '\x33', '\x31', '\x3', '\x2', 
-		'\x2', '\x2', '\x33', '\x34', '\x3', '\x2', '\x2', '\x2', '\x34', '\r', 
-		'\x3', '\x2', '\x2', '\x2', '\x35', '\x33', '\x3', '\x2', '\x2', '\x2', 
-		'\x36', '\x37', '\x5', '\x14', '\v', '\x2', '\x37', '\x38', '\x5', '\f', 
-		'\a', '\x2', '\x38', '\x39', '\a', '\x12', '\x2', '\x2', '\x39', '\xF', 
-		'\x3', '\x2', '\x2', '\x2', ':', '<', '\x5', '\x12', '\n', '\x2', ';', 
-		':', '\x3', '\x2', '\x2', '\x2', ';', '<', '\x3', '\x2', '\x2', '\x2', 
-		'<', '=', '\x3', '\x2', '\x2', '\x2', '=', '?', '\a', '\v', '\x2', '\x2', 
-		'>', '@', '\a', '\x4', '\x2', '\x2', '?', '>', '\x3', '\x2', '\x2', '\x2', 
-		'?', '@', '\x3', '\x2', '\x2', '\x2', '@', '\x41', '\x3', '\x2', '\x2', 
-		'\x2', '\x41', '\x43', '\a', '\x15', '\x2', '\x2', '\x42', '\x44', '\x5', 
-		'\xE', '\b', '\x2', '\x43', '\x42', '\x3', '\x2', '\x2', '\x2', '\x44', 
-		'\x45', '\x3', '\x2', '\x2', '\x2', '\x45', '\x43', '\x3', '\x2', '\x2', 
-		'\x2', '\x45', '\x46', '\x3', '\x2', '\x2', '\x2', '\x46', 'G', '\x3', 
-		'\x2', '\x2', '\x2', 'G', 'H', '\a', '\x16', '\x2', '\x2', 'H', 'I', '\x5', 
-		'\f', '\a', '\x2', 'I', 'J', '\a', '\x12', '\x2', '\x2', 'J', '\x11', 
-		'\x3', '\x2', '\x2', '\x2', 'K', 'L', '\t', '\x3', '\x2', '\x2', 'L', 
-		'\x13', '\x3', '\x2', '\x2', '\x2', 'M', 'N', '\t', '\x4', '\x2', '\x2', 
-		'N', '\x15', '\x3', '\x2', '\x2', '\x2', '\b', '\x17', '$', '\x33', ';', 
-		'?', '\x45',
+		'\x3', '\x2', '\x3', '\x4', '\x3', '\x2', '\n', '\xF', '\x4', '\x2', '\x15', 
+		'@', '\x42', '\x42', '\x2', 'K', '\x2', '\x17', '\x3', '\x2', '\x2', '\x2', 
+		'\x4', '\x1B', '\x3', '\x2', '\x2', '\x2', '\x6', '\x1D', '\x3', '\x2', 
+		'\x2', '\x2', '\b', '\'', '\x3', '\x2', '\x2', '\x2', '\n', ')', '\x3', 
+		'\x2', '\x2', '\x2', '\f', '+', '\x3', '\x2', '\x2', '\x2', '\xE', '\x36', 
+		'\x3', '\x2', '\x2', '\x2', '\x10', ';', '\x3', '\x2', '\x2', '\x2', '\x12', 
+		'K', '\x3', '\x2', '\x2', '\x2', '\x14', 'M', '\x3', '\x2', '\x2', '\x2', 
+		'\x16', '\x18', '\x5', '\x6', '\x4', '\x2', '\x17', '\x16', '\x3', '\x2', 
+		'\x2', '\x2', '\x17', '\x18', '\x3', '\x2', '\x2', '\x2', '\x18', '\x19', 
+		'\x3', '\x2', '\x2', '\x2', '\x19', '\x1A', '\a', '\x2', '\x2', '\x3', 
+		'\x1A', '\x3', '\x3', '\x2', '\x2', '\x2', '\x1B', '\x1C', '\x5', '\b', 
+		'\x5', '\x2', '\x1C', '\x5', '\x3', '\x2', '\x2', '\x2', '\x1D', '\x1E', 
+		'\b', '\x4', '\x1', '\x2', '\x1E', '\x1F', '\x5', '\x4', '\x3', '\x2', 
+		'\x1F', '$', '\x3', '\x2', '\x2', '\x2', ' ', '!', '\f', '\x3', '\x2', 
+		'\x2', '!', '#', '\x5', '\x4', '\x3', '\x2', '\"', ' ', '\x3', '\x2', 
+		'\x2', '\x2', '#', '&', '\x3', '\x2', '\x2', '\x2', '$', '\"', '\x3', 
+		'\x2', '\x2', '\x2', '$', '%', '\x3', '\x2', '\x2', '\x2', '%', '\a', 
+		'\x3', '\x2', '\x2', '\x2', '&', '$', '\x3', '\x2', '\x2', '\x2', '\'', 
+		'(', '\a', '\x42', '\x2', '\x2', '(', '\t', '\x3', '\x2', '\x2', '\x2', 
+		')', '*', '\t', '\x2', '\x2', '\x2', '*', '\v', '\x3', '\x2', '\x2', '\x2', 
+		'+', ',', '\b', '\a', '\x1', '\x2', ',', '-', '\a', '\x42', '\x2', '\x2', 
+		'-', '\x33', '\x3', '\x2', '\x2', '\x2', '.', '/', '\f', '\x3', '\x2', 
+		'\x2', '/', '\x30', '\a', '\x12', '\x2', '\x2', '\x30', '\x32', '\a', 
+		'\x42', '\x2', '\x2', '\x31', '.', '\x3', '\x2', '\x2', '\x2', '\x32', 
+		'\x35', '\x3', '\x2', '\x2', '\x2', '\x33', '\x31', '\x3', '\x2', '\x2', 
+		'\x2', '\x33', '\x34', '\x3', '\x2', '\x2', '\x2', '\x34', '\r', '\x3', 
+		'\x2', '\x2', '\x2', '\x35', '\x33', '\x3', '\x2', '\x2', '\x2', '\x36', 
+		'\x37', '\x5', '\x14', '\v', '\x2', '\x37', '\x38', '\x5', '\f', '\a', 
+		'\x2', '\x38', '\x39', '\a', '\x10', '\x2', '\x2', '\x39', '\xF', '\x3', 
+		'\x2', '\x2', '\x2', ':', '<', '\x5', '\x12', '\n', '\x2', ';', ':', '\x3', 
+		'\x2', '\x2', '\x2', ';', '<', '\x3', '\x2', '\x2', '\x2', '<', '=', '\x3', 
+		'\x2', '\x2', '\x2', '=', '?', '\a', '\t', '\x2', '\x2', '>', '@', '\a', 
+		'\x42', '\x2', '\x2', '?', '>', '\x3', '\x2', '\x2', '\x2', '?', '@', 
+		'\x3', '\x2', '\x2', '\x2', '@', '\x41', '\x3', '\x2', '\x2', '\x2', '\x41', 
+		'\x43', '\a', '\x13', '\x2', '\x2', '\x42', '\x44', '\x5', '\xE', '\b', 
+		'\x2', '\x43', '\x42', '\x3', '\x2', '\x2', '\x2', '\x44', '\x45', '\x3', 
+		'\x2', '\x2', '\x2', '\x45', '\x43', '\x3', '\x2', '\x2', '\x2', '\x45', 
+		'\x46', '\x3', '\x2', '\x2', '\x2', '\x46', 'G', '\x3', '\x2', '\x2', 
+		'\x2', 'G', 'H', '\a', '\x14', '\x2', '\x2', 'H', 'I', '\x5', '\f', '\a', 
+		'\x2', 'I', 'J', '\a', '\x10', '\x2', '\x2', 'J', '\x11', '\x3', '\x2', 
+		'\x2', '\x2', 'K', 'L', '\t', '\x3', '\x2', '\x2', 'L', '\x13', '\x3', 
+		'\x2', '\x2', '\x2', 'M', 'N', '\t', '\x4', '\x2', '\x2', 'N', '\x15', 
+		'\x3', '\x2', '\x2', '\x2', '\b', '\x17', '$', '\x33', ';', '?', '\x45',
 	};
 
 	public static readonly ATN _ATN =

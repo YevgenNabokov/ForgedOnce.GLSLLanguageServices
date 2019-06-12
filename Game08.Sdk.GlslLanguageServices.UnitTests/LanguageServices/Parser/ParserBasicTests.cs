@@ -33,9 +33,9 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.Parser
         {
             string payload = @"struct A 
             {
-                f1 int;
-                f2 float;
-            } s1";
+                int f1;
+                float f2;
+            } s1;";
 
             var parser = TestUtils.SetupParser(payload);
             var context = parser.structdefinition();
