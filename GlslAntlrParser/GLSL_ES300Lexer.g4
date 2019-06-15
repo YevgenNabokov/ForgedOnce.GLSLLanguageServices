@@ -71,6 +71,11 @@ IntegerLiteral
    | HexadecimalLiteral IntegerSuffix?
    ;
 
+BoolLiteral
+   : True
+   | False
+   ;
+
 Whitespace
     :   [ \t]+ -> skip
     ;
@@ -97,18 +102,74 @@ InOut: 'inout' ;
 Uniform: 'uniform' ;
 CentroidIn: 'centroid in' ;
 CentroidOut: 'centroid out' ;
+Precision: 'precision' ;
+PrecisionLow: 'lowp' ;
+PrecisionMedium: 'mediump' ;
+PrecisionHigh: 'highp' ;
+True: 'true' ;
+False: 'false' ;
+If: 'if' ;
+Else: 'else' ;
+Switch: 'switch' ;
+Case: 'case' ;
+Default: 'default' ;
+While: 'while' ;
+Do: 'do' ;
+For: 'for' ;
+Continue: 'continue' ;
+Break: 'break' ;
+Return: 'return' ;
+Discard: 'discard' ;
+
+/* Operators */
+
+Plus: '+' ;
+Minus: '-' ;
+Mul: '*' ;
+Div: '/' ;
+Pipe: '|' ;
+Percent: '%' ;
+Bang: '!' ;
+Tilde: '~' ;
+Equal: '=' ;
+NotEqual: '!=' ;
+Ampersand: '&' ;
+Caret: '^' ;
+Greater: '>' ;
+Less: '<' ;
+LessOrEqual: '<=' ;
+GreaterOrEqual: '>=' ;
+Left: '<<' ;
+Right: '>>' ;
+And: '&&' ;
+Or: '||' ;
+Xor: '^^' ;
+MulAssign: '*=' ;
+DivAssign: '/=' ;
+ModAssign: '%=' ;
+AddAssign: '+=' ;
+SubAssign: '-=' ;
+LeftAssign: '<<=' ;
+RightAssign: '>>=' ;
+AndAssign: '&=' ;
+XorAssign: '^=' ;
+OrAssign: '|=' ;
+Increment: '++' ;
+Decrement: '--' ;
 
 /* Chars */
 
 Semicolon: ';' ;
 Colon: ':' ;
 Comma: ',' ;
+Dot: '.' ;
 LeftBrace: '{' ;
 RightBrace: '}' ;
 LeftParen: '(' ;
 RightParen: ')' ;
 LeftBracket: '[' ;
 RightBracket: ']' ;
+Question: '?' ;
 
 /* Basic types */
 
@@ -293,10 +354,6 @@ IdentifierNonDigit
 
 Identifier
    : IdentifierNonDigit (IdentifierNonDigit | DIGIT)*
-   ;
-
-NotImplemented
-   : 'NA'
    ;
 
 

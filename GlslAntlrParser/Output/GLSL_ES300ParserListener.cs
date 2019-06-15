@@ -31,15 +31,35 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IGLSL_ES300ParserListener : IParseTreeListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.root"/>.
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.translation_unit"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterRoot([NotNull] GLSL_ES300Parser.RootContext context);
+	void EnterTranslation_unit([NotNull] GLSL_ES300Parser.Translation_unitContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.root"/>.
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.translation_unit"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitRoot([NotNull] GLSL_ES300Parser.RootContext context);
+	void ExitTranslation_unit([NotNull] GLSL_ES300Parser.Translation_unitContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.external_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExternal_declaration([NotNull] GLSL_ES300Parser.External_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.external_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExternal_declaration([NotNull] GLSL_ES300Parser.External_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.function_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunction_definition([NotNull] GLSL_ES300Parser.Function_definitionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.function_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunction_definition([NotNull] GLSL_ES300Parser.Function_definitionContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.declaration"/>.
 	/// </summary>
@@ -51,25 +71,535 @@ public interface IGLSL_ES300ParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitDeclaration([NotNull] GLSL_ES300Parser.DeclarationContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.declarationlist"/>.
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.declarator"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterDeclarationlist([NotNull] GLSL_ES300Parser.DeclarationlistContext context);
+	void EnterDeclarator([NotNull] GLSL_ES300Parser.DeclaratorContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.declarationlist"/>.
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.declarator"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitDeclarationlist([NotNull] GLSL_ES300Parser.DeclarationlistContext context);
+	void ExitDeclarator([NotNull] GLSL_ES300Parser.DeclaratorContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.variabledeclaration"/>.
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.declaratorlist"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterVariabledeclaration([NotNull] GLSL_ES300Parser.VariabledeclarationContext context);
+	void EnterDeclaratorlist([NotNull] GLSL_ES300Parser.DeclaratorlistContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.variabledeclaration"/>.
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.declaratorlist"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitVariabledeclaration([NotNull] GLSL_ES300Parser.VariabledeclarationContext context);
+	void ExitDeclaratorlist([NotNull] GLSL_ES300Parser.DeclaratorlistContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInitializer([NotNull] GLSL_ES300Parser.InitializerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInitializer([NotNull] GLSL_ES300Parser.InitializerContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.assignment_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAssignment_expression([NotNull] GLSL_ES300Parser.Assignment_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.assignment_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAssignment_expression([NotNull] GLSL_ES300Parser.Assignment_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.multiplicative_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMultiplicative_expression([NotNull] GLSL_ES300Parser.Multiplicative_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.multiplicative_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMultiplicative_expression([NotNull] GLSL_ES300Parser.Multiplicative_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.additive_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAdditive_expression([NotNull] GLSL_ES300Parser.Additive_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.additive_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAdditive_expression([NotNull] GLSL_ES300Parser.Additive_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.shift_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterShift_expression([NotNull] GLSL_ES300Parser.Shift_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.shift_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitShift_expression([NotNull] GLSL_ES300Parser.Shift_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.relational_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterRelational_expression([NotNull] GLSL_ES300Parser.Relational_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.relational_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitRelational_expression([NotNull] GLSL_ES300Parser.Relational_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.equality_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEquality_expression([NotNull] GLSL_ES300Parser.Equality_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.equality_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEquality_expression([NotNull] GLSL_ES300Parser.Equality_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.and_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAnd_expression([NotNull] GLSL_ES300Parser.And_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.and_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAnd_expression([NotNull] GLSL_ES300Parser.And_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.exclusive_or_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExclusive_or_expression([NotNull] GLSL_ES300Parser.Exclusive_or_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.exclusive_or_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExclusive_or_expression([NotNull] GLSL_ES300Parser.Exclusive_or_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.inclusive_or_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInclusive_or_expression([NotNull] GLSL_ES300Parser.Inclusive_or_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.inclusive_or_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInclusive_or_expression([NotNull] GLSL_ES300Parser.Inclusive_or_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.logical_and_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLogical_and_expression([NotNull] GLSL_ES300Parser.Logical_and_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.logical_and_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLogical_and_expression([NotNull] GLSL_ES300Parser.Logical_and_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.logical_xor_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLogical_xor_expression([NotNull] GLSL_ES300Parser.Logical_xor_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.logical_xor_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLogical_xor_expression([NotNull] GLSL_ES300Parser.Logical_xor_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.logical_or_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLogical_or_expression([NotNull] GLSL_ES300Parser.Logical_or_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.logical_or_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLogical_or_expression([NotNull] GLSL_ES300Parser.Logical_or_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.conditional_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConditional_expression([NotNull] GLSL_ES300Parser.Conditional_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.conditional_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConditional_expression([NotNull] GLSL_ES300Parser.Conditional_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.unary_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUnary_expression([NotNull] GLSL_ES300Parser.Unary_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.unary_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUnary_expression([NotNull] GLSL_ES300Parser.Unary_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.field_selection"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterField_selection([NotNull] GLSL_ES300Parser.Field_selectionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.field_selection"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitField_selection([NotNull] GLSL_ES300Parser.Field_selectionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.postfix_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPostfix_expression([NotNull] GLSL_ES300Parser.Postfix_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.postfix_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPostfix_expression([NotNull] GLSL_ES300Parser.Postfix_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.function_call_generic"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunction_call_generic([NotNull] GLSL_ES300Parser.Function_call_genericContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.function_call_generic"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunction_call_generic([NotNull] GLSL_ES300Parser.Function_call_genericContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.function_call_header_no_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunction_call_header_no_parameters([NotNull] GLSL_ES300Parser.Function_call_header_no_parametersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.function_call_header_no_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunction_call_header_no_parameters([NotNull] GLSL_ES300Parser.Function_call_header_no_parametersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.function_call_header_with_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunction_call_header_with_parameters([NotNull] GLSL_ES300Parser.Function_call_header_with_parametersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.function_call_header_with_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunction_call_header_with_parameters([NotNull] GLSL_ES300Parser.Function_call_header_with_parametersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.function_call_header"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunction_call_header([NotNull] GLSL_ES300Parser.Function_call_headerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.function_call_header"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunction_call_header([NotNull] GLSL_ES300Parser.Function_call_headerContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.function_identifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunction_identifier([NotNull] GLSL_ES300Parser.Function_identifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.function_identifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunction_identifier([NotNull] GLSL_ES300Parser.Function_identifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.variable_identifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterVariable_identifier([NotNull] GLSL_ES300Parser.Variable_identifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.variable_identifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitVariable_identifier([NotNull] GLSL_ES300Parser.Variable_identifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.integer_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInteger_expression([NotNull] GLSL_ES300Parser.Integer_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.integer_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInteger_expression([NotNull] GLSL_ES300Parser.Integer_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExpression([NotNull] GLSL_ES300Parser.ExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExpression([NotNull] GLSL_ES300Parser.ExpressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.primary_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPrimary_expression([NotNull] GLSL_ES300Parser.Primary_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.primary_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPrimary_expression([NotNull] GLSL_ES300Parser.Primary_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.function_prototype"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunction_prototype([NotNull] GLSL_ES300Parser.Function_prototypeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.function_prototype"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunction_prototype([NotNull] GLSL_ES300Parser.Function_prototypeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.function_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunction_declarator([NotNull] GLSL_ES300Parser.Function_declaratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.function_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunction_declarator([NotNull] GLSL_ES300Parser.Function_declaratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.function_header"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunction_header([NotNull] GLSL_ES300Parser.Function_headerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.function_header"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunction_header([NotNull] GLSL_ES300Parser.Function_headerContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.function_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunction_parameters([NotNull] GLSL_ES300Parser.Function_parametersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.function_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunction_parameters([NotNull] GLSL_ES300Parser.Function_parametersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.parameter_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterParameter_declaration([NotNull] GLSL_ES300Parser.Parameter_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.parameter_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitParameter_declaration([NotNull] GLSL_ES300Parser.Parameter_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.parameter_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterParameter_declarator([NotNull] GLSL_ES300Parser.Parameter_declaratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.parameter_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitParameter_declarator([NotNull] GLSL_ES300Parser.Parameter_declaratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.precision_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPrecision_qualifier([NotNull] GLSL_ES300Parser.Precision_qualifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.precision_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPrecision_qualifier([NotNull] GLSL_ES300Parser.Precision_qualifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.parameter_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterParameter_qualifier([NotNull] GLSL_ES300Parser.Parameter_qualifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.parameter_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitParameter_qualifier([NotNull] GLSL_ES300Parser.Parameter_qualifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.parameter_type_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterParameter_type_qualifier([NotNull] GLSL_ES300Parser.Parameter_type_qualifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.parameter_type_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitParameter_type_qualifier([NotNull] GLSL_ES300Parser.Parameter_type_qualifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.compound_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCompound_statement([NotNull] GLSL_ES300Parser.Compound_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.compound_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCompound_statement([NotNull] GLSL_ES300Parser.Compound_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.statementlist"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStatementlist([NotNull] GLSL_ES300Parser.StatementlistContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.statementlist"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStatementlist([NotNull] GLSL_ES300Parser.StatementlistContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStatement([NotNull] GLSL_ES300Parser.StatementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStatement([NotNull] GLSL_ES300Parser.StatementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.simple_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSimple_statement([NotNull] GLSL_ES300Parser.Simple_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.simple_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSimple_statement([NotNull] GLSL_ES300Parser.Simple_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.jump_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterJump_statement([NotNull] GLSL_ES300Parser.Jump_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.jump_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitJump_statement([NotNull] GLSL_ES300Parser.Jump_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.condition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCondition([NotNull] GLSL_ES300Parser.ConditionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.condition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCondition([NotNull] GLSL_ES300Parser.ConditionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.iteration_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIteration_statement([NotNull] GLSL_ES300Parser.Iteration_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.iteration_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIteration_statement([NotNull] GLSL_ES300Parser.Iteration_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.for_init_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFor_init_statement([NotNull] GLSL_ES300Parser.For_init_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.for_init_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFor_init_statement([NotNull] GLSL_ES300Parser.For_init_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.for_rest_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFor_rest_statement([NotNull] GLSL_ES300Parser.For_rest_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.for_rest_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFor_rest_statement([NotNull] GLSL_ES300Parser.For_rest_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.case_label"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCase_label([NotNull] GLSL_ES300Parser.Case_labelContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.case_label"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCase_label([NotNull] GLSL_ES300Parser.Case_labelContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.switch_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSwitch_statement([NotNull] GLSL_ES300Parser.Switch_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.switch_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSwitch_statement([NotNull] GLSL_ES300Parser.Switch_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.selection_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSelection_statement([NotNull] GLSL_ES300Parser.Selection_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.selection_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSelection_statement([NotNull] GLSL_ES300Parser.Selection_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.expression_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExpression_statement([NotNull] GLSL_ES300Parser.Expression_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.expression_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExpression_statement([NotNull] GLSL_ES300Parser.Expression_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.declaration_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDeclaration_statement([NotNull] GLSL_ES300Parser.Declaration_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.declaration_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDeclaration_statement([NotNull] GLSL_ES300Parser.Declaration_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.constant_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstant_expression([NotNull] GLSL_ES300Parser.Constant_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.constant_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstant_expression([NotNull] GLSL_ES300Parser.Constant_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.fully_specified_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFully_specified_type([NotNull] GLSL_ES300Parser.Fully_specified_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.fully_specified_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFully_specified_type([NotNull] GLSL_ES300Parser.Fully_specified_typeContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.literal"/>.
 	/// </summary>
@@ -81,53 +611,103 @@ public interface IGLSL_ES300ParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitLiteral([NotNull] GLSL_ES300Parser.LiteralContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.declarators"/>.
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.struct_declaratorlist"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterDeclarators([NotNull] GLSL_ES300Parser.DeclaratorsContext context);
+	void EnterStruct_declaratorlist([NotNull] GLSL_ES300Parser.Struct_declaratorlistContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.declarators"/>.
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.struct_declaratorlist"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitDeclarators([NotNull] GLSL_ES300Parser.DeclaratorsContext context);
+	void ExitStruct_declaratorlist([NotNull] GLSL_ES300Parser.Struct_declaratorlistContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.memberdeclaration"/>.
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.struct_declarationlist"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMemberdeclaration([NotNull] GLSL_ES300Parser.MemberdeclarationContext context);
+	void EnterStruct_declarationlist([NotNull] GLSL_ES300Parser.Struct_declarationlistContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.memberdeclaration"/>.
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.struct_declarationlist"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMemberdeclaration([NotNull] GLSL_ES300Parser.MemberdeclarationContext context);
+	void ExitStruct_declarationlist([NotNull] GLSL_ES300Parser.Struct_declarationlistContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.structdefinition"/>.
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.struct_declaration"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterStructdefinition([NotNull] GLSL_ES300Parser.StructdefinitionContext context);
+	void EnterStruct_declaration([NotNull] GLSL_ES300Parser.Struct_declarationContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.structdefinition"/>.
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.struct_declaration"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitStructdefinition([NotNull] GLSL_ES300Parser.StructdefinitionContext context);
+	void ExitStruct_declaration([NotNull] GLSL_ES300Parser.Struct_declarationContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.typequalifier"/>.
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.struct_specifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterTypequalifier([NotNull] GLSL_ES300Parser.TypequalifierContext context);
+	void EnterStruct_specifier([NotNull] GLSL_ES300Parser.Struct_specifierContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.typequalifier"/>.
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.struct_specifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitTypequalifier([NotNull] GLSL_ES300Parser.TypequalifierContext context);
+	void ExitStruct_specifier([NotNull] GLSL_ES300Parser.Struct_specifierContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.typename"/>.
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.type_qualifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterTypename([NotNull] GLSL_ES300Parser.TypenameContext context);
+	void EnterType_qualifier([NotNull] GLSL_ES300Parser.Type_qualifierContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.typename"/>.
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.type_qualifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitTypename([NotNull] GLSL_ES300Parser.TypenameContext context);
+	void ExitType_qualifier([NotNull] GLSL_ES300Parser.Type_qualifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.unary_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUnary_operator([NotNull] GLSL_ES300Parser.Unary_operatorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.unary_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUnary_operator([NotNull] GLSL_ES300Parser.Unary_operatorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.assignment_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAssignment_operator([NotNull] GLSL_ES300Parser.Assignment_operatorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.assignment_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAssignment_operator([NotNull] GLSL_ES300Parser.Assignment_operatorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.type_specifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_specifier([NotNull] GLSL_ES300Parser.Type_specifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.type_specifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_specifier([NotNull] GLSL_ES300Parser.Type_specifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.type_specifier_noprec"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_specifier_noprec([NotNull] GLSL_ES300Parser.Type_specifier_noprecContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.type_specifier_noprec"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_specifier_noprec([NotNull] GLSL_ES300Parser.Type_specifier_noprecContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.type_specifier_nonarray"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_specifier_nonarray([NotNull] GLSL_ES300Parser.Type_specifier_nonarrayContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.type_specifier_nonarray"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_specifier_nonarray([NotNull] GLSL_ES300Parser.Type_specifier_nonarrayContext context);
 }

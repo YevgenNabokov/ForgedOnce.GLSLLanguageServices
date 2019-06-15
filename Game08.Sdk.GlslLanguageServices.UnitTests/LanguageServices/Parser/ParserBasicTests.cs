@@ -35,11 +35,11 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.Parser
             {
                 int f1;
                 float f2;
-            } s1;";
+            }";
 
             var parser = TestUtils.SetupParser(payload);
-            var context = parser.structdefinition();
-
+            var context = parser.struct_specifier();
+            
             Assert.IsNull(context.exception);
         }
     }
