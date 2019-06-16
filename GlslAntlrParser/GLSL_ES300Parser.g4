@@ -24,12 +24,19 @@ declaration
    ;
 
 declarator
-   : fully_specified_type Identifier (LeftBracket constant_expression? RightBracket (Equal initializer)? )?
+   : fully_specified_type Identifier?
+   | fully_specified_type Identifier LeftBracket constant_expression RightBracket (Equal initializer)?
+   | fully_specified_type Identifier LeftBracket RightBracket Equal initializer
+   | fully_specified_type Identifier Equal initializer
+   | Invariant Identifier
    ;
 
 declaratorlist
    : declarator
-   | declaratorlist Comma Identifier (LeftBracket constant_expression? RightBracket (Equal initializer)? )?
+   | declaratorlist Comma Identifier
+   | declaratorlist Comma Identifier LeftBracket constant_expression RightBracket (Equal initializer)?
+   | declaratorlist Comma Identifier LeftBracket RightBracket Equal initializer
+   | declaratorlist Comma Identifier Equal initializer
    ;
 
 initializer
@@ -310,7 +317,38 @@ struct_specifier
    ;
 
 type_qualifier
-   : Const
+   : storage_qualifier
+   | layout_qualifier
+   | layout_qualifier storage_qualifier
+   | interpolation_qualifier
+   | invariant_qualifier storage_qualifier
+   | invariant_qualifier interpolation_qualifier storage_qualifier
+   ;
+
+interpolation_qualifier
+   : Smooth
+   | Flat
+   ;
+
+layout_qualifier_id
+   : Identifier (Equal IntegerLiteral)?
+   ;
+
+layout_qualifier_idlist
+   : layout_qualifier_id
+   | layout_qualifier_idlist Comma layout_qualifier_id
+   ;
+
+layout_qualifier
+   : Layout LeftParen layout_qualifier_idlist RightParen
+   ;
+
+invariant_qualifier
+   : Invariant
+   ;
+
+storage_qualifier
+   :  Const
    | In
    | Out
    | Uniform

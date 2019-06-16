@@ -410,6 +410,42 @@ public interface IGLSL_ES300ParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitType_qualifier([NotNull] GLSL_ES300Parser.Type_qualifierContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.interpolation_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterpolation_qualifier([NotNull] GLSL_ES300Parser.Interpolation_qualifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.layout_qualifier_id"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLayout_qualifier_id([NotNull] GLSL_ES300Parser.Layout_qualifier_idContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.layout_qualifier_idlist"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLayout_qualifier_idlist([NotNull] GLSL_ES300Parser.Layout_qualifier_idlistContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.layout_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLayout_qualifier([NotNull] GLSL_ES300Parser.Layout_qualifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.invariant_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInvariant_qualifier([NotNull] GLSL_ES300Parser.Invariant_qualifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.storage_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStorage_qualifier([NotNull] GLSL_ES300Parser.Storage_qualifierContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.unary_operator"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

@@ -120,6 +120,10 @@ Continue: 'continue' ;
 Break: 'break' ;
 Return: 'return' ;
 Discard: 'discard' ;
+Invariant: 'invariant' ;
+Layout: 'layout' ;
+Smooth: 'smooth' ;
+Flat: 'flat' ;
 
 /* Operators */
 

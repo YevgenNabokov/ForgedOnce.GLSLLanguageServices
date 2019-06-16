@@ -661,6 +661,66 @@ public interface IGLSL_ES300ParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitType_qualifier([NotNull] GLSL_ES300Parser.Type_qualifierContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.interpolation_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterpolation_qualifier([NotNull] GLSL_ES300Parser.Interpolation_qualifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.interpolation_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterpolation_qualifier([NotNull] GLSL_ES300Parser.Interpolation_qualifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.layout_qualifier_id"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLayout_qualifier_id([NotNull] GLSL_ES300Parser.Layout_qualifier_idContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.layout_qualifier_id"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLayout_qualifier_id([NotNull] GLSL_ES300Parser.Layout_qualifier_idContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.layout_qualifier_idlist"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLayout_qualifier_idlist([NotNull] GLSL_ES300Parser.Layout_qualifier_idlistContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.layout_qualifier_idlist"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLayout_qualifier_idlist([NotNull] GLSL_ES300Parser.Layout_qualifier_idlistContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.layout_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLayout_qualifier([NotNull] GLSL_ES300Parser.Layout_qualifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.layout_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLayout_qualifier([NotNull] GLSL_ES300Parser.Layout_qualifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.invariant_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInvariant_qualifier([NotNull] GLSL_ES300Parser.Invariant_qualifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.invariant_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInvariant_qualifier([NotNull] GLSL_ES300Parser.Invariant_qualifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.storage_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStorage_qualifier([NotNull] GLSL_ES300Parser.Storage_qualifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.storage_qualifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStorage_qualifier([NotNull] GLSL_ES300Parser.Storage_qualifierContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.unary_operator"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

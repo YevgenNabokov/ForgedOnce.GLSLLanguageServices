@@ -1,5 +1,6 @@
 ﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
+using Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.TestResources;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,33 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.Parser
             var context = parser.struct_specifier();
             
             Assert.IsNull(context.exception);
+        }
+
+        [Test]
+        public void CanParseVariableDeclaration()
+        {
+            var varName = "myVar";
+            string payload = DeclarationMaker.SimpleIntVar(varName);
+            var parser = TestUtils.SetupParser(payload);
+            var context = parser.declaration();
+
+            Assert.IsNull(context.exception);
+            var declarators = context.declaratorlist();
+            Assert.IsNotNull(declarators);
+            Assert.IsNotNull(context.Semicolon());
+            Assert.AreEqual(GLSL_ES300Lexer.Semicolon, context.Semicolon().Symbol.Type);
+            var declarator = declarators.declarator();
+            Assert.IsNotNull(declarator);
+            var type = declarator.fully_specified_type();
+            Assert.NotNull(type);
+            var typeSpec = type.type_specifier_nonarray();
+            Assert.NotNull(typeSpec);
+            var intT = typeSpec.Int_type();
+            Assert.NotNull(intT);
+
+            var id = declarator.Identifier();
+            Assert.NotNull(id);
+            Assert.AreEqual(varName, id.Symbol.Text);
         }
     }
 }

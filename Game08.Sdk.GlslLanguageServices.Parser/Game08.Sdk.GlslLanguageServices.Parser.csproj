@@ -21,4 +21,8 @@
     <PackageReference Include="Antlr4.Runtime.Standard" Version="4.7.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Game08.Sdk.GlslLanguageServices.LanguageModels\Game08.Sdk.GlslLanguageServices.LanguageModels.csproj" />
+  </ItemGroup>
+
 </Project>
