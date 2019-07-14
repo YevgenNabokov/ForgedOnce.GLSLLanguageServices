@@ -353,7 +353,7 @@ Usampler2DArray_type
    : 'usampler2DArray'
    ;
 
-IdentifierNonDigit
+fragment IdentifierNonDigit
    : NONDIGIT;
 
 Identifier

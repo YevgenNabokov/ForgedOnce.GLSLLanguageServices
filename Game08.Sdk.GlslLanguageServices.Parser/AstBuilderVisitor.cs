@@ -1,6 +1,5 @@
 ﻿using Antlr4.Runtime.Misc;
 using Game08.Sdk.GlslLanguageServices.LanguageModels.Ast;
-using Game08.Sdk.GlslLanguageServices.Parser.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,35 +9,33 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
     public class AstBuilderVisitor : GLSL_ES300ParserBaseVisitor<AstNode>
     {
         public override AstNode VisitTranslation_unit([NotNull] GLSL_ES300Parser.Translation_unitContext context)
+        {            
+            var declarations = context.external_declaration_list();
+            if (declarations != null)
+            {
+                return this.Visit(declarations);
+            }
+
+            return new Root();
+        }
+
+        public override AstNode VisitExternal_declaration_list([NotNull] GLSL_ES300Parser.External_declaration_listContext context)
         {
             var result = new Root();
 
-            var declarations = context.external_declaration();
-            if (declarations != null)
+            foreach (var exdec in context.external_declaration())
             {
-                foreach (var exdec in declarations)
+                var dec = exdec.declaration();
+                if (dec != null)
                 {
-                    var dec = exdec.declaration();
-                    if (dec != null)
+                    result.Declarations.Add((Declaration)this.Visit(dec));
+                }
+                else
+                {
+                    var func = exdec.function_definition();
+                    if (func != null)
                     {
-                        var d = (Declaration)this.Visit(dec);
-
-                        if (d is VarDeclaratorRoot)
-                        {
-                            result.Declarations.AddRange(this.UnwrapVariableDeclaratorList((VarDeclaratorRoot)d));
-                        }
-                        else
-                        {
-                            result.Declarations.Add(d);
-                        }
-                    }
-                    else
-                    {
-                        var func = exdec.function_definition();
-                        if (func != null)
-                        {
-                            result.Declarations.Add((Declaration)this.Visit(func));
-                        }
+                        result.Declarations.Add((Declaration)this.Visit(func));
                     }
                 }
             }
@@ -59,76 +56,71 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
 
         public override AstNode VisitDeclaratorlist([NotNull] GLSL_ES300Parser.DeclaratorlistContext context)
         {
-            VarDeclarator currentDeclarator = null;
+            VariableDeclarationList declaratorList = new VariableDeclarationList();
             var currentContext = context;
             while (currentContext != null)
             {
                 var dec = currentContext.declarator();
                 if (dec != null)
-                {
-                    currentDeclarator = null;
-                    var root = new VarDeclaratorRoot();
-                    root.Next = currentDeclarator;
+                {                    
                     if (dec.fully_specified_type() != null)
                     {
-                        root.Type = (TypeSpecifier)this.Visit(dec.fully_specified_type());
+                        declaratorList.Type = (TypeSpecifier)this.Visit(dec.fully_specified_type());
                     }
+
+                    VariableDeclaration declaration = new VariableDeclaration();
                     if (dec.Identifier() != null)
                     {
-                        root.Name = new Identifier()
+                        declaration.Name = new Identifier()
                         {
                             Name = dec.Identifier().Symbol.Text
                         };
                     }
                     if (dec.LeftBracket() != null)
                     {
-                        root.IsArray = true;
+                        declaration.ArraySpecifier = new ArraySpecifier();
                         if (dec.constant_expression() != null)
                         {
-                            root.ArraySizeExpression = (Expression)this.Visit(dec.constant_expression());
+                            declaration.ArraySpecifier.ArraySizeExpression = (Expression)this.Visit(dec.constant_expression());
                         }
                     }
                     if (dec.initializer() != null)
                     {
-                        root.Initializer = (Expression)this.Visit(dec.initializer().assignment_expression());
+                        declaration.Initializer = (Expression)this.Visit(dec.initializer().assignment_expression());
                     }
 
-                    return root;
+                    declaratorList.Declarations.Add(declaration);
+                    return declaratorList;
                 }
                 else
                 {
-                    var declarator = new VarDeclarator();
-                    declarator.Next = currentDeclarator;                    
+                    VariableDeclaration declaration = new VariableDeclaration();
                     if (currentContext.Identifier() != null)
                     {
-                        declarator.Name = new Identifier()
+                        declaration.Name = new Identifier()
                         {
                             Name = currentContext.Identifier().Symbol.Text
                         };
                     }
                     if (currentContext.LeftBracket() != null)
                     {
-                        declarator.IsArray = true;
+                        declaration.ArraySpecifier = new ArraySpecifier();
                         if (currentContext.constant_expression() != null)
                         {
-                            declarator.ArraySizeExpression = (Expression)this.Visit(currentContext.constant_expression());
+                            declaration.ArraySpecifier.ArraySizeExpression = (Expression)this.Visit(currentContext.constant_expression());
                         }
                     }
                     if (currentContext.initializer() != null)
                     {
-                        declarator.Initializer = (Expression)this.Visit(currentContext.initializer().assignment_expression());
+                        declaration.Initializer = (Expression)this.Visit(currentContext.initializer().assignment_expression());
                     }
 
                     currentContext = currentContext.declaratorlist();
+                    declaratorList.Declarations.Add(declaration);
                 }
             }
 
-            return currentDeclarator;
-        }
-
-        private List<VariableDeclaration> UnwrapVariableDeclaratorList(VarDeclaratorRoot declaratorRoot)
-        {
-            throw new NotImplementedException("Consider not unwrapping the variable declarations.");
+            return declaratorList;
         }
     }
 }

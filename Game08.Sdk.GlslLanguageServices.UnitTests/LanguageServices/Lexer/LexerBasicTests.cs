@@ -11,6 +11,7 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.Lexer
     {
         private readonly string[] validIdentifiers = new[]
         {
+            "a",
             "id",
             "id12",
             "id12_23",

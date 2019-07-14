@@ -3,7 +3,11 @@ parser grammar GLSL_ES300Parser;
 options { tokenVocab = GLSL_ES300Lexer; }
 
 translation_unit
-   : external_declaration+ EOF
+   : external_declaration_list? EOF
+   ;
+
+external_declaration_list
+   : external_declaration+   
    ;
 
 external_declaration
@@ -190,8 +194,8 @@ function_parameters
    ;
 
 parameter_declaration
-   : parameter_type_qualifier? parameter_qualifier parameter_declarator
-   | parameter_type_qualifier? parameter_qualifier type_specifier_nonarray
+   : parameter_type_qualifier? parameter_qualifier? parameter_declarator
+   | parameter_type_qualifier? parameter_qualifier? type_specifier_nonarray
    ;
 
 parameter_declarator

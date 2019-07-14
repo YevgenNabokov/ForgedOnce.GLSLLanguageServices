@@ -4,10 +4,12 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
-    public class VariableDeclaration : Declaration
+    public class VariableDeclaration : AstNode
     {
-        public TypeSpecifier Type;
+        public ArraySpecifier ArraySpecifier;
 
         public Identifier Name;
+
+        public Expression Initializer;
     }
 }

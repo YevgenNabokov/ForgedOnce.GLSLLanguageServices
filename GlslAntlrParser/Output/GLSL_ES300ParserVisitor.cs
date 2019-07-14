@@ -38,6 +38,12 @@ public interface IGLSL_ES300ParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitTranslation_unit([NotNull] GLSL_ES300Parser.Translation_unitContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.external_declaration_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExternal_declaration_list([NotNull] GLSL_ES300Parser.External_declaration_listContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="GLSL_ES300Parser.external_declaration"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

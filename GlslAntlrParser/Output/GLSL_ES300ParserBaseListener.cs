@@ -47,6 +47,18 @@ public partial class GLSL_ES300ParserBaseListener : IGLSL_ES300ParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitTranslation_unit([NotNull] GLSL_ES300Parser.Translation_unitContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.external_declaration_list"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterExternal_declaration_list([NotNull] GLSL_ES300Parser.External_declaration_listContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.external_declaration_list"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitExternal_declaration_list([NotNull] GLSL_ES300Parser.External_declaration_listContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.external_declaration"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

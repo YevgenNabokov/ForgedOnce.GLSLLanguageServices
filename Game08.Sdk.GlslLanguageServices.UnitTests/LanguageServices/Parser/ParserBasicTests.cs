@@ -70,5 +70,36 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.Parser
             Assert.NotNull(id);
             Assert.AreEqual(varName, id.Symbol.Text);
         }
+
+        [Test]
+        public void CanParseExternalDeclarationList()
+        {
+            var varName = "a";
+            string payload = DeclarationMaker.SimpleIntVar(varName);
+            var parser = TestUtils.SetupParser(payload);
+            var context = parser.external_declaration_list();
+
+            Assert.IsNull(context.exception);
+            var declarations = context.external_declaration();
+            Assert.IsNotNull(declarations);
+            Assert.AreEqual(1, declarations.Length);
+            var d = declarations[0];
+            var declaration = d.declaration();
+            Assert.NotNull(declaration);
+            var dList = declaration.declaratorlist();
+            Assert.NotNull(dList);
+            var declarator = dList.declarator();
+            Assert.NotNull(declarator);
+            var type = declarator.fully_specified_type();
+            Assert.NotNull(type);
+            var typeSpec = type.type_specifier_nonarray();
+            Assert.NotNull(typeSpec);
+            var intT = typeSpec.Int_type();
+            Assert.NotNull(intT);
+
+            var id = declarator.Identifier();
+            Assert.NotNull(id);
+            Assert.AreEqual(varName, id.Symbol.Text);
+        }
     }
 }
