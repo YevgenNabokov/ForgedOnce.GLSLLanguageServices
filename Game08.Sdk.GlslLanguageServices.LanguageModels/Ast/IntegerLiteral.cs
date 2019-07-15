@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
-    public abstract class TypeSpecifier : AstNode
+    public class IntegerLiteral : AstNode
     {
-        public TypeQualifier Qualifier = new TypeQualifier();
+        public string LiteralValue;
     }
 }

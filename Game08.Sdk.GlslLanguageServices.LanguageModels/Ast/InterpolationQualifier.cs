@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
-    public abstract class TypeSpecifier : AstNode
+    public enum InterpolationQualifier
     {
-        public TypeQualifier Qualifier = new TypeQualifier();
+        Smooth,
+        Flat
     }
 }

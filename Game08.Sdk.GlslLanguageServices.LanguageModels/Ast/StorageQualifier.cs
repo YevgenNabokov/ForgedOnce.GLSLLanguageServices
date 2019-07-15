@@ -4,8 +4,13 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
-    public abstract class TypeSpecifier : AstNode
+    public enum StorageQualifier
     {
-        public TypeQualifier Qualifier = new TypeQualifier();
+        Const,
+        In,
+        Out,
+        Uniform,
+        CentroidIn,
+        CentroidOut
     }
 }

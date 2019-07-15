@@ -90,7 +90,7 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
                     }
 
                     declaratorList.Declarations.Add(declaration);
-                    return declaratorList;
+                    currentContext = null;                    
                 }
                 else
                 {
@@ -120,7 +120,79 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
                 }
             }
 
+            declaratorList.Declarations.Reverse();
             return declaratorList;
+        }
+
+        public override AstNode VisitFully_specified_type([NotNull] GLSL_ES300Parser.Fully_specified_typeContext context)
+        {            
+            TypeQualifier resultQualifier = null;
+            var qualifier = context.type_qualifier();
+            if (qualifier != null)
+            {
+                resultQualifier = this.ParseQualifier(qualifier);
+            }
+
+            var nonArraySpecifier = context.type_specifier_nonarray();
+            if (nonArraySpecifier.struct_specifier() != null)
+            {
+                var structSpecifier = (StructTypeSpecifier)this.VisitStruct_specifier(nonArraySpecifier.struct_specifier());
+                structSpecifier.Qualifier = resultQualifier;
+                return structSpecifier;
+            }
+            else
+            {
+                TypeNameSpecifier result = new TypeNameSpecifier();
+                result.Qualifier = resultQualifier;
+                result.Identifier = new Identifier() { Name = nonArraySpecifier.GetText() };
+                return result;
+            }
+        }
+
+        public TypeQualifier ParseQualifier(GLSL_ES300Parser.Type_qualifierContext context)
+        {
+            TypeQualifier result = new TypeQualifier();
+
+            if (context.invariant_qualifier() != null)
+            {
+                result.Invariant = true;
+            }
+
+            if (context.interpolation_qualifier() != null)
+            {
+                var interp = context.interpolation_qualifier();
+                result.Interpolation = (InterpolationQualifier)Enum.Parse(typeof(InterpolationQualifier), interp.GetText(), true);
+            }
+
+            if (context.storage_qualifier() != null)
+            {
+                var stor = context.storage_qualifier();
+                result.Storage = (StorageQualifier)Enum.Parse(typeof(StorageQualifier), stor.GetText(), true);
+            }
+
+            if (context.layout_qualifier() != null)
+            {
+                var layoutIdList = context.layout_qualifier().layout_qualifier_idlist();
+                while (layoutIdList != null)
+                {
+                    if (layoutIdList.layout_qualifier_id() != null)
+                    {
+                        var idQualifier = new LayoutIdQualifier();
+                        var layoutId = layoutIdList.layout_qualifier_id();
+                        idQualifier.Id = (Identifier)this.Visit(layoutId.Identifier());
+                        if (layoutId.IntegerLiteral() != null)
+                        {
+                            idQualifier.Order = new IntegerLiteral() { LiteralValue = layoutId.IntegerLiteral().GetText() };
+                        }
+
+                        result.Layout.Add(idQualifier);
+                    }
+
+                    layoutIdList = layoutIdList.layout_qualifier_idlist();
+                }
+            }
+
+            return result;
         }
     }
 }
