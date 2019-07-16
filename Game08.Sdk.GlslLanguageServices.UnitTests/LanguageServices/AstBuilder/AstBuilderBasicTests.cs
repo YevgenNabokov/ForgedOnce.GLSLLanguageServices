@@ -15,6 +15,8 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.AstBuilder
 
         private readonly string QualifiedVariableDeclarationInput = @"uniform int a;";
 
+        private readonly string StructVariableDeclarationInput = @"struct { int a; } b;";
+
         [Test]
         public void CanParseVariablesInRoot()
         {
@@ -69,6 +71,35 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.AstBuilder
             Assert.IsNotNull(declarationList);
             Assert.AreEqual(1, declarationList.Declarations.Count);
             Assert.AreEqual("a", declarationList.Declarations[0].Name.Name);
+        }
+
+        [Test]
+        public void CanParseStructVariablesInRoot()
+        {
+            var parser = TestUtils.SetupParser(this.StructVariableDeclarationInput);
+            var context = parser.external_declaration_list();
+
+            var subject = new AstBuilderVisitor();
+
+            var result = subject.Visit(context);
+
+            Assert.IsTrue(result is Root);
+            var root = result as Root;
+
+            Assert.AreEqual(1, root.Declarations.Count);
+            var declarationList = root.Declarations[0] as VariableDeclarationList;
+
+            var structTypeSpecifier = declarationList.Type as StructTypeSpecifier;
+            Assert.AreEqual(1, structTypeSpecifier.Members.Count);
+
+            var memberType = structTypeSpecifier.Members[0].Type as TypeNameSpecifier;
+            Assert.IsNotNull(memberType);
+            Assert.AreEqual("int", memberType.Identifier.Name);
+
+            Assert.AreEqual(1, structTypeSpecifier.Members[0].Identifiers.Count);
+            Assert.AreEqual("a", structTypeSpecifier.Members[0].Identifiers[0].Name);
+
+            Assert.AreEqual("b", declarationList.Declarations[0].Name.Name);
         }
     }
 }

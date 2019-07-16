@@ -130,26 +130,30 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
             var qualifier = context.type_qualifier();
             if (qualifier != null)
             {
-                resultQualifier = this.ParseQualifier(qualifier);
+                resultQualifier = (TypeQualifier)VisitType_qualifier(qualifier);
             }
 
-            var nonArraySpecifier = context.type_specifier_nonarray();
-            if (nonArraySpecifier.struct_specifier() != null)
+            var typeSpecifier = (TypeSpecifier)VisitType_specifier_nonarray(context.type_specifier_nonarray());
+            typeSpecifier.Qualifier = resultQualifier;
+            return typeSpecifier;
+        }
+
+        public override AstNode VisitType_specifier_nonarray([NotNull] GLSL_ES300Parser.Type_specifier_nonarrayContext context)
+        {
+            if (context.struct_specifier() != null)
             {
-                var structSpecifier = (StructTypeSpecifier)this.VisitStruct_specifier(nonArraySpecifier.struct_specifier());
-                structSpecifier.Qualifier = resultQualifier;
+                var structSpecifier = (StructTypeSpecifier)this.VisitStruct_specifier(context.struct_specifier());
                 return structSpecifier;
             }
             else
             {
                 TypeNameSpecifier result = new TypeNameSpecifier();
-                result.Qualifier = resultQualifier;
-                result.Identifier = new Identifier() { Name = nonArraySpecifier.GetText() };
+                result.Identifier = new Identifier() { Name = context.GetText() };
                 return result;
             }
         }
 
-        public TypeQualifier ParseQualifier(GLSL_ES300Parser.Type_qualifierContext context)
+        public override AstNode VisitType_qualifier(GLSL_ES300Parser.Type_qualifierContext context)
         {
             TypeQualifier result = new TypeQualifier();
 
@@ -171,7 +175,7 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
             }
 
             if (context.layout_qualifier() != null)
-            {
+            {                
                 var layoutIdList = context.layout_qualifier().layout_qualifier_idlist();
                 while (layoutIdList != null)
                 {
@@ -179,7 +183,11 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
                     {
                         var idQualifier = new LayoutIdQualifier();
                         var layoutId = layoutIdList.layout_qualifier_id();
-                        idQualifier.Id = (Identifier)this.Visit(layoutId.Identifier());
+                        idQualifier.Id = new Identifier()
+                        {
+                            Name = layoutId.Identifier().Symbol.Text
+                        };
+
                         if (layoutId.IntegerLiteral() != null)
                         {
                             idQualifier.Order = new IntegerLiteral() { LiteralValue = layoutId.IntegerLiteral().GetText() };
@@ -190,6 +198,88 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
 
                     layoutIdList = layoutIdList.layout_qualifier_idlist();
                 }
+            }
+
+            return result;
+        }
+
+        public override AstNode VisitStruct_specifier([NotNull] GLSL_ES300Parser.Struct_specifierContext context)
+        {
+            var result = new StructTypeSpecifier();
+
+            if (context.Identifier() != null)
+            {
+                result.Identifier = new Identifier()
+                {
+                    Name = context.Identifier().Symbol.Text
+                };
+            }
+
+            var list = context.struct_declarationlist();
+            if (list != null)
+            {
+                foreach (var d in list.struct_declaration())
+                {
+                    var member = new StructMemberDeclaration();
+                    var qualifier = d.type_qualifier() != null ? (TypeQualifier)VisitType_qualifier(d.type_qualifier()) : new TypeQualifier();
+
+                    var typeSpec = d.type_specifier();
+
+                    if (typeSpec.precision_qualifier() != null)
+                    {
+                        qualifier.Precision = (PrecisionQualifier)Enum.Parse(typeof(PrecisionQualifier), typeSpec.precision_qualifier().GetText(), true);
+                    }
+
+                    var noPrecTypeSpec = typeSpec.type_specifier_noprec();
+                    var typeSpecifier = (TypeSpecifier)VisitType_specifier_nonarray(noPrecTypeSpec.type_specifier_nonarray());
+                    typeSpecifier.Qualifier = qualifier;
+                    member.Type = typeSpecifier;
+
+                    if (noPrecTypeSpec.LeftBracket() != null)
+                    {
+                        member.ArraySpecifier = new ArraySpecifier();
+
+                        if (noPrecTypeSpec.constant_expression() != null)
+                        {
+                            member.ArraySpecifier.ArraySizeExpression = (Expression)this.Visit(noPrecTypeSpec.constant_expression());
+                        }
+                    }
+
+                    var currentDeclaratorList = d.struct_declaratorlist();
+                    while(currentDeclaratorList != null)
+                    {
+                        if (currentDeclaratorList.Identifier() != null)
+                        {
+                            member.Identifiers.Add(new Identifier()
+                            {
+                                Name = currentDeclaratorList.Identifier().Symbol.Text
+                            });
+                        }
+
+                        currentDeclaratorList = currentDeclaratorList.struct_declaratorlist();
+                    }
+
+                    result.Members.Add(member);
+                }
+            }
+
+            return result;
+        }
+
+        private List<TOut> UnwrapList<TRecursive, TItem, TOut>(Func<TRecursive, TItem> itemGetter, Func<TItem, TOut> itemMapper, Func<TRecursive, TRecursive> nextGetter, TRecursive subject)
+        {
+            List<TOut> result = new List<TOut>();
+            var current = subject;
+            while (current != null)
+            {
+                var item = itemGetter(current);
+
+                if (item != null)
+                {
+                    result.Add(itemMapper(item));
+                }
+
+                current = nextGetter(current);
             }
 
             return result;
