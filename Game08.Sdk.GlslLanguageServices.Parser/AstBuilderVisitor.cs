@@ -51,6 +51,12 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
                 return this.Visit(declaratorList);
             }
 
+            var functionPrototype = context.function_prototype();
+            if (functionPrototype != null)
+            {
+                return this.Visit(functionPrototype);
+            }
+
             throw new NotSupportedException();
         }
 
@@ -260,6 +266,74 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
                     }
 
                     result.Members.Add(member);
+                }
+            }
+
+            return result;
+        }
+
+        public override AstNode VisitFunction_definition([NotNull] GLSL_ES300Parser.Function_definitionContext context)
+        {
+            var result = (FunctionDeclaration)this.Visit(context.function_prototype());
+
+            result.Statement = (StatementCompound)this.Visit(context.compound_statement());
+
+            return result;
+        }
+
+        public override AstNode VisitFunction_prototype([NotNull] GLSL_ES300Parser.Function_prototypeContext context)
+        {
+            var result = new FunctionDeclaration();
+
+            var declarator = context.function_declarator();
+
+            var header = declarator.function_header();
+
+            result.Name = new Identifier()
+            {
+                Name = header.Identifier().Symbol.Text
+            };
+
+            result.TypeSpecifier = (TypeSpecifier)VisitFully_specified_type(header.fully_specified_type());
+
+            var parameters = declarator.function_parameters();
+
+            if (parameters != null)
+            {
+                foreach (var p in parameters.parameter_declaration())
+                {
+                    var pResult = new FunctionParameter();
+
+                    pResult.IsConst = p.parameter_type_qualifier() != null;
+
+                    var paramQ = p.parameter_qualifier();
+                    if (paramQ != null)
+                    {
+                        pResult.ParameterQualifier = (ParameterQualifier)Enum.Parse(typeof(ParameterQualifier), paramQ.GetText(), true);
+                    }
+
+                    var decl = p.parameter_declarator();
+                    var typeSpecifier = (TypeSpecifier)VisitType_specifier_nonarray(p.type_specifier_nonarray() ?? decl.type_specifier_nonarray());
+                    if (decl != null)
+                    {
+                        pResult.Name = new Identifier()
+                        {
+                            Name = decl.Identifier().Symbol.Text
+                        };
+
+                        var arraySize = decl.constant_expression();
+                        if (arraySize != null)
+                        {
+                            pResult.ArraySpecifier = new ArraySpecifier()
+                            {
+                                ArraySizeExpression = (Expression)Visit(arraySize)
+                            };
+                        }
+                    }
+
+                    pResult.TypeSpecifier = typeSpecifier;
+
+                    result.Parameters.Add(pResult);
                 }
             }
 

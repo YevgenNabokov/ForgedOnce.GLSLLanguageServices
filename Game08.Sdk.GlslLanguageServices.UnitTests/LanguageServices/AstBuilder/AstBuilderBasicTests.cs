@@ -17,6 +17,8 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.AstBuilder
 
         private readonly string StructVariableDeclarationInput = @"struct { int a; } b;";
 
+        private readonly string FunctionProtoInput = "int DoSomething(const float a, int b);";
+
         [Test]
         public void CanParseVariablesInRoot()
         {
@@ -100,6 +102,38 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.AstBuilder
             Assert.AreEqual("a", structTypeSpecifier.Members[0].Identifiers[0].Name);
 
             Assert.AreEqual("b", declarationList.Declarations[0].Name.Name);
+        }
+
+        [Test]
+        public void CanParseFunctionDefinitionsInRoot()
+        {
+            var parser = TestUtils.SetupParser(this.FunctionProtoInput);
+            var context = parser.external_declaration_list();
+
+            var subject = new AstBuilderVisitor();
+
+            var result = subject.Visit(context);
+
+            Assert.IsTrue(result is Root);
+            var root = result as Root;
+
+            Assert.AreEqual(1, root.Declarations.Count);
+            var funcDeclaration = root.Declarations[0] as FunctionDeclaration;
+
+            Assert.AreEqual("DoSomething", funcDeclaration.Name.Name);
+
+            var typeSpec = funcDeclaration.TypeSpecifier as TypeNameSpecifier;
+            Assert.IsNotNull(typeSpec);
+
+            Assert.AreEqual("int", typeSpec.Identifier.Name);
+
+            Assert.AreEqual(2, funcDeclaration.Parameters.Count);
+
+            Assert.AreEqual("float", ((TypeNameSpecifier)funcDeclaration.Parameters[0].TypeSpecifier).Identifier.Name);
+            Assert.AreEqual("a", funcDeclaration.Parameters[0].Name.Name);
+
+            Assert.AreEqual("int", ((TypeNameSpecifier)funcDeclaration.Parameters[1].TypeSpecifier).Identifier.Name);
+            Assert.AreEqual("b", funcDeclaration.Parameters[1].Name.Name);
         }
     }
 }
