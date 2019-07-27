@@ -4,8 +4,12 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
-    public class StatementCompound : Statement
+    public class ExpressionBinary : Expression
     {
-        public List<Statement> Statements = new List<Statement>();
+        public Expression Left;
+
+        public Operator Operator;
+
+        public Expression Right;
     }
 }

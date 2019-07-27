@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
-    public class StatementCompound : Statement
+    public class StatementExpression : Statement
     {
-        public List<Statement> Statements = new List<Statement>();
+        public Expression Expression;
     }
 }

@@ -43,23 +43,24 @@ public partial class GLSL_ES300Parser : Parser {
 		Switch=24, Case=25, Default=26, While=27, Do=28, For=29, Continue=30, 
 		Break=31, Return=32, Discard=33, Invariant=34, Layout=35, Smooth=36, Flat=37, 
 		Plus=38, Minus=39, Mul=40, Div=41, Pipe=42, Percent=43, Bang=44, Tilde=45, 
-		Equal=46, NotEqual=47, Ampersand=48, Caret=49, Greater=50, Less=51, LessOrEqual=52, 
-		GreaterOrEqual=53, Left=54, Right=55, And=56, Or=57, Xor=58, MulAssign=59, 
-		DivAssign=60, ModAssign=61, AddAssign=62, SubAssign=63, LeftAssign=64, 
-		RightAssign=65, AndAssign=66, XorAssign=67, OrAssign=68, Increment=69, 
-		Decrement=70, Semicolon=71, Colon=72, Comma=73, Dot=74, LeftBrace=75, 
-		RightBrace=76, LeftParen=77, RightParen=78, LeftBracket=79, RightBracket=80, 
-		Question=81, Void_type=82, Bool_type=83, Int_type=84, Uint_type=85, Float_type=86, 
-		Vec2_type=87, Vec3_type=88, Vec4_type=89, Bvec2_type=90, Bvec3_type=91, 
-		Bvec4_type=92, Ivec2_type=93, Ivec3_type=94, Ivec4_type=95, Uvec2_type=96, 
-		Uvec3_type=97, Uvec4_type=98, Mat2_type=99, Mat3_type=100, Mat4_type=101, 
-		Mat2x2_type=102, Mat2x3_type=103, Mat2x4_type=104, Mat3x2_type=105, Mat3x3_type=106, 
-		Mat3x4_type=107, Mat4x2_type=108, Mat4x3_type=109, Mat4x4_type=110, Sampler2D_type=111, 
-		Sampler3D_type=112, SamplerCube_type=113, SamplerCubeShadow_type=114, 
-		Sampler2DShadow_type=115, Sampler2DArray_type=116, Sampler2DArrayShadow_type=117, 
-		Isampler2D_type=118, Isampler3D_type=119, IsamplerCube_type=120, Isampler2DArray_type=121, 
-		Usampler2D_type=122, Usampler3D_type=123, UsamplerCube_type=124, Usampler2DArray_type=125, 
-		Identifier=126;
+		Assign=46, NotEqual=47, Ampersand=48, Caret=49, Greater=50, Less=51, LessOrEqual=52, 
+		GreaterOrEqual=53, Left=54, Right=55, And=56, Or=57, Xor=58, Equal=59, 
+		MulAssign=60, DivAssign=61, ModAssign=62, AddAssign=63, SubAssign=64, 
+		LeftAssign=65, RightAssign=66, AndAssign=67, XorAssign=68, OrAssign=69, 
+		Increment=70, Decrement=71, Semicolon=72, Colon=73, Comma=74, Dot=75, 
+		LeftBrace=76, RightBrace=77, LeftParen=78, RightParen=79, LeftBracket=80, 
+		RightBracket=81, Question=82, Void_type=83, Bool_type=84, Int_type=85, 
+		Uint_type=86, Float_type=87, Vec2_type=88, Vec3_type=89, Vec4_type=90, 
+		Bvec2_type=91, Bvec3_type=92, Bvec4_type=93, Ivec2_type=94, Ivec3_type=95, 
+		Ivec4_type=96, Uvec2_type=97, Uvec3_type=98, Uvec4_type=99, Mat2_type=100, 
+		Mat3_type=101, Mat4_type=102, Mat2x2_type=103, Mat2x3_type=104, Mat2x4_type=105, 
+		Mat3x2_type=106, Mat3x3_type=107, Mat3x4_type=108, Mat4x2_type=109, Mat4x3_type=110, 
+		Mat4x4_type=111, Sampler2D_type=112, Sampler3D_type=113, SamplerCube_type=114, 
+		SamplerCubeShadow_type=115, Sampler2DShadow_type=116, Sampler2DArray_type=117, 
+		Sampler2DArrayShadow_type=118, Isampler2D_type=119, Isampler3D_type=120, 
+		IsamplerCube_type=121, Isampler2DArray_type=122, Usampler2D_type=123, 
+		Usampler3D_type=124, UsamplerCube_type=125, Usampler2DArray_type=126, 
+		Identifier=127;
 	public const int
 		RULE_translation_unit = 0, RULE_external_declaration_list = 1, RULE_external_declaration = 2, 
 		RULE_function_definition = 3, RULE_declaration = 4, RULE_declarator = 5, 
@@ -119,10 +120,10 @@ public partial class GLSL_ES300Parser : Parser {
 		"'for'", "'continue'", "'break'", "'return'", "'discard'", "'invariant'", 
 		"'layout'", "'smooth'", "'flat'", "'+'", "'-'", "'*'", "'/'", "'|'", "'%'", 
 		"'!'", "'~'", "'='", "'!='", "'&'", "'^'", "'>'", "'<'", "'<='", "'>='", 
-		"'<<'", "'>>'", "'&&'", "'||'", "'^^'", "'*='", "'/='", "'%='", "'+='", 
-		"'-='", "'<<='", "'>>='", "'&='", "'^='", "'|='", "'++'", "'--'", "';'", 
-		"':'", "','", "'.'", "'{'", "'}'", "'('", "')'", "'['", "']'", "'?'", 
-		"'void'", "'bool'", "'int'", "'uint'", "'float'", "'vec2'", "'vec3'", 
+		"'<<'", "'>>'", "'&&'", "'||'", "'^^'", "'=='", "'*='", "'/='", "'%='", 
+		"'+='", "'-='", "'<<='", "'>>='", "'&='", "'^='", "'|='", "'++'", "'--'", 
+		"';'", "':'", "','", "'.'", "'{'", "'}'", "'('", "')'", "'['", "']'", 
+		"'?'", "'void'", "'bool'", "'int'", "'uint'", "'float'", "'vec2'", "'vec3'", 
 		"'vec4'", "'bvec2'", "'bvec3'", "'bvec4'", "'ivec2'", "'ivec3'", "'ivec4'", 
 		"'uvec2'", "'uvec3'", "'uvec4'", "'mat2'", "'mat3'", "'mat4'", "'mat2x2'", 
 		"'mat2x3'", "'mat2x4'", "'mat3x2'", "'mat3x3'", "'mat3x4'", "'mat4x2'", 
@@ -138,9 +139,9 @@ public partial class GLSL_ES300Parser : Parser {
 		"PrecisionMedium", "PrecisionHigh", "True", "False", "If", "Else", "Switch", 
 		"Case", "Default", "While", "Do", "For", "Continue", "Break", "Return", 
 		"Discard", "Invariant", "Layout", "Smooth", "Flat", "Plus", "Minus", "Mul", 
-		"Div", "Pipe", "Percent", "Bang", "Tilde", "Equal", "NotEqual", "Ampersand", 
+		"Div", "Pipe", "Percent", "Bang", "Tilde", "Assign", "NotEqual", "Ampersand", 
 		"Caret", "Greater", "Less", "LessOrEqual", "GreaterOrEqual", "Left", "Right", 
-		"And", "Or", "Xor", "MulAssign", "DivAssign", "ModAssign", "AddAssign", 
+		"And", "Or", "Xor", "Equal", "MulAssign", "DivAssign", "ModAssign", "AddAssign", 
 		"SubAssign", "LeftAssign", "RightAssign", "AndAssign", "XorAssign", "OrAssign", 
 		"Increment", "Decrement", "Semicolon", "Colon", "Comma", "Dot", "LeftBrace", 
 		"RightBrace", "LeftParen", "RightParen", "LeftBracket", "RightBracket", 
@@ -223,7 +224,7 @@ public partial class GLSL_ES300Parser : Parser {
 			State = 151;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut) | (1L << Precision) | (1L << Invariant) | (1L << Layout) | (1L << Smooth) | (1L << Flat))) != 0) || ((((_la - 82)) & ~0x3f) == 0 && ((1L << (_la - 82)) & ((1L << (Void_type - 82)) | (1L << (Bool_type - 82)) | (1L << (Int_type - 82)) | (1L << (Uint_type - 82)) | (1L << (Float_type - 82)) | (1L << (Vec2_type - 82)) | (1L << (Vec3_type - 82)) | (1L << (Vec4_type - 82)) | (1L << (Bvec2_type - 82)) | (1L << (Bvec3_type - 82)) | (1L << (Bvec4_type - 82)) | (1L << (Ivec2_type - 82)) | (1L << (Ivec3_type - 82)) | (1L << (Ivec4_type - 82)) | (1L << (Uvec2_type - 82)) | (1L << (Uvec3_type - 82)) | (1L << (Uvec4_type - 82)) | (1L << (Mat2_type - 82)) | (1L << (Mat3_type - 82)) | (1L << (Mat4_type - 82)) | (1L << (Mat2x2_type - 82)) | (1L << (Mat2x3_type - 82)) | (1L << (Mat2x4_type - 82)) | (1L << (Mat3x2_type - 82)) | (1L << (Mat3x3_type - 82)) | (1L << (Mat3x4_type - 82)) | (1L << (Mat4x2_type - 82)) | (1L << (Mat4x3_type - 82)) | (1L << (Mat4x4_type - 82)) | (1L << (Sampler2D_type - 82)) | (1L << (Sampler3D_type - 82)) | (1L << (SamplerCube_type - 82)) | (1L << (SamplerCubeShadow_type - 82)) | (1L << (Sampler2DShadow_type - 82)) | (1L << (Sampler2DArray_type - 82)) | (1L << (Sampler2DArrayShadow_type - 82)) | (1L << (Isampler2D_type - 82)) | (1L << (Isampler3D_type - 82)) | (1L << (IsamplerCube_type - 82)) | (1L << (Isampler2DArray_type - 82)) | (1L << (Usampler2D_type - 82)) | (1L << (Usampler3D_type - 82)) | (1L << (UsamplerCube_type - 82)) | (1L << (Usampler2DArray_type - 82)) | (1L << (Identifier - 82)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut) | (1L << Precision) | (1L << Invariant) | (1L << Layout) | (1L << Smooth) | (1L << Flat))) != 0) || ((((_la - 83)) & ~0x3f) == 0 && ((1L << (_la - 83)) & ((1L << (Void_type - 83)) | (1L << (Bool_type - 83)) | (1L << (Int_type - 83)) | (1L << (Uint_type - 83)) | (1L << (Float_type - 83)) | (1L << (Vec2_type - 83)) | (1L << (Vec3_type - 83)) | (1L << (Vec4_type - 83)) | (1L << (Bvec2_type - 83)) | (1L << (Bvec3_type - 83)) | (1L << (Bvec4_type - 83)) | (1L << (Ivec2_type - 83)) | (1L << (Ivec3_type - 83)) | (1L << (Ivec4_type - 83)) | (1L << (Uvec2_type - 83)) | (1L << (Uvec3_type - 83)) | (1L << (Uvec4_type - 83)) | (1L << (Mat2_type - 83)) | (1L << (Mat3_type - 83)) | (1L << (Mat4_type - 83)) | (1L << (Mat2x2_type - 83)) | (1L << (Mat2x3_type - 83)) | (1L << (Mat2x4_type - 83)) | (1L << (Mat3x2_type - 83)) | (1L << (Mat3x3_type - 83)) | (1L << (Mat3x4_type - 83)) | (1L << (Mat4x2_type - 83)) | (1L << (Mat4x3_type - 83)) | (1L << (Mat4x4_type - 83)) | (1L << (Sampler2D_type - 83)) | (1L << (Sampler3D_type - 83)) | (1L << (SamplerCube_type - 83)) | (1L << (SamplerCubeShadow_type - 83)) | (1L << (Sampler2DShadow_type - 83)) | (1L << (Sampler2DArray_type - 83)) | (1L << (Sampler2DArrayShadow_type - 83)) | (1L << (Isampler2D_type - 83)) | (1L << (Isampler3D_type - 83)) | (1L << (IsamplerCube_type - 83)) | (1L << (Isampler2DArray_type - 83)) | (1L << (Usampler2D_type - 83)) | (1L << (Usampler3D_type - 83)) | (1L << (UsamplerCube_type - 83)) | (1L << (Usampler2DArray_type - 83)) | (1L << (Identifier - 83)))) != 0)) {
 				{
 				State = 150; external_declaration_list();
 				}
@@ -290,7 +291,7 @@ public partial class GLSL_ES300Parser : Parser {
 				State = 158;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut) | (1L << Precision) | (1L << Invariant) | (1L << Layout) | (1L << Smooth) | (1L << Flat))) != 0) || ((((_la - 82)) & ~0x3f) == 0 && ((1L << (_la - 82)) & ((1L << (Void_type - 82)) | (1L << (Bool_type - 82)) | (1L << (Int_type - 82)) | (1L << (Uint_type - 82)) | (1L << (Float_type - 82)) | (1L << (Vec2_type - 82)) | (1L << (Vec3_type - 82)) | (1L << (Vec4_type - 82)) | (1L << (Bvec2_type - 82)) | (1L << (Bvec3_type - 82)) | (1L << (Bvec4_type - 82)) | (1L << (Ivec2_type - 82)) | (1L << (Ivec3_type - 82)) | (1L << (Ivec4_type - 82)) | (1L << (Uvec2_type - 82)) | (1L << (Uvec3_type - 82)) | (1L << (Uvec4_type - 82)) | (1L << (Mat2_type - 82)) | (1L << (Mat3_type - 82)) | (1L << (Mat4_type - 82)) | (1L << (Mat2x2_type - 82)) | (1L << (Mat2x3_type - 82)) | (1L << (Mat2x4_type - 82)) | (1L << (Mat3x2_type - 82)) | (1L << (Mat3x3_type - 82)) | (1L << (Mat3x4_type - 82)) | (1L << (Mat4x2_type - 82)) | (1L << (Mat4x3_type - 82)) | (1L << (Mat4x4_type - 82)) | (1L << (Sampler2D_type - 82)) | (1L << (Sampler3D_type - 82)) | (1L << (SamplerCube_type - 82)) | (1L << (SamplerCubeShadow_type - 82)) | (1L << (Sampler2DShadow_type - 82)) | (1L << (Sampler2DArray_type - 82)) | (1L << (Sampler2DArrayShadow_type - 82)) | (1L << (Isampler2D_type - 82)) | (1L << (Isampler3D_type - 82)) | (1L << (IsamplerCube_type - 82)) | (1L << (Isampler2DArray_type - 82)) | (1L << (Usampler2D_type - 82)) | (1L << (Usampler3D_type - 82)) | (1L << (UsamplerCube_type - 82)) | (1L << (Usampler2DArray_type - 82)) | (1L << (Identifier - 82)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut) | (1L << Precision) | (1L << Invariant) | (1L << Layout) | (1L << Smooth) | (1L << Flat))) != 0) || ((((_la - 83)) & ~0x3f) == 0 && ((1L << (_la - 83)) & ((1L << (Void_type - 83)) | (1L << (Bool_type - 83)) | (1L << (Int_type - 83)) | (1L << (Uint_type - 83)) | (1L << (Float_type - 83)) | (1L << (Vec2_type - 83)) | (1L << (Vec3_type - 83)) | (1L << (Vec4_type - 83)) | (1L << (Bvec2_type - 83)) | (1L << (Bvec3_type - 83)) | (1L << (Bvec4_type - 83)) | (1L << (Ivec2_type - 83)) | (1L << (Ivec3_type - 83)) | (1L << (Ivec4_type - 83)) | (1L << (Uvec2_type - 83)) | (1L << (Uvec3_type - 83)) | (1L << (Uvec4_type - 83)) | (1L << (Mat2_type - 83)) | (1L << (Mat3_type - 83)) | (1L << (Mat4_type - 83)) | (1L << (Mat2x2_type - 83)) | (1L << (Mat2x3_type - 83)) | (1L << (Mat2x4_type - 83)) | (1L << (Mat3x2_type - 83)) | (1L << (Mat3x3_type - 83)) | (1L << (Mat3x4_type - 83)) | (1L << (Mat4x2_type - 83)) | (1L << (Mat4x3_type - 83)) | (1L << (Mat4x4_type - 83)) | (1L << (Sampler2D_type - 83)) | (1L << (Sampler3D_type - 83)) | (1L << (SamplerCube_type - 83)) | (1L << (SamplerCubeShadow_type - 83)) | (1L << (Sampler2DShadow_type - 83)) | (1L << (Sampler2DArray_type - 83)) | (1L << (Sampler2DArrayShadow_type - 83)) | (1L << (Isampler2D_type - 83)) | (1L << (Isampler3D_type - 83)) | (1L << (IsamplerCube_type - 83)) | (1L << (Isampler2DArray_type - 83)) | (1L << (Usampler2D_type - 83)) | (1L << (Usampler3D_type - 83)) | (1L << (UsamplerCube_type - 83)) | (1L << (Usampler2DArray_type - 83)) | (1L << (Identifier - 83)))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -558,7 +559,7 @@ public partial class GLSL_ES300Parser : Parser {
 			return GetRuleContext<Constant_expressionContext>(0);
 		}
 		public ITerminalNode RightBracket() { return GetToken(GLSL_ES300Parser.RightBracket, 0); }
-		public ITerminalNode Equal() { return GetToken(GLSL_ES300Parser.Equal, 0); }
+		public ITerminalNode Assign() { return GetToken(GLSL_ES300Parser.Assign, 0); }
 		public InitializerContext initializer() {
 			return GetRuleContext<InitializerContext>(0);
 		}
@@ -619,7 +620,7 @@ public partial class GLSL_ES300Parser : Parser {
 				switch ( Interpreter.AdaptivePredict(TokenStream,7,Context) ) {
 				case 1:
 					{
-					State = 208; Match(Equal);
+					State = 208; Match(Assign);
 					State = 209; initializer();
 					}
 					break;
@@ -633,7 +634,7 @@ public partial class GLSL_ES300Parser : Parser {
 				State = 213; Match(Identifier);
 				State = 214; Match(LeftBracket);
 				State = 215; Match(RightBracket);
-				State = 216; Match(Equal);
+				State = 216; Match(Assign);
 				State = 217; initializer();
 				}
 				break;
@@ -642,7 +643,7 @@ public partial class GLSL_ES300Parser : Parser {
 				{
 				State = 219; fully_specified_type();
 				State = 220; Match(Identifier);
-				State = 221; Match(Equal);
+				State = 221; Match(Assign);
 				State = 222; initializer();
 				}
 				break;
@@ -680,7 +681,7 @@ public partial class GLSL_ES300Parser : Parser {
 			return GetRuleContext<Constant_expressionContext>(0);
 		}
 		public ITerminalNode RightBracket() { return GetToken(GLSL_ES300Parser.RightBracket, 0); }
-		public ITerminalNode Equal() { return GetToken(GLSL_ES300Parser.Equal, 0); }
+		public ITerminalNode Assign() { return GetToken(GLSL_ES300Parser.Assign, 0); }
 		public InitializerContext initializer() {
 			return GetRuleContext<InitializerContext>(0);
 		}
@@ -762,7 +763,7 @@ public partial class GLSL_ES300Parser : Parser {
 						switch ( Interpreter.AdaptivePredict(TokenStream,9,Context) ) {
 						case 1:
 							{
-							State = 240; Match(Equal);
+							State = 240; Match(Assign);
 							State = 241; initializer();
 							}
 							break;
@@ -779,7 +780,7 @@ public partial class GLSL_ES300Parser : Parser {
 						State = 246; Match(Identifier);
 						State = 247; Match(LeftBracket);
 						State = 248; Match(RightBracket);
-						State = 249; Match(Equal);
+						State = 249; Match(Assign);
 						State = 250; initializer();
 						}
 						break;
@@ -791,7 +792,7 @@ public partial class GLSL_ES300Parser : Parser {
 						if (!(Precpred(Context, 1))) throw new FailedPredicateException(this, "Precpred(Context, 1)");
 						State = 252; Match(Comma);
 						State = 253; Match(Identifier);
-						State = 254; Match(Equal);
+						State = 254; Match(Assign);
 						State = 255; initializer();
 						}
 						break;
@@ -1373,7 +1374,7 @@ public partial class GLSL_ES300Parser : Parser {
 					if (!(Precpred(Context, 1))) throw new FailedPredicateException(this, "Precpred(Context, 1)");
 					State = 318;
 					_la = TokenStream.LA(1);
-					if ( !(_la==Equal || _la==NotEqual) ) {
+					if ( !(_la==NotEqual || _la==Equal) ) {
 					ErrorHandler.RecoverInline(this);
 					}
 					else {
@@ -2969,7 +2970,7 @@ public partial class GLSL_ES300Parser : Parser {
 			State = 498;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << InOut))) != 0) || ((((_la - 82)) & ~0x3f) == 0 && ((1L << (_la - 82)) & ((1L << (Void_type - 82)) | (1L << (Bool_type - 82)) | (1L << (Int_type - 82)) | (1L << (Uint_type - 82)) | (1L << (Float_type - 82)) | (1L << (Vec2_type - 82)) | (1L << (Vec3_type - 82)) | (1L << (Vec4_type - 82)) | (1L << (Bvec2_type - 82)) | (1L << (Bvec3_type - 82)) | (1L << (Bvec4_type - 82)) | (1L << (Ivec2_type - 82)) | (1L << (Ivec3_type - 82)) | (1L << (Ivec4_type - 82)) | (1L << (Uvec2_type - 82)) | (1L << (Uvec3_type - 82)) | (1L << (Uvec4_type - 82)) | (1L << (Mat2_type - 82)) | (1L << (Mat3_type - 82)) | (1L << (Mat4_type - 82)) | (1L << (Mat2x2_type - 82)) | (1L << (Mat2x3_type - 82)) | (1L << (Mat2x4_type - 82)) | (1L << (Mat3x2_type - 82)) | (1L << (Mat3x3_type - 82)) | (1L << (Mat3x4_type - 82)) | (1L << (Mat4x2_type - 82)) | (1L << (Mat4x3_type - 82)) | (1L << (Mat4x4_type - 82)) | (1L << (Sampler2D_type - 82)) | (1L << (Sampler3D_type - 82)) | (1L << (SamplerCube_type - 82)) | (1L << (SamplerCubeShadow_type - 82)) | (1L << (Sampler2DShadow_type - 82)) | (1L << (Sampler2DArray_type - 82)) | (1L << (Sampler2DArrayShadow_type - 82)) | (1L << (Isampler2D_type - 82)) | (1L << (Isampler3D_type - 82)) | (1L << (IsamplerCube_type - 82)) | (1L << (Isampler2DArray_type - 82)) | (1L << (Usampler2D_type - 82)) | (1L << (Usampler3D_type - 82)) | (1L << (UsamplerCube_type - 82)) | (1L << (Usampler2DArray_type - 82)) | (1L << (Identifier - 82)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << InOut))) != 0) || ((((_la - 83)) & ~0x3f) == 0 && ((1L << (_la - 83)) & ((1L << (Void_type - 83)) | (1L << (Bool_type - 83)) | (1L << (Int_type - 83)) | (1L << (Uint_type - 83)) | (1L << (Float_type - 83)) | (1L << (Vec2_type - 83)) | (1L << (Vec3_type - 83)) | (1L << (Vec4_type - 83)) | (1L << (Bvec2_type - 83)) | (1L << (Bvec3_type - 83)) | (1L << (Bvec4_type - 83)) | (1L << (Ivec2_type - 83)) | (1L << (Ivec3_type - 83)) | (1L << (Ivec4_type - 83)) | (1L << (Uvec2_type - 83)) | (1L << (Uvec3_type - 83)) | (1L << (Uvec4_type - 83)) | (1L << (Mat2_type - 83)) | (1L << (Mat3_type - 83)) | (1L << (Mat4_type - 83)) | (1L << (Mat2x2_type - 83)) | (1L << (Mat2x3_type - 83)) | (1L << (Mat2x4_type - 83)) | (1L << (Mat3x2_type - 83)) | (1L << (Mat3x3_type - 83)) | (1L << (Mat3x4_type - 83)) | (1L << (Mat4x2_type - 83)) | (1L << (Mat4x3_type - 83)) | (1L << (Mat4x4_type - 83)) | (1L << (Sampler2D_type - 83)) | (1L << (Sampler3D_type - 83)) | (1L << (SamplerCube_type - 83)) | (1L << (SamplerCubeShadow_type - 83)) | (1L << (Sampler2DShadow_type - 83)) | (1L << (Sampler2DArray_type - 83)) | (1L << (Sampler2DArrayShadow_type - 83)) | (1L << (Isampler2D_type - 83)) | (1L << (Isampler3D_type - 83)) | (1L << (IsamplerCube_type - 83)) | (1L << (Isampler2DArray_type - 83)) | (1L << (Usampler2D_type - 83)) | (1L << (Usampler3D_type - 83)) | (1L << (UsamplerCube_type - 83)) | (1L << (Usampler2DArray_type - 83)) | (1L << (Identifier - 83)))) != 0)) {
 				{
 				State = 497; function_parameters();
 				}
@@ -3460,7 +3461,7 @@ public partial class GLSL_ES300Parser : Parser {
 			State = 544;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut) | (1L << Precision) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << If) | (1L << Switch) | (1L << Case) | (1L << Default) | (1L << While) | (1L << Do) | (1L << For) | (1L << Continue) | (1L << Break) | (1L << Return) | (1L << Discard) | (1L << Invariant) | (1L << Layout) | (1L << Smooth) | (1L << Flat) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 69)) & ~0x3f) == 0 && ((1L << (_la - 69)) & ((1L << (Increment - 69)) | (1L << (Decrement - 69)) | (1L << (Semicolon - 69)) | (1L << (LeftBrace - 69)) | (1L << (LeftParen - 69)) | (1L << (Void_type - 69)) | (1L << (Bool_type - 69)) | (1L << (Int_type - 69)) | (1L << (Uint_type - 69)) | (1L << (Float_type - 69)) | (1L << (Vec2_type - 69)) | (1L << (Vec3_type - 69)) | (1L << (Vec4_type - 69)) | (1L << (Bvec2_type - 69)) | (1L << (Bvec3_type - 69)) | (1L << (Bvec4_type - 69)) | (1L << (Ivec2_type - 69)) | (1L << (Ivec3_type - 69)) | (1L << (Ivec4_type - 69)) | (1L << (Uvec2_type - 69)) | (1L << (Uvec3_type - 69)) | (1L << (Uvec4_type - 69)) | (1L << (Mat2_type - 69)) | (1L << (Mat3_type - 69)) | (1L << (Mat4_type - 69)) | (1L << (Mat2x2_type - 69)) | (1L << (Mat2x3_type - 69)) | (1L << (Mat2x4_type - 69)) | (1L << (Mat3x2_type - 69)) | (1L << (Mat3x3_type - 69)) | (1L << (Mat3x4_type - 69)) | (1L << (Mat4x2_type - 69)) | (1L << (Mat4x3_type - 69)) | (1L << (Mat4x4_type - 69)) | (1L << (Sampler2D_type - 69)) | (1L << (Sampler3D_type - 69)) | (1L << (SamplerCube_type - 69)) | (1L << (SamplerCubeShadow_type - 69)) | (1L << (Sampler2DShadow_type - 69)) | (1L << (Sampler2DArray_type - 69)) | (1L << (Sampler2DArrayShadow_type - 69)) | (1L << (Isampler2D_type - 69)) | (1L << (Isampler3D_type - 69)) | (1L << (IsamplerCube_type - 69)) | (1L << (Isampler2DArray_type - 69)) | (1L << (Usampler2D_type - 69)) | (1L << (Usampler3D_type - 69)) | (1L << (UsamplerCube_type - 69)) | (1L << (Usampler2DArray_type - 69)) | (1L << (Identifier - 69)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut) | (1L << Precision) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << If) | (1L << Switch) | (1L << Case) | (1L << Default) | (1L << While) | (1L << Do) | (1L << For) | (1L << Continue) | (1L << Break) | (1L << Return) | (1L << Discard) | (1L << Invariant) | (1L << Layout) | (1L << Smooth) | (1L << Flat) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 70)) & ~0x3f) == 0 && ((1L << (_la - 70)) & ((1L << (Increment - 70)) | (1L << (Decrement - 70)) | (1L << (Semicolon - 70)) | (1L << (LeftBrace - 70)) | (1L << (LeftParen - 70)) | (1L << (Void_type - 70)) | (1L << (Bool_type - 70)) | (1L << (Int_type - 70)) | (1L << (Uint_type - 70)) | (1L << (Float_type - 70)) | (1L << (Vec2_type - 70)) | (1L << (Vec3_type - 70)) | (1L << (Vec4_type - 70)) | (1L << (Bvec2_type - 70)) | (1L << (Bvec3_type - 70)) | (1L << (Bvec4_type - 70)) | (1L << (Ivec2_type - 70)) | (1L << (Ivec3_type - 70)) | (1L << (Ivec4_type - 70)) | (1L << (Uvec2_type - 70)) | (1L << (Uvec3_type - 70)) | (1L << (Uvec4_type - 70)) | (1L << (Mat2_type - 70)) | (1L << (Mat3_type - 70)) | (1L << (Mat4_type - 70)) | (1L << (Mat2x2_type - 70)) | (1L << (Mat2x3_type - 70)) | (1L << (Mat2x4_type - 70)) | (1L << (Mat3x2_type - 70)) | (1L << (Mat3x3_type - 70)) | (1L << (Mat3x4_type - 70)) | (1L << (Mat4x2_type - 70)) | (1L << (Mat4x3_type - 70)) | (1L << (Mat4x4_type - 70)) | (1L << (Sampler2D_type - 70)) | (1L << (Sampler3D_type - 70)) | (1L << (SamplerCube_type - 70)) | (1L << (SamplerCubeShadow_type - 70)) | (1L << (Sampler2DShadow_type - 70)) | (1L << (Sampler2DArray_type - 70)) | (1L << (Sampler2DArrayShadow_type - 70)) | (1L << (Isampler2D_type - 70)) | (1L << (Isampler3D_type - 70)) | (1L << (IsamplerCube_type - 70)) | (1L << (Isampler2DArray_type - 70)) | (1L << (Usampler2D_type - 70)) | (1L << (Usampler3D_type - 70)) | (1L << (UsamplerCube_type - 70)) | (1L << (Usampler2DArray_type - 70)) | (1L << (Identifier - 70)))) != 0)) {
 				{
 				State = 543; statementlist(0);
 				}
@@ -3869,7 +3870,7 @@ public partial class GLSL_ES300Parser : Parser {
 				State = 577;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 69)) & ~0x3f) == 0 && ((1L << (_la - 69)) & ((1L << (Increment - 69)) | (1L << (Decrement - 69)) | (1L << (LeftParen - 69)) | (1L << (Void_type - 69)) | (1L << (Bool_type - 69)) | (1L << (Int_type - 69)) | (1L << (Uint_type - 69)) | (1L << (Float_type - 69)) | (1L << (Vec2_type - 69)) | (1L << (Vec3_type - 69)) | (1L << (Vec4_type - 69)) | (1L << (Bvec2_type - 69)) | (1L << (Bvec3_type - 69)) | (1L << (Bvec4_type - 69)) | (1L << (Ivec2_type - 69)) | (1L << (Ivec3_type - 69)) | (1L << (Ivec4_type - 69)) | (1L << (Uvec2_type - 69)) | (1L << (Uvec3_type - 69)) | (1L << (Uvec4_type - 69)) | (1L << (Mat2_type - 69)) | (1L << (Mat3_type - 69)) | (1L << (Mat4_type - 69)) | (1L << (Mat2x2_type - 69)) | (1L << (Mat2x3_type - 69)) | (1L << (Mat2x4_type - 69)) | (1L << (Mat3x2_type - 69)) | (1L << (Mat3x3_type - 69)) | (1L << (Mat3x4_type - 69)) | (1L << (Mat4x2_type - 69)) | (1L << (Mat4x3_type - 69)) | (1L << (Mat4x4_type - 69)) | (1L << (Sampler2D_type - 69)) | (1L << (Sampler3D_type - 69)) | (1L << (SamplerCube_type - 69)) | (1L << (SamplerCubeShadow_type - 69)) | (1L << (Sampler2DShadow_type - 69)) | (1L << (Sampler2DArray_type - 69)) | (1L << (Sampler2DArrayShadow_type - 69)) | (1L << (Isampler2D_type - 69)) | (1L << (Isampler3D_type - 69)) | (1L << (IsamplerCube_type - 69)) | (1L << (Isampler2DArray_type - 69)) | (1L << (Usampler2D_type - 69)) | (1L << (Usampler3D_type - 69)) | (1L << (UsamplerCube_type - 69)) | (1L << (Usampler2DArray_type - 69)) | (1L << (Identifier - 69)))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 70)) & ~0x3f) == 0 && ((1L << (_la - 70)) & ((1L << (Increment - 70)) | (1L << (Decrement - 70)) | (1L << (LeftParen - 70)) | (1L << (Void_type - 70)) | (1L << (Bool_type - 70)) | (1L << (Int_type - 70)) | (1L << (Uint_type - 70)) | (1L << (Float_type - 70)) | (1L << (Vec2_type - 70)) | (1L << (Vec3_type - 70)) | (1L << (Vec4_type - 70)) | (1L << (Bvec2_type - 70)) | (1L << (Bvec3_type - 70)) | (1L << (Bvec4_type - 70)) | (1L << (Ivec2_type - 70)) | (1L << (Ivec3_type - 70)) | (1L << (Ivec4_type - 70)) | (1L << (Uvec2_type - 70)) | (1L << (Uvec3_type - 70)) | (1L << (Uvec4_type - 70)) | (1L << (Mat2_type - 70)) | (1L << (Mat3_type - 70)) | (1L << (Mat4_type - 70)) | (1L << (Mat2x2_type - 70)) | (1L << (Mat2x3_type - 70)) | (1L << (Mat2x4_type - 70)) | (1L << (Mat3x2_type - 70)) | (1L << (Mat3x3_type - 70)) | (1L << (Mat3x4_type - 70)) | (1L << (Mat4x2_type - 70)) | (1L << (Mat4x3_type - 70)) | (1L << (Mat4x4_type - 70)) | (1L << (Sampler2D_type - 70)) | (1L << (Sampler3D_type - 70)) | (1L << (SamplerCube_type - 70)) | (1L << (SamplerCubeShadow_type - 70)) | (1L << (Sampler2DShadow_type - 70)) | (1L << (Sampler2DArray_type - 70)) | (1L << (Sampler2DArrayShadow_type - 70)) | (1L << (Isampler2D_type - 70)) | (1L << (Isampler3D_type - 70)) | (1L << (IsamplerCube_type - 70)) | (1L << (Isampler2DArray_type - 70)) | (1L << (Usampler2D_type - 70)) | (1L << (Usampler3D_type - 70)) | (1L << (UsamplerCube_type - 70)) | (1L << (Usampler2DArray_type - 70)) | (1L << (Identifier - 70)))) != 0)) {
 					{
 					State = 576; expression(0);
 					}
@@ -3908,7 +3909,7 @@ public partial class GLSL_ES300Parser : Parser {
 			return GetRuleContext<Fully_specified_typeContext>(0);
 		}
 		public ITerminalNode Identifier() { return GetToken(GLSL_ES300Parser.Identifier, 0); }
-		public ITerminalNode Equal() { return GetToken(GLSL_ES300Parser.Equal, 0); }
+		public ITerminalNode Assign() { return GetToken(GLSL_ES300Parser.Assign, 0); }
 		public InitializerContext initializer() {
 			return GetRuleContext<InitializerContext>(0);
 		}
@@ -3951,7 +3952,7 @@ public partial class GLSL_ES300Parser : Parser {
 				{
 				State = 585; fully_specified_type();
 				State = 586; Match(Identifier);
-				State = 587; Match(Equal);
+				State = 587; Match(Assign);
 				State = 588; initializer();
 				}
 				break;
@@ -4165,7 +4166,7 @@ public partial class GLSL_ES300Parser : Parser {
 			State = 620;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << Invariant) | (1L << Layout) | (1L << Smooth) | (1L << Flat) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 69)) & ~0x3f) == 0 && ((1L << (_la - 69)) & ((1L << (Increment - 69)) | (1L << (Decrement - 69)) | (1L << (LeftParen - 69)) | (1L << (Void_type - 69)) | (1L << (Bool_type - 69)) | (1L << (Int_type - 69)) | (1L << (Uint_type - 69)) | (1L << (Float_type - 69)) | (1L << (Vec2_type - 69)) | (1L << (Vec3_type - 69)) | (1L << (Vec4_type - 69)) | (1L << (Bvec2_type - 69)) | (1L << (Bvec3_type - 69)) | (1L << (Bvec4_type - 69)) | (1L << (Ivec2_type - 69)) | (1L << (Ivec3_type - 69)) | (1L << (Ivec4_type - 69)) | (1L << (Uvec2_type - 69)) | (1L << (Uvec3_type - 69)) | (1L << (Uvec4_type - 69)) | (1L << (Mat2_type - 69)) | (1L << (Mat3_type - 69)) | (1L << (Mat4_type - 69)) | (1L << (Mat2x2_type - 69)) | (1L << (Mat2x3_type - 69)) | (1L << (Mat2x4_type - 69)) | (1L << (Mat3x2_type - 69)) | (1L << (Mat3x3_type - 69)) | (1L << (Mat3x4_type - 69)) | (1L << (Mat4x2_type - 69)) | (1L << (Mat4x3_type - 69)) | (1L << (Mat4x4_type - 69)) | (1L << (Sampler2D_type - 69)) | (1L << (Sampler3D_type - 69)) | (1L << (SamplerCube_type - 69)) | (1L << (SamplerCubeShadow_type - 69)) | (1L << (Sampler2DShadow_type - 69)) | (1L << (Sampler2DArray_type - 69)) | (1L << (Sampler2DArrayShadow_type - 69)) | (1L << (Isampler2D_type - 69)) | (1L << (Isampler3D_type - 69)) | (1L << (IsamplerCube_type - 69)) | (1L << (Isampler2DArray_type - 69)) | (1L << (Usampler2D_type - 69)) | (1L << (Usampler3D_type - 69)) | (1L << (UsamplerCube_type - 69)) | (1L << (Usampler2DArray_type - 69)) | (1L << (Identifier - 69)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << Invariant) | (1L << Layout) | (1L << Smooth) | (1L << Flat) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 70)) & ~0x3f) == 0 && ((1L << (_la - 70)) & ((1L << (Increment - 70)) | (1L << (Decrement - 70)) | (1L << (LeftParen - 70)) | (1L << (Void_type - 70)) | (1L << (Bool_type - 70)) | (1L << (Int_type - 70)) | (1L << (Uint_type - 70)) | (1L << (Float_type - 70)) | (1L << (Vec2_type - 70)) | (1L << (Vec3_type - 70)) | (1L << (Vec4_type - 70)) | (1L << (Bvec2_type - 70)) | (1L << (Bvec3_type - 70)) | (1L << (Bvec4_type - 70)) | (1L << (Ivec2_type - 70)) | (1L << (Ivec3_type - 70)) | (1L << (Ivec4_type - 70)) | (1L << (Uvec2_type - 70)) | (1L << (Uvec3_type - 70)) | (1L << (Uvec4_type - 70)) | (1L << (Mat2_type - 70)) | (1L << (Mat3_type - 70)) | (1L << (Mat4_type - 70)) | (1L << (Mat2x2_type - 70)) | (1L << (Mat2x3_type - 70)) | (1L << (Mat2x4_type - 70)) | (1L << (Mat3x2_type - 70)) | (1L << (Mat3x3_type - 70)) | (1L << (Mat3x4_type - 70)) | (1L << (Mat4x2_type - 70)) | (1L << (Mat4x3_type - 70)) | (1L << (Mat4x4_type - 70)) | (1L << (Sampler2D_type - 70)) | (1L << (Sampler3D_type - 70)) | (1L << (SamplerCube_type - 70)) | (1L << (SamplerCubeShadow_type - 70)) | (1L << (Sampler2DShadow_type - 70)) | (1L << (Sampler2DArray_type - 70)) | (1L << (Sampler2DArrayShadow_type - 70)) | (1L << (Isampler2D_type - 70)) | (1L << (Isampler3D_type - 70)) | (1L << (IsamplerCube_type - 70)) | (1L << (Isampler2DArray_type - 70)) | (1L << (Usampler2D_type - 70)) | (1L << (Usampler3D_type - 70)) | (1L << (UsamplerCube_type - 70)) | (1L << (Usampler2DArray_type - 70)) | (1L << (Identifier - 70)))) != 0)) {
 				{
 				State = 619; condition();
 				}
@@ -4175,7 +4176,7 @@ public partial class GLSL_ES300Parser : Parser {
 			State = 624;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 69)) & ~0x3f) == 0 && ((1L << (_la - 69)) & ((1L << (Increment - 69)) | (1L << (Decrement - 69)) | (1L << (LeftParen - 69)) | (1L << (Void_type - 69)) | (1L << (Bool_type - 69)) | (1L << (Int_type - 69)) | (1L << (Uint_type - 69)) | (1L << (Float_type - 69)) | (1L << (Vec2_type - 69)) | (1L << (Vec3_type - 69)) | (1L << (Vec4_type - 69)) | (1L << (Bvec2_type - 69)) | (1L << (Bvec3_type - 69)) | (1L << (Bvec4_type - 69)) | (1L << (Ivec2_type - 69)) | (1L << (Ivec3_type - 69)) | (1L << (Ivec4_type - 69)) | (1L << (Uvec2_type - 69)) | (1L << (Uvec3_type - 69)) | (1L << (Uvec4_type - 69)) | (1L << (Mat2_type - 69)) | (1L << (Mat3_type - 69)) | (1L << (Mat4_type - 69)) | (1L << (Mat2x2_type - 69)) | (1L << (Mat2x3_type - 69)) | (1L << (Mat2x4_type - 69)) | (1L << (Mat3x2_type - 69)) | (1L << (Mat3x3_type - 69)) | (1L << (Mat3x4_type - 69)) | (1L << (Mat4x2_type - 69)) | (1L << (Mat4x3_type - 69)) | (1L << (Mat4x4_type - 69)) | (1L << (Sampler2D_type - 69)) | (1L << (Sampler3D_type - 69)) | (1L << (SamplerCube_type - 69)) | (1L << (SamplerCubeShadow_type - 69)) | (1L << (Sampler2DShadow_type - 69)) | (1L << (Sampler2DArray_type - 69)) | (1L << (Sampler2DArrayShadow_type - 69)) | (1L << (Isampler2D_type - 69)) | (1L << (Isampler3D_type - 69)) | (1L << (IsamplerCube_type - 69)) | (1L << (Isampler2DArray_type - 69)) | (1L << (Usampler2D_type - 69)) | (1L << (Usampler3D_type - 69)) | (1L << (UsamplerCube_type - 69)) | (1L << (Usampler2DArray_type - 69)) | (1L << (Identifier - 69)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 70)) & ~0x3f) == 0 && ((1L << (_la - 70)) & ((1L << (Increment - 70)) | (1L << (Decrement - 70)) | (1L << (LeftParen - 70)) | (1L << (Void_type - 70)) | (1L << (Bool_type - 70)) | (1L << (Int_type - 70)) | (1L << (Uint_type - 70)) | (1L << (Float_type - 70)) | (1L << (Vec2_type - 70)) | (1L << (Vec3_type - 70)) | (1L << (Vec4_type - 70)) | (1L << (Bvec2_type - 70)) | (1L << (Bvec3_type - 70)) | (1L << (Bvec4_type - 70)) | (1L << (Ivec2_type - 70)) | (1L << (Ivec3_type - 70)) | (1L << (Ivec4_type - 70)) | (1L << (Uvec2_type - 70)) | (1L << (Uvec3_type - 70)) | (1L << (Uvec4_type - 70)) | (1L << (Mat2_type - 70)) | (1L << (Mat3_type - 70)) | (1L << (Mat4_type - 70)) | (1L << (Mat2x2_type - 70)) | (1L << (Mat2x3_type - 70)) | (1L << (Mat2x4_type - 70)) | (1L << (Mat3x2_type - 70)) | (1L << (Mat3x3_type - 70)) | (1L << (Mat3x4_type - 70)) | (1L << (Mat4x2_type - 70)) | (1L << (Mat4x3_type - 70)) | (1L << (Mat4x4_type - 70)) | (1L << (Sampler2D_type - 70)) | (1L << (Sampler3D_type - 70)) | (1L << (SamplerCube_type - 70)) | (1L << (SamplerCubeShadow_type - 70)) | (1L << (Sampler2DShadow_type - 70)) | (1L << (Sampler2DArray_type - 70)) | (1L << (Sampler2DArrayShadow_type - 70)) | (1L << (Isampler2D_type - 70)) | (1L << (Isampler3D_type - 70)) | (1L << (IsamplerCube_type - 70)) | (1L << (Isampler2DArray_type - 70)) | (1L << (Usampler2D_type - 70)) | (1L << (Usampler3D_type - 70)) | (1L << (UsamplerCube_type - 70)) | (1L << (Usampler2DArray_type - 70)) | (1L << (Identifier - 70)))) != 0)) {
 				{
 				State = 623; expression(0);
 				}
@@ -4307,7 +4308,7 @@ public partial class GLSL_ES300Parser : Parser {
 			State = 640;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut) | (1L << Precision) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << If) | (1L << Switch) | (1L << Case) | (1L << Default) | (1L << While) | (1L << Do) | (1L << For) | (1L << Continue) | (1L << Break) | (1L << Return) | (1L << Discard) | (1L << Invariant) | (1L << Layout) | (1L << Smooth) | (1L << Flat) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 69)) & ~0x3f) == 0 && ((1L << (_la - 69)) & ((1L << (Increment - 69)) | (1L << (Decrement - 69)) | (1L << (Semicolon - 69)) | (1L << (LeftBrace - 69)) | (1L << (LeftParen - 69)) | (1L << (Void_type - 69)) | (1L << (Bool_type - 69)) | (1L << (Int_type - 69)) | (1L << (Uint_type - 69)) | (1L << (Float_type - 69)) | (1L << (Vec2_type - 69)) | (1L << (Vec3_type - 69)) | (1L << (Vec4_type - 69)) | (1L << (Bvec2_type - 69)) | (1L << (Bvec3_type - 69)) | (1L << (Bvec4_type - 69)) | (1L << (Ivec2_type - 69)) | (1L << (Ivec3_type - 69)) | (1L << (Ivec4_type - 69)) | (1L << (Uvec2_type - 69)) | (1L << (Uvec3_type - 69)) | (1L << (Uvec4_type - 69)) | (1L << (Mat2_type - 69)) | (1L << (Mat3_type - 69)) | (1L << (Mat4_type - 69)) | (1L << (Mat2x2_type - 69)) | (1L << (Mat2x3_type - 69)) | (1L << (Mat2x4_type - 69)) | (1L << (Mat3x2_type - 69)) | (1L << (Mat3x3_type - 69)) | (1L << (Mat3x4_type - 69)) | (1L << (Mat4x2_type - 69)) | (1L << (Mat4x3_type - 69)) | (1L << (Mat4x4_type - 69)) | (1L << (Sampler2D_type - 69)) | (1L << (Sampler3D_type - 69)) | (1L << (SamplerCube_type - 69)) | (1L << (SamplerCubeShadow_type - 69)) | (1L << (Sampler2DShadow_type - 69)) | (1L << (Sampler2DArray_type - 69)) | (1L << (Sampler2DArrayShadow_type - 69)) | (1L << (Isampler2D_type - 69)) | (1L << (Isampler3D_type - 69)) | (1L << (IsamplerCube_type - 69)) | (1L << (Isampler2DArray_type - 69)) | (1L << (Usampler2D_type - 69)) | (1L << (Usampler3D_type - 69)) | (1L << (UsamplerCube_type - 69)) | (1L << (Usampler2DArray_type - 69)) | (1L << (Identifier - 69)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut) | (1L << Precision) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << If) | (1L << Switch) | (1L << Case) | (1L << Default) | (1L << While) | (1L << Do) | (1L << For) | (1L << Continue) | (1L << Break) | (1L << Return) | (1L << Discard) | (1L << Invariant) | (1L << Layout) | (1L << Smooth) | (1L << Flat) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 70)) & ~0x3f) == 0 && ((1L << (_la - 70)) & ((1L << (Increment - 70)) | (1L << (Decrement - 70)) | (1L << (Semicolon - 70)) | (1L << (LeftBrace - 70)) | (1L << (LeftParen - 70)) | (1L << (Void_type - 70)) | (1L << (Bool_type - 70)) | (1L << (Int_type - 70)) | (1L << (Uint_type - 70)) | (1L << (Float_type - 70)) | (1L << (Vec2_type - 70)) | (1L << (Vec3_type - 70)) | (1L << (Vec4_type - 70)) | (1L << (Bvec2_type - 70)) | (1L << (Bvec3_type - 70)) | (1L << (Bvec4_type - 70)) | (1L << (Ivec2_type - 70)) | (1L << (Ivec3_type - 70)) | (1L << (Ivec4_type - 70)) | (1L << (Uvec2_type - 70)) | (1L << (Uvec3_type - 70)) | (1L << (Uvec4_type - 70)) | (1L << (Mat2_type - 70)) | (1L << (Mat3_type - 70)) | (1L << (Mat4_type - 70)) | (1L << (Mat2x2_type - 70)) | (1L << (Mat2x3_type - 70)) | (1L << (Mat2x4_type - 70)) | (1L << (Mat3x2_type - 70)) | (1L << (Mat3x3_type - 70)) | (1L << (Mat3x4_type - 70)) | (1L << (Mat4x2_type - 70)) | (1L << (Mat4x3_type - 70)) | (1L << (Mat4x4_type - 70)) | (1L << (Sampler2D_type - 70)) | (1L << (Sampler3D_type - 70)) | (1L << (SamplerCube_type - 70)) | (1L << (SamplerCubeShadow_type - 70)) | (1L << (Sampler2DShadow_type - 70)) | (1L << (Sampler2DArray_type - 70)) | (1L << (Sampler2DArrayShadow_type - 70)) | (1L << (Isampler2D_type - 70)) | (1L << (Isampler3D_type - 70)) | (1L << (IsamplerCube_type - 70)) | (1L << (Isampler2DArray_type - 70)) | (1L << (Usampler2D_type - 70)) | (1L << (Usampler3D_type - 70)) | (1L << (UsamplerCube_type - 70)) | (1L << (Usampler2DArray_type - 70)) | (1L << (Identifier - 70)))) != 0)) {
 				{
 				State = 639; statementlist(0);
 				}
@@ -4432,7 +4433,7 @@ public partial class GLSL_ES300Parser : Parser {
 			State = 654;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 69)) & ~0x3f) == 0 && ((1L << (_la - 69)) & ((1L << (Increment - 69)) | (1L << (Decrement - 69)) | (1L << (LeftParen - 69)) | (1L << (Void_type - 69)) | (1L << (Bool_type - 69)) | (1L << (Int_type - 69)) | (1L << (Uint_type - 69)) | (1L << (Float_type - 69)) | (1L << (Vec2_type - 69)) | (1L << (Vec3_type - 69)) | (1L << (Vec4_type - 69)) | (1L << (Bvec2_type - 69)) | (1L << (Bvec3_type - 69)) | (1L << (Bvec4_type - 69)) | (1L << (Ivec2_type - 69)) | (1L << (Ivec3_type - 69)) | (1L << (Ivec4_type - 69)) | (1L << (Uvec2_type - 69)) | (1L << (Uvec3_type - 69)) | (1L << (Uvec4_type - 69)) | (1L << (Mat2_type - 69)) | (1L << (Mat3_type - 69)) | (1L << (Mat4_type - 69)) | (1L << (Mat2x2_type - 69)) | (1L << (Mat2x3_type - 69)) | (1L << (Mat2x4_type - 69)) | (1L << (Mat3x2_type - 69)) | (1L << (Mat3x3_type - 69)) | (1L << (Mat3x4_type - 69)) | (1L << (Mat4x2_type - 69)) | (1L << (Mat4x3_type - 69)) | (1L << (Mat4x4_type - 69)) | (1L << (Sampler2D_type - 69)) | (1L << (Sampler3D_type - 69)) | (1L << (SamplerCube_type - 69)) | (1L << (SamplerCubeShadow_type - 69)) | (1L << (Sampler2DShadow_type - 69)) | (1L << (Sampler2DArray_type - 69)) | (1L << (Sampler2DArrayShadow_type - 69)) | (1L << (Isampler2D_type - 69)) | (1L << (Isampler3D_type - 69)) | (1L << (IsamplerCube_type - 69)) | (1L << (Isampler2DArray_type - 69)) | (1L << (Usampler2D_type - 69)) | (1L << (Usampler3D_type - 69)) | (1L << (UsamplerCube_type - 69)) | (1L << (Usampler2DArray_type - 69)) | (1L << (Identifier - 69)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 70)) & ~0x3f) == 0 && ((1L << (_la - 70)) & ((1L << (Increment - 70)) | (1L << (Decrement - 70)) | (1L << (LeftParen - 70)) | (1L << (Void_type - 70)) | (1L << (Bool_type - 70)) | (1L << (Int_type - 70)) | (1L << (Uint_type - 70)) | (1L << (Float_type - 70)) | (1L << (Vec2_type - 70)) | (1L << (Vec3_type - 70)) | (1L << (Vec4_type - 70)) | (1L << (Bvec2_type - 70)) | (1L << (Bvec3_type - 70)) | (1L << (Bvec4_type - 70)) | (1L << (Ivec2_type - 70)) | (1L << (Ivec3_type - 70)) | (1L << (Ivec4_type - 70)) | (1L << (Uvec2_type - 70)) | (1L << (Uvec3_type - 70)) | (1L << (Uvec4_type - 70)) | (1L << (Mat2_type - 70)) | (1L << (Mat3_type - 70)) | (1L << (Mat4_type - 70)) | (1L << (Mat2x2_type - 70)) | (1L << (Mat2x3_type - 70)) | (1L << (Mat2x4_type - 70)) | (1L << (Mat3x2_type - 70)) | (1L << (Mat3x3_type - 70)) | (1L << (Mat3x4_type - 70)) | (1L << (Mat4x2_type - 70)) | (1L << (Mat4x3_type - 70)) | (1L << (Mat4x4_type - 70)) | (1L << (Sampler2D_type - 70)) | (1L << (Sampler3D_type - 70)) | (1L << (SamplerCube_type - 70)) | (1L << (SamplerCubeShadow_type - 70)) | (1L << (Sampler2DShadow_type - 70)) | (1L << (Sampler2DArray_type - 70)) | (1L << (Sampler2DArrayShadow_type - 70)) | (1L << (Isampler2D_type - 70)) | (1L << (Isampler3D_type - 70)) | (1L << (IsamplerCube_type - 70)) | (1L << (Isampler2DArray_type - 70)) | (1L << (Usampler2D_type - 70)) | (1L << (Usampler3D_type - 70)) | (1L << (UsamplerCube_type - 70)) | (1L << (Usampler2DArray_type - 70)) | (1L << (Identifier - 70)))) != 0)) {
 				{
 				State = 653; expression(0);
 				}
@@ -4782,7 +4783,7 @@ public partial class GLSL_ES300Parser : Parser {
 				State = 683;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << Invariant) | (1L << Layout) | (1L << Smooth) | (1L << Flat))) != 0) || ((((_la - 82)) & ~0x3f) == 0 && ((1L << (_la - 82)) & ((1L << (Void_type - 82)) | (1L << (Bool_type - 82)) | (1L << (Int_type - 82)) | (1L << (Uint_type - 82)) | (1L << (Float_type - 82)) | (1L << (Vec2_type - 82)) | (1L << (Vec3_type - 82)) | (1L << (Vec4_type - 82)) | (1L << (Bvec2_type - 82)) | (1L << (Bvec3_type - 82)) | (1L << (Bvec4_type - 82)) | (1L << (Ivec2_type - 82)) | (1L << (Ivec3_type - 82)) | (1L << (Ivec4_type - 82)) | (1L << (Uvec2_type - 82)) | (1L << (Uvec3_type - 82)) | (1L << (Uvec4_type - 82)) | (1L << (Mat2_type - 82)) | (1L << (Mat3_type - 82)) | (1L << (Mat4_type - 82)) | (1L << (Mat2x2_type - 82)) | (1L << (Mat2x3_type - 82)) | (1L << (Mat2x4_type - 82)) | (1L << (Mat3x2_type - 82)) | (1L << (Mat3x3_type - 82)) | (1L << (Mat3x4_type - 82)) | (1L << (Mat4x2_type - 82)) | (1L << (Mat4x3_type - 82)) | (1L << (Mat4x4_type - 82)) | (1L << (Sampler2D_type - 82)) | (1L << (Sampler3D_type - 82)) | (1L << (SamplerCube_type - 82)) | (1L << (SamplerCubeShadow_type - 82)) | (1L << (Sampler2DShadow_type - 82)) | (1L << (Sampler2DArray_type - 82)) | (1L << (Sampler2DArrayShadow_type - 82)) | (1L << (Isampler2D_type - 82)) | (1L << (Isampler3D_type - 82)) | (1L << (IsamplerCube_type - 82)) | (1L << (Isampler2DArray_type - 82)) | (1L << (Usampler2D_type - 82)) | (1L << (Usampler3D_type - 82)) | (1L << (UsamplerCube_type - 82)) | (1L << (Usampler2DArray_type - 82)) | (1L << (Identifier - 82)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Struct) | (1L << Const) | (1L << In) | (1L << Out) | (1L << Uniform) | (1L << CentroidIn) | (1L << CentroidOut) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << Invariant) | (1L << Layout) | (1L << Smooth) | (1L << Flat))) != 0) || ((((_la - 83)) & ~0x3f) == 0 && ((1L << (_la - 83)) & ((1L << (Void_type - 83)) | (1L << (Bool_type - 83)) | (1L << (Int_type - 83)) | (1L << (Uint_type - 83)) | (1L << (Float_type - 83)) | (1L << (Vec2_type - 83)) | (1L << (Vec3_type - 83)) | (1L << (Vec4_type - 83)) | (1L << (Bvec2_type - 83)) | (1L << (Bvec3_type - 83)) | (1L << (Bvec4_type - 83)) | (1L << (Ivec2_type - 83)) | (1L << (Ivec3_type - 83)) | (1L << (Ivec4_type - 83)) | (1L << (Uvec2_type - 83)) | (1L << (Uvec3_type - 83)) | (1L << (Uvec4_type - 83)) | (1L << (Mat2_type - 83)) | (1L << (Mat3_type - 83)) | (1L << (Mat4_type - 83)) | (1L << (Mat2x2_type - 83)) | (1L << (Mat2x3_type - 83)) | (1L << (Mat2x4_type - 83)) | (1L << (Mat3x2_type - 83)) | (1L << (Mat3x3_type - 83)) | (1L << (Mat3x4_type - 83)) | (1L << (Mat4x2_type - 83)) | (1L << (Mat4x3_type - 83)) | (1L << (Mat4x4_type - 83)) | (1L << (Sampler2D_type - 83)) | (1L << (Sampler3D_type - 83)) | (1L << (SamplerCube_type - 83)) | (1L << (SamplerCubeShadow_type - 83)) | (1L << (Sampler2DShadow_type - 83)) | (1L << (Sampler2DArray_type - 83)) | (1L << (Sampler2DArrayShadow_type - 83)) | (1L << (Isampler2D_type - 83)) | (1L << (Isampler3D_type - 83)) | (1L << (IsamplerCube_type - 83)) | (1L << (Isampler2DArray_type - 83)) | (1L << (Usampler2D_type - 83)) | (1L << (Usampler3D_type - 83)) | (1L << (UsamplerCube_type - 83)) | (1L << (Usampler2DArray_type - 83)) | (1L << (Identifier - 83)))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -5071,7 +5072,7 @@ public partial class GLSL_ES300Parser : Parser {
 
 	public partial class Layout_qualifier_idContext : ParserRuleContext {
 		public ITerminalNode Identifier() { return GetToken(GLSL_ES300Parser.Identifier, 0); }
-		public ITerminalNode Equal() { return GetToken(GLSL_ES300Parser.Equal, 0); }
+		public ITerminalNode Assign() { return GetToken(GLSL_ES300Parser.Assign, 0); }
 		public ITerminalNode IntegerLiteral() { return GetToken(GLSL_ES300Parser.IntegerLiteral, 0); }
 		public Layout_qualifier_idContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -5106,7 +5107,7 @@ public partial class GLSL_ES300Parser : Parser {
 			switch ( Interpreter.AdaptivePredict(TokenStream,64,Context) ) {
 			case 1:
 				{
-				State = 718; Match(Equal);
+				State = 718; Match(Assign);
 				State = 719; Match(IntegerLiteral);
 				}
 				break;
@@ -5415,7 +5416,7 @@ public partial class GLSL_ES300Parser : Parser {
 	}
 
 	public partial class Assignment_operatorContext : ParserRuleContext {
-		public ITerminalNode Equal() { return GetToken(GLSL_ES300Parser.Equal, 0); }
+		public ITerminalNode Assign() { return GetToken(GLSL_ES300Parser.Assign, 0); }
 		public ITerminalNode MulAssign() { return GetToken(GLSL_ES300Parser.MulAssign, 0); }
 		public ITerminalNode DivAssign() { return GetToken(GLSL_ES300Parser.DivAssign, 0); }
 		public ITerminalNode ModAssign() { return GetToken(GLSL_ES300Parser.ModAssign, 0); }
@@ -5456,7 +5457,7 @@ public partial class GLSL_ES300Parser : Parser {
 			{
 			State = 744;
 			_la = TokenStream.LA(1);
-			if ( !(((((_la - 46)) & ~0x3f) == 0 && ((1L << (_la - 46)) & ((1L << (Equal - 46)) | (1L << (MulAssign - 46)) | (1L << (DivAssign - 46)) | (1L << (ModAssign - 46)) | (1L << (AddAssign - 46)) | (1L << (SubAssign - 46)) | (1L << (LeftAssign - 46)) | (1L << (RightAssign - 46)) | (1L << (AndAssign - 46)) | (1L << (XorAssign - 46)) | (1L << (OrAssign - 46)))) != 0)) ) {
+			if ( !(((((_la - 46)) & ~0x3f) == 0 && ((1L << (_la - 46)) & ((1L << (Assign - 46)) | (1L << (MulAssign - 46)) | (1L << (DivAssign - 46)) | (1L << (ModAssign - 46)) | (1L << (AddAssign - 46)) | (1L << (SubAssign - 46)) | (1L << (LeftAssign - 46)) | (1L << (RightAssign - 46)) | (1L << (AndAssign - 46)) | (1L << (XorAssign - 46)) | (1L << (OrAssign - 46)))) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
 			}
 			else {
@@ -5581,7 +5582,7 @@ public partial class GLSL_ES300Parser : Parser {
 				State = 754;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 69)) & ~0x3f) == 0 && ((1L << (_la - 69)) & ((1L << (Increment - 69)) | (1L << (Decrement - 69)) | (1L << (LeftParen - 69)) | (1L << (Void_type - 69)) | (1L << (Bool_type - 69)) | (1L << (Int_type - 69)) | (1L << (Uint_type - 69)) | (1L << (Float_type - 69)) | (1L << (Vec2_type - 69)) | (1L << (Vec3_type - 69)) | (1L << (Vec4_type - 69)) | (1L << (Bvec2_type - 69)) | (1L << (Bvec3_type - 69)) | (1L << (Bvec4_type - 69)) | (1L << (Ivec2_type - 69)) | (1L << (Ivec3_type - 69)) | (1L << (Ivec4_type - 69)) | (1L << (Uvec2_type - 69)) | (1L << (Uvec3_type - 69)) | (1L << (Uvec4_type - 69)) | (1L << (Mat2_type - 69)) | (1L << (Mat3_type - 69)) | (1L << (Mat4_type - 69)) | (1L << (Mat2x2_type - 69)) | (1L << (Mat2x3_type - 69)) | (1L << (Mat2x4_type - 69)) | (1L << (Mat3x2_type - 69)) | (1L << (Mat3x3_type - 69)) | (1L << (Mat3x4_type - 69)) | (1L << (Mat4x2_type - 69)) | (1L << (Mat4x3_type - 69)) | (1L << (Mat4x4_type - 69)) | (1L << (Sampler2D_type - 69)) | (1L << (Sampler3D_type - 69)) | (1L << (SamplerCube_type - 69)) | (1L << (SamplerCubeShadow_type - 69)) | (1L << (Sampler2DShadow_type - 69)) | (1L << (Sampler2DArray_type - 69)) | (1L << (Sampler2DArrayShadow_type - 69)) | (1L << (Isampler2D_type - 69)) | (1L << (Isampler3D_type - 69)) | (1L << (IsamplerCube_type - 69)) | (1L << (Isampler2DArray_type - 69)) | (1L << (Usampler2D_type - 69)) | (1L << (Usampler3D_type - 69)) | (1L << (UsamplerCube_type - 69)) | (1L << (Usampler2DArray_type - 69)) | (1L << (Identifier - 69)))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FloatingLiteral) | (1L << IntegerLiteral) | (1L << BoolLiteral) | (1L << Struct) | (1L << PrecisionLow) | (1L << PrecisionMedium) | (1L << PrecisionHigh) | (1L << Plus) | (1L << Minus) | (1L << Bang) | (1L << Tilde))) != 0) || ((((_la - 70)) & ~0x3f) == 0 && ((1L << (_la - 70)) & ((1L << (Increment - 70)) | (1L << (Decrement - 70)) | (1L << (LeftParen - 70)) | (1L << (Void_type - 70)) | (1L << (Bool_type - 70)) | (1L << (Int_type - 70)) | (1L << (Uint_type - 70)) | (1L << (Float_type - 70)) | (1L << (Vec2_type - 70)) | (1L << (Vec3_type - 70)) | (1L << (Vec4_type - 70)) | (1L << (Bvec2_type - 70)) | (1L << (Bvec3_type - 70)) | (1L << (Bvec4_type - 70)) | (1L << (Ivec2_type - 70)) | (1L << (Ivec3_type - 70)) | (1L << (Ivec4_type - 70)) | (1L << (Uvec2_type - 70)) | (1L << (Uvec3_type - 70)) | (1L << (Uvec4_type - 70)) | (1L << (Mat2_type - 70)) | (1L << (Mat3_type - 70)) | (1L << (Mat4_type - 70)) | (1L << (Mat2x2_type - 70)) | (1L << (Mat2x3_type - 70)) | (1L << (Mat2x4_type - 70)) | (1L << (Mat3x2_type - 70)) | (1L << (Mat3x3_type - 70)) | (1L << (Mat3x4_type - 70)) | (1L << (Mat4x2_type - 70)) | (1L << (Mat4x3_type - 70)) | (1L << (Mat4x4_type - 70)) | (1L << (Sampler2D_type - 70)) | (1L << (Sampler3D_type - 70)) | (1L << (SamplerCube_type - 70)) | (1L << (SamplerCubeShadow_type - 70)) | (1L << (Sampler2DShadow_type - 70)) | (1L << (Sampler2DArray_type - 70)) | (1L << (Sampler2DArrayShadow_type - 70)) | (1L << (Isampler2D_type - 70)) | (1L << (Isampler3D_type - 70)) | (1L << (IsamplerCube_type - 70)) | (1L << (Isampler2DArray_type - 70)) | (1L << (Usampler2D_type - 70)) | (1L << (Usampler3D_type - 70)) | (1L << (UsamplerCube_type - 70)) | (1L << (Usampler2DArray_type - 70)) | (1L << (Identifier - 70)))) != 0)) {
 					{
 					State = 753; constant_expression();
 					}
@@ -6113,7 +6114,7 @@ public partial class GLSL_ES300Parser : Parser {
 
 	private static char[] _serializedATN = {
 		'\x3', '\x608B', '\xA72A', '\x8133', '\xB9ED', '\x417C', '\x3BE7', '\x7786', 
-		'\x5964', '\x3', '\x80', '\x32A', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', 
+		'\x5964', '\x3', '\x81', '\x32A', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', 
 		'\t', '\x3', '\x4', '\x4', '\t', '\x4', '\x4', '\x5', '\t', '\x5', '\x4', 
 		'\x6', '\t', '\x6', '\x4', '\a', '\t', '\a', '\x4', '\b', '\t', '\b', 
 		'\x4', '\t', '\t', '\t', '\x4', '\n', '\t', '\n', '\x4', '\v', '\t', '\v', 
@@ -6282,126 +6283,126 @@ public partial class GLSL_ES300Parser : Parser {
 		'\x82', '\x84', '\x86', '\x88', '\x8A', '\x8C', '\x8E', '\x90', '\x92', 
 		'\x94', '\x96', '\x2', '\xE', '\x4', '\x2', '*', '+', '-', '-', '\x3', 
 		'\x2', '(', ')', '\x3', '\x2', '\x38', '\x39', '\x3', '\x2', '\x34', '\x37', 
-		'\x3', '\x2', '\x30', '\x31', '\x3', '\x2', '\x13', '\x15', '\x3', '\x2', 
-		'\f', '\xE', '\x3', '\x2', '\x3', '\x4', '\x3', '\x2', '&', '\'', '\x4', 
-		'\x2', '\v', '\r', '\xF', '\x11', '\x4', '\x2', '(', ')', '.', '/', '\x4', 
-		'\x2', '\x30', '\x30', '=', '\x46', '\x2', '\x36D', '\x2', '\x99', '\x3', 
-		'\x2', '\x2', '\x2', '\x4', '\x9E', '\x3', '\x2', '\x2', '\x2', '\x6', 
-		'\xA4', '\x3', '\x2', '\x2', '\x2', '\b', '\xA6', '\x3', '\x2', '\x2', 
-		'\x2', '\n', '\xC7', '\x3', '\x2', '\x2', '\x2', '\f', '\xE4', '\x3', 
-		'\x2', '\x2', '\x2', '\xE', '\xE6', '\x3', '\x2', '\x2', '\x2', '\x10', 
-		'\x107', '\x3', '\x2', '\x2', '\x2', '\x12', '\x10E', '\x3', '\x2', '\x2', 
-		'\x2', '\x14', '\x110', '\x3', '\x2', '\x2', '\x2', '\x16', '\x11B', '\x3', 
-		'\x2', '\x2', '\x2', '\x18', '\x126', '\x3', '\x2', '\x2', '\x2', '\x1A', 
-		'\x131', '\x3', '\x2', '\x2', '\x2', '\x1C', '\x13C', '\x3', '\x2', '\x2', 
-		'\x2', '\x1E', '\x147', '\x3', '\x2', '\x2', '\x2', ' ', '\x152', '\x3', 
-		'\x2', '\x2', '\x2', '\"', '\x15D', '\x3', '\x2', '\x2', '\x2', '$', '\x168', 
-		'\x3', '\x2', '\x2', '\x2', '&', '\x173', '\x3', '\x2', '\x2', '\x2', 
-		'(', '\x17E', '\x3', '\x2', '\x2', '\x2', '*', '\x189', '\x3', '\x2', 
-		'\x2', '\x2', ',', '\x199', '\x3', '\x2', '\x2', '\x2', '.', '\x19B', 
-		'\x3', '\x2', '\x2', '\x2', '\x30', '\x1A0', '\x3', '\x2', '\x2', '\x2', 
-		'\x32', '\x1BC', '\x3', '\x2', '\x2', '\x2', '\x34', '\x1BE', '\x3', '\x2', 
-		'\x2', '\x2', '\x36', '\x1C2', '\x3', '\x2', '\x2', '\x2', '\x38', '\x1CE', 
-		'\x3', '\x2', '\x2', '\x2', ':', '\x1D4', '\x3', '\x2', '\x2', '\x2', 
-		'<', '\x1D6', '\x3', '\x2', '\x2', '\x2', '>', '\x1D8', '\x3', '\x2', 
-		'\x2', '\x2', '@', '\x1DA', '\x3', '\x2', '\x2', '\x2', '\x42', '\x1ED', 
-		'\x3', '\x2', '\x2', '\x2', '\x44', '\x1EF', '\x3', '\x2', '\x2', '\x2', 
-		'\x46', '\x1F2', '\x3', '\x2', '\x2', '\x2', 'H', '\x1F6', '\x3', '\x2', 
-		'\x2', '\x2', 'J', '\x1FA', '\x3', '\x2', '\x2', '\x2', 'L', '\x210', 
-		'\x3', '\x2', '\x2', '\x2', 'N', '\x212', '\x3', '\x2', '\x2', '\x2', 
-		'P', '\x21A', '\x3', '\x2', '\x2', '\x2', 'R', '\x21C', '\x3', '\x2', 
-		'\x2', '\x2', 'T', '\x21E', '\x3', '\x2', '\x2', '\x2', 'V', '\x220', 
-		'\x3', '\x2', '\x2', '\x2', 'X', '\x226', '\x3', '\x2', '\x2', '\x2', 
-		'Z', '\x232', '\x3', '\x2', '\x2', '\x2', '\\', '\x23B', '\x3', '\x2', 
-		'\x2', '\x2', '^', '\x248', '\x3', '\x2', '\x2', '\x2', '`', '\x250', 
-		'\x3', '\x2', '\x2', '\x2', '\x62', '\x267', '\x3', '\x2', '\x2', '\x2', 
-		'\x64', '\x26B', '\x3', '\x2', '\x2', '\x2', '\x66', '\x26E', '\x3', '\x2', 
-		'\x2', '\x2', 'h', '\x27A', '\x3', '\x2', '\x2', '\x2', 'j', '\x27C', 
-		'\x3', '\x2', '\x2', '\x2', 'l', '\x286', '\x3', '\x2', '\x2', '\x2', 
-		'n', '\x290', '\x3', '\x2', '\x2', '\x2', 'p', '\x294', '\x3', '\x2', 
-		'\x2', '\x2', 'r', '\x296', '\x3', '\x2', '\x2', '\x2', 't', '\x299', 
-		'\x3', '\x2', '\x2', '\x2', 'v', '\x29D', '\x3', '\x2', '\x2', '\x2', 
-		'x', '\x29F', '\x3', '\x2', '\x2', '\x2', 'z', '\x2AB', '\x3', '\x2', 
-		'\x2', '\x2', '|', '\x2B0', '\x3', '\x2', '\x2', '\x2', '~', '\x2B6', 
-		'\x3', '\x2', '\x2', '\x2', '\x80', '\x2CB', '\x3', '\x2', '\x2', '\x2', 
-		'\x82', '\x2CD', '\x3', '\x2', '\x2', '\x2', '\x84', '\x2CF', '\x3', '\x2', 
-		'\x2', '\x2', '\x86', '\x2D4', '\x3', '\x2', '\x2', '\x2', '\x88', '\x2DF', 
-		'\x3', '\x2', '\x2', '\x2', '\x8A', '\x2E4', '\x3', '\x2', '\x2', '\x2', 
-		'\x8C', '\x2E6', '\x3', '\x2', '\x2', '\x2', '\x8E', '\x2E8', '\x3', '\x2', 
-		'\x2', '\x2', '\x90', '\x2EA', '\x3', '\x2', '\x2', '\x2', '\x92', '\x2ED', 
-		'\x3', '\x2', '\x2', '\x2', '\x94', '\x2F1', '\x3', '\x2', '\x2', '\x2', 
-		'\x96', '\x327', '\x3', '\x2', '\x2', '\x2', '\x98', '\x9A', '\x5', '\x4', 
-		'\x3', '\x2', '\x99', '\x98', '\x3', '\x2', '\x2', '\x2', '\x99', '\x9A', 
-		'\x3', '\x2', '\x2', '\x2', '\x9A', '\x9B', '\x3', '\x2', '\x2', '\x2', 
-		'\x9B', '\x9C', '\a', '\x2', '\x2', '\x3', '\x9C', '\x3', '\x3', '\x2', 
-		'\x2', '\x2', '\x9D', '\x9F', '\x5', '\x6', '\x4', '\x2', '\x9E', '\x9D', 
-		'\x3', '\x2', '\x2', '\x2', '\x9F', '\xA0', '\x3', '\x2', '\x2', '\x2', 
-		'\xA0', '\x9E', '\x3', '\x2', '\x2', '\x2', '\xA0', '\xA1', '\x3', '\x2', 
-		'\x2', '\x2', '\xA1', '\x5', '\x3', '\x2', '\x2', '\x2', '\xA2', '\xA5', 
-		'\x5', '\b', '\x5', '\x2', '\xA3', '\xA5', '\x5', '\n', '\x6', '\x2', 
-		'\xA4', '\xA2', '\x3', '\x2', '\x2', '\x2', '\xA4', '\xA3', '\x3', '\x2', 
-		'\x2', '\x2', '\xA5', '\a', '\x3', '\x2', '\x2', '\x2', '\xA6', '\xA7', 
-		'\x5', '\x44', '#', '\x2', '\xA7', '\xA8', '\x5', 'V', ',', '\x2', '\xA8', 
-		'\t', '\x3', '\x2', '\x2', '\x2', '\xA9', '\xAA', '\x5', '\x44', '#', 
-		'\x2', '\xAA', '\xAB', '\a', 'I', '\x2', '\x2', '\xAB', '\xC8', '\x3', 
-		'\x2', '\x2', '\x2', '\xAC', '\xAD', '\x5', '\xE', '\b', '\x2', '\xAD', 
-		'\xAE', '\a', 'I', '\x2', '\x2', '\xAE', '\xC8', '\x3', '\x2', '\x2', 
-		'\x2', '\xAF', '\xB0', '\a', '\x12', '\x2', '\x2', '\xB0', '\xB1', '\x5', 
-		'P', ')', '\x2', '\xB1', '\xB2', '\x5', '\x94', 'K', '\x2', '\xB2', '\xB3', 
-		'\a', 'I', '\x2', '\x2', '\xB3', '\xC8', '\x3', '\x2', '\x2', '\x2', '\xB4', 
-		'\xB5', '\x5', '\x80', '\x41', '\x2', '\xB5', '\xB6', '\a', '\x80', '\x2', 
-		'\x2', '\xB6', '\xB7', '\a', 'M', '\x2', '\x2', '\xB7', '\xB8', '\x5', 
-		'z', '>', '\x2', '\xB8', '\xC0', '\a', 'N', '\x2', '\x2', '\xB9', '\xBE', 
-		'\a', '\x80', '\x2', '\x2', '\xBA', '\xBB', '\a', 'Q', '\x2', '\x2', '\xBB', 
-		'\xBC', '\x5', 'r', ':', '\x2', '\xBC', '\xBD', '\a', 'R', '\x2', '\x2', 
-		'\xBD', '\xBF', '\x3', '\x2', '\x2', '\x2', '\xBE', '\xBA', '\x3', '\x2', 
-		'\x2', '\x2', '\xBE', '\xBF', '\x3', '\x2', '\x2', '\x2', '\xBF', '\xC1', 
-		'\x3', '\x2', '\x2', '\x2', '\xC0', '\xB9', '\x3', '\x2', '\x2', '\x2', 
-		'\xC0', '\xC1', '\x3', '\x2', '\x2', '\x2', '\xC1', '\xC2', '\x3', '\x2', 
-		'\x2', '\x2', '\xC2', '\xC3', '\a', 'I', '\x2', '\x2', '\xC3', '\xC8', 
-		'\x3', '\x2', '\x2', '\x2', '\xC4', '\xC5', '\x5', '\x80', '\x41', '\x2', 
-		'\xC5', '\xC6', '\a', 'I', '\x2', '\x2', '\xC6', '\xC8', '\x3', '\x2', 
-		'\x2', '\x2', '\xC7', '\xA9', '\x3', '\x2', '\x2', '\x2', '\xC7', '\xAC', 
-		'\x3', '\x2', '\x2', '\x2', '\xC7', '\xAF', '\x3', '\x2', '\x2', '\x2', 
-		'\xC7', '\xB4', '\x3', '\x2', '\x2', '\x2', '\xC7', '\xC4', '\x3', '\x2', 
-		'\x2', '\x2', '\xC8', '\v', '\x3', '\x2', '\x2', '\x2', '\xC9', '\xCB', 
-		'\x5', 't', ';', '\x2', '\xCA', '\xCC', '\a', '\x80', '\x2', '\x2', '\xCB', 
-		'\xCA', '\x3', '\x2', '\x2', '\x2', '\xCB', '\xCC', '\x3', '\x2', '\x2', 
-		'\x2', '\xCC', '\xE5', '\x3', '\x2', '\x2', '\x2', '\xCD', '\xCE', '\x5', 
-		't', ';', '\x2', '\xCE', '\xCF', '\a', '\x80', '\x2', '\x2', '\xCF', '\xD0', 
-		'\a', 'Q', '\x2', '\x2', '\xD0', '\xD1', '\x5', 'r', ':', '\x2', '\xD1', 
-		'\xD4', '\a', 'R', '\x2', '\x2', '\xD2', '\xD3', '\a', '\x30', '\x2', 
-		'\x2', '\xD3', '\xD5', '\x5', '\x10', '\t', '\x2', '\xD4', '\xD2', '\x3', 
-		'\x2', '\x2', '\x2', '\xD4', '\xD5', '\x3', '\x2', '\x2', '\x2', '\xD5', 
-		'\xE5', '\x3', '\x2', '\x2', '\x2', '\xD6', '\xD7', '\x5', 't', ';', '\x2', 
-		'\xD7', '\xD8', '\a', '\x80', '\x2', '\x2', '\xD8', '\xD9', '\a', 'Q', 
-		'\x2', '\x2', '\xD9', '\xDA', '\a', 'R', '\x2', '\x2', '\xDA', '\xDB', 
-		'\a', '\x30', '\x2', '\x2', '\xDB', '\xDC', '\x5', '\x10', '\t', '\x2', 
-		'\xDC', '\xE5', '\x3', '\x2', '\x2', '\x2', '\xDD', '\xDE', '\x5', 't', 
-		';', '\x2', '\xDE', '\xDF', '\a', '\x80', '\x2', '\x2', '\xDF', '\xE0', 
-		'\a', '\x30', '\x2', '\x2', '\xE0', '\xE1', '\x5', '\x10', '\t', '\x2', 
-		'\xE1', '\xE5', '\x3', '\x2', '\x2', '\x2', '\xE2', '\xE3', '\a', '$', 
-		'\x2', '\x2', '\xE3', '\xE5', '\a', '\x80', '\x2', '\x2', '\xE4', '\xC9', 
-		'\x3', '\x2', '\x2', '\x2', '\xE4', '\xCD', '\x3', '\x2', '\x2', '\x2', 
-		'\xE4', '\xD6', '\x3', '\x2', '\x2', '\x2', '\xE4', '\xDD', '\x3', '\x2', 
-		'\x2', '\x2', '\xE4', '\xE2', '\x3', '\x2', '\x2', '\x2', '\xE5', '\r', 
-		'\x3', '\x2', '\x2', '\x2', '\xE6', '\xE7', '\b', '\b', '\x1', '\x2', 
+		'\x4', '\x2', '\x31', '\x31', '=', '=', '\x3', '\x2', '\x13', '\x15', 
+		'\x3', '\x2', '\f', '\xE', '\x3', '\x2', '\x3', '\x4', '\x3', '\x2', '&', 
+		'\'', '\x4', '\x2', '\v', '\r', '\xF', '\x11', '\x4', '\x2', '(', ')', 
+		'.', '/', '\x4', '\x2', '\x30', '\x30', '>', 'G', '\x2', '\x36D', '\x2', 
+		'\x99', '\x3', '\x2', '\x2', '\x2', '\x4', '\x9E', '\x3', '\x2', '\x2', 
+		'\x2', '\x6', '\xA4', '\x3', '\x2', '\x2', '\x2', '\b', '\xA6', '\x3', 
+		'\x2', '\x2', '\x2', '\n', '\xC7', '\x3', '\x2', '\x2', '\x2', '\f', '\xE4', 
+		'\x3', '\x2', '\x2', '\x2', '\xE', '\xE6', '\x3', '\x2', '\x2', '\x2', 
+		'\x10', '\x107', '\x3', '\x2', '\x2', '\x2', '\x12', '\x10E', '\x3', '\x2', 
+		'\x2', '\x2', '\x14', '\x110', '\x3', '\x2', '\x2', '\x2', '\x16', '\x11B', 
+		'\x3', '\x2', '\x2', '\x2', '\x18', '\x126', '\x3', '\x2', '\x2', '\x2', 
+		'\x1A', '\x131', '\x3', '\x2', '\x2', '\x2', '\x1C', '\x13C', '\x3', '\x2', 
+		'\x2', '\x2', '\x1E', '\x147', '\x3', '\x2', '\x2', '\x2', ' ', '\x152', 
+		'\x3', '\x2', '\x2', '\x2', '\"', '\x15D', '\x3', '\x2', '\x2', '\x2', 
+		'$', '\x168', '\x3', '\x2', '\x2', '\x2', '&', '\x173', '\x3', '\x2', 
+		'\x2', '\x2', '(', '\x17E', '\x3', '\x2', '\x2', '\x2', '*', '\x189', 
+		'\x3', '\x2', '\x2', '\x2', ',', '\x199', '\x3', '\x2', '\x2', '\x2', 
+		'.', '\x19B', '\x3', '\x2', '\x2', '\x2', '\x30', '\x1A0', '\x3', '\x2', 
+		'\x2', '\x2', '\x32', '\x1BC', '\x3', '\x2', '\x2', '\x2', '\x34', '\x1BE', 
+		'\x3', '\x2', '\x2', '\x2', '\x36', '\x1C2', '\x3', '\x2', '\x2', '\x2', 
+		'\x38', '\x1CE', '\x3', '\x2', '\x2', '\x2', ':', '\x1D4', '\x3', '\x2', 
+		'\x2', '\x2', '<', '\x1D6', '\x3', '\x2', '\x2', '\x2', '>', '\x1D8', 
+		'\x3', '\x2', '\x2', '\x2', '@', '\x1DA', '\x3', '\x2', '\x2', '\x2', 
+		'\x42', '\x1ED', '\x3', '\x2', '\x2', '\x2', '\x44', '\x1EF', '\x3', '\x2', 
+		'\x2', '\x2', '\x46', '\x1F2', '\x3', '\x2', '\x2', '\x2', 'H', '\x1F6', 
+		'\x3', '\x2', '\x2', '\x2', 'J', '\x1FA', '\x3', '\x2', '\x2', '\x2', 
+		'L', '\x210', '\x3', '\x2', '\x2', '\x2', 'N', '\x212', '\x3', '\x2', 
+		'\x2', '\x2', 'P', '\x21A', '\x3', '\x2', '\x2', '\x2', 'R', '\x21C', 
+		'\x3', '\x2', '\x2', '\x2', 'T', '\x21E', '\x3', '\x2', '\x2', '\x2', 
+		'V', '\x220', '\x3', '\x2', '\x2', '\x2', 'X', '\x226', '\x3', '\x2', 
+		'\x2', '\x2', 'Z', '\x232', '\x3', '\x2', '\x2', '\x2', '\\', '\x23B', 
+		'\x3', '\x2', '\x2', '\x2', '^', '\x248', '\x3', '\x2', '\x2', '\x2', 
+		'`', '\x250', '\x3', '\x2', '\x2', '\x2', '\x62', '\x267', '\x3', '\x2', 
+		'\x2', '\x2', '\x64', '\x26B', '\x3', '\x2', '\x2', '\x2', '\x66', '\x26E', 
+		'\x3', '\x2', '\x2', '\x2', 'h', '\x27A', '\x3', '\x2', '\x2', '\x2', 
+		'j', '\x27C', '\x3', '\x2', '\x2', '\x2', 'l', '\x286', '\x3', '\x2', 
+		'\x2', '\x2', 'n', '\x290', '\x3', '\x2', '\x2', '\x2', 'p', '\x294', 
+		'\x3', '\x2', '\x2', '\x2', 'r', '\x296', '\x3', '\x2', '\x2', '\x2', 
+		't', '\x299', '\x3', '\x2', '\x2', '\x2', 'v', '\x29D', '\x3', '\x2', 
+		'\x2', '\x2', 'x', '\x29F', '\x3', '\x2', '\x2', '\x2', 'z', '\x2AB', 
+		'\x3', '\x2', '\x2', '\x2', '|', '\x2B0', '\x3', '\x2', '\x2', '\x2', 
+		'~', '\x2B6', '\x3', '\x2', '\x2', '\x2', '\x80', '\x2CB', '\x3', '\x2', 
+		'\x2', '\x2', '\x82', '\x2CD', '\x3', '\x2', '\x2', '\x2', '\x84', '\x2CF', 
+		'\x3', '\x2', '\x2', '\x2', '\x86', '\x2D4', '\x3', '\x2', '\x2', '\x2', 
+		'\x88', '\x2DF', '\x3', '\x2', '\x2', '\x2', '\x8A', '\x2E4', '\x3', '\x2', 
+		'\x2', '\x2', '\x8C', '\x2E6', '\x3', '\x2', '\x2', '\x2', '\x8E', '\x2E8', 
+		'\x3', '\x2', '\x2', '\x2', '\x90', '\x2EA', '\x3', '\x2', '\x2', '\x2', 
+		'\x92', '\x2ED', '\x3', '\x2', '\x2', '\x2', '\x94', '\x2F1', '\x3', '\x2', 
+		'\x2', '\x2', '\x96', '\x327', '\x3', '\x2', '\x2', '\x2', '\x98', '\x9A', 
+		'\x5', '\x4', '\x3', '\x2', '\x99', '\x98', '\x3', '\x2', '\x2', '\x2', 
+		'\x99', '\x9A', '\x3', '\x2', '\x2', '\x2', '\x9A', '\x9B', '\x3', '\x2', 
+		'\x2', '\x2', '\x9B', '\x9C', '\a', '\x2', '\x2', '\x3', '\x9C', '\x3', 
+		'\x3', '\x2', '\x2', '\x2', '\x9D', '\x9F', '\x5', '\x6', '\x4', '\x2', 
+		'\x9E', '\x9D', '\x3', '\x2', '\x2', '\x2', '\x9F', '\xA0', '\x3', '\x2', 
+		'\x2', '\x2', '\xA0', '\x9E', '\x3', '\x2', '\x2', '\x2', '\xA0', '\xA1', 
+		'\x3', '\x2', '\x2', '\x2', '\xA1', '\x5', '\x3', '\x2', '\x2', '\x2', 
+		'\xA2', '\xA5', '\x5', '\b', '\x5', '\x2', '\xA3', '\xA5', '\x5', '\n', 
+		'\x6', '\x2', '\xA4', '\xA2', '\x3', '\x2', '\x2', '\x2', '\xA4', '\xA3', 
+		'\x3', '\x2', '\x2', '\x2', '\xA5', '\a', '\x3', '\x2', '\x2', '\x2', 
+		'\xA6', '\xA7', '\x5', '\x44', '#', '\x2', '\xA7', '\xA8', '\x5', 'V', 
+		',', '\x2', '\xA8', '\t', '\x3', '\x2', '\x2', '\x2', '\xA9', '\xAA', 
+		'\x5', '\x44', '#', '\x2', '\xAA', '\xAB', '\a', 'J', '\x2', '\x2', '\xAB', 
+		'\xC8', '\x3', '\x2', '\x2', '\x2', '\xAC', '\xAD', '\x5', '\xE', '\b', 
+		'\x2', '\xAD', '\xAE', '\a', 'J', '\x2', '\x2', '\xAE', '\xC8', '\x3', 
+		'\x2', '\x2', '\x2', '\xAF', '\xB0', '\a', '\x12', '\x2', '\x2', '\xB0', 
+		'\xB1', '\x5', 'P', ')', '\x2', '\xB1', '\xB2', '\x5', '\x94', 'K', '\x2', 
+		'\xB2', '\xB3', '\a', 'J', '\x2', '\x2', '\xB3', '\xC8', '\x3', '\x2', 
+		'\x2', '\x2', '\xB4', '\xB5', '\x5', '\x80', '\x41', '\x2', '\xB5', '\xB6', 
+		'\a', '\x81', '\x2', '\x2', '\xB6', '\xB7', '\a', 'N', '\x2', '\x2', '\xB7', 
+		'\xB8', '\x5', 'z', '>', '\x2', '\xB8', '\xC0', '\a', 'O', '\x2', '\x2', 
+		'\xB9', '\xBE', '\a', '\x81', '\x2', '\x2', '\xBA', '\xBB', '\a', 'R', 
+		'\x2', '\x2', '\xBB', '\xBC', '\x5', 'r', ':', '\x2', '\xBC', '\xBD', 
+		'\a', 'S', '\x2', '\x2', '\xBD', '\xBF', '\x3', '\x2', '\x2', '\x2', '\xBE', 
+		'\xBA', '\x3', '\x2', '\x2', '\x2', '\xBE', '\xBF', '\x3', '\x2', '\x2', 
+		'\x2', '\xBF', '\xC1', '\x3', '\x2', '\x2', '\x2', '\xC0', '\xB9', '\x3', 
+		'\x2', '\x2', '\x2', '\xC0', '\xC1', '\x3', '\x2', '\x2', '\x2', '\xC1', 
+		'\xC2', '\x3', '\x2', '\x2', '\x2', '\xC2', '\xC3', '\a', 'J', '\x2', 
+		'\x2', '\xC3', '\xC8', '\x3', '\x2', '\x2', '\x2', '\xC4', '\xC5', '\x5', 
+		'\x80', '\x41', '\x2', '\xC5', '\xC6', '\a', 'J', '\x2', '\x2', '\xC6', 
+		'\xC8', '\x3', '\x2', '\x2', '\x2', '\xC7', '\xA9', '\x3', '\x2', '\x2', 
+		'\x2', '\xC7', '\xAC', '\x3', '\x2', '\x2', '\x2', '\xC7', '\xAF', '\x3', 
+		'\x2', '\x2', '\x2', '\xC7', '\xB4', '\x3', '\x2', '\x2', '\x2', '\xC7', 
+		'\xC4', '\x3', '\x2', '\x2', '\x2', '\xC8', '\v', '\x3', '\x2', '\x2', 
+		'\x2', '\xC9', '\xCB', '\x5', 't', ';', '\x2', '\xCA', '\xCC', '\a', '\x81', 
+		'\x2', '\x2', '\xCB', '\xCA', '\x3', '\x2', '\x2', '\x2', '\xCB', '\xCC', 
+		'\x3', '\x2', '\x2', '\x2', '\xCC', '\xE5', '\x3', '\x2', '\x2', '\x2', 
+		'\xCD', '\xCE', '\x5', 't', ';', '\x2', '\xCE', '\xCF', '\a', '\x81', 
+		'\x2', '\x2', '\xCF', '\xD0', '\a', 'R', '\x2', '\x2', '\xD0', '\xD1', 
+		'\x5', 'r', ':', '\x2', '\xD1', '\xD4', '\a', 'S', '\x2', '\x2', '\xD2', 
+		'\xD3', '\a', '\x30', '\x2', '\x2', '\xD3', '\xD5', '\x5', '\x10', '\t', 
+		'\x2', '\xD4', '\xD2', '\x3', '\x2', '\x2', '\x2', '\xD4', '\xD5', '\x3', 
+		'\x2', '\x2', '\x2', '\xD5', '\xE5', '\x3', '\x2', '\x2', '\x2', '\xD6', 
+		'\xD7', '\x5', 't', ';', '\x2', '\xD7', '\xD8', '\a', '\x81', '\x2', '\x2', 
+		'\xD8', '\xD9', '\a', 'R', '\x2', '\x2', '\xD9', '\xDA', '\a', 'S', '\x2', 
+		'\x2', '\xDA', '\xDB', '\a', '\x30', '\x2', '\x2', '\xDB', '\xDC', '\x5', 
+		'\x10', '\t', '\x2', '\xDC', '\xE5', '\x3', '\x2', '\x2', '\x2', '\xDD', 
+		'\xDE', '\x5', 't', ';', '\x2', '\xDE', '\xDF', '\a', '\x81', '\x2', '\x2', 
+		'\xDF', '\xE0', '\a', '\x30', '\x2', '\x2', '\xE0', '\xE1', '\x5', '\x10', 
+		'\t', '\x2', '\xE1', '\xE5', '\x3', '\x2', '\x2', '\x2', '\xE2', '\xE3', 
+		'\a', '$', '\x2', '\x2', '\xE3', '\xE5', '\a', '\x81', '\x2', '\x2', '\xE4', 
+		'\xC9', '\x3', '\x2', '\x2', '\x2', '\xE4', '\xCD', '\x3', '\x2', '\x2', 
+		'\x2', '\xE4', '\xD6', '\x3', '\x2', '\x2', '\x2', '\xE4', '\xDD', '\x3', 
+		'\x2', '\x2', '\x2', '\xE4', '\xE2', '\x3', '\x2', '\x2', '\x2', '\xE5', 
+		'\r', '\x3', '\x2', '\x2', '\x2', '\xE6', '\xE7', '\b', '\b', '\x1', '\x2', 
 		'\xE7', '\xE8', '\x5', '\f', '\a', '\x2', '\xE8', '\x104', '\x3', '\x2', 
 		'\x2', '\x2', '\xE9', '\xEA', '\f', '\x6', '\x2', '\x2', '\xEA', '\xEB', 
-		'\a', 'K', '\x2', '\x2', '\xEB', '\x103', '\a', '\x80', '\x2', '\x2', 
-		'\xEC', '\xED', '\f', '\x5', '\x2', '\x2', '\xED', '\xEE', '\a', 'K', 
-		'\x2', '\x2', '\xEE', '\xEF', '\a', '\x80', '\x2', '\x2', '\xEF', '\xF0', 
-		'\a', 'Q', '\x2', '\x2', '\xF0', '\xF1', '\x5', 'r', ':', '\x2', '\xF1', 
-		'\xF4', '\a', 'R', '\x2', '\x2', '\xF2', '\xF3', '\a', '\x30', '\x2', 
+		'\a', 'L', '\x2', '\x2', '\xEB', '\x103', '\a', '\x81', '\x2', '\x2', 
+		'\xEC', '\xED', '\f', '\x5', '\x2', '\x2', '\xED', '\xEE', '\a', 'L', 
+		'\x2', '\x2', '\xEE', '\xEF', '\a', '\x81', '\x2', '\x2', '\xEF', '\xF0', 
+		'\a', 'R', '\x2', '\x2', '\xF0', '\xF1', '\x5', 'r', ':', '\x2', '\xF1', 
+		'\xF4', '\a', 'S', '\x2', '\x2', '\xF2', '\xF3', '\a', '\x30', '\x2', 
 		'\x2', '\xF3', '\xF5', '\x5', '\x10', '\t', '\x2', '\xF4', '\xF2', '\x3', 
 		'\x2', '\x2', '\x2', '\xF4', '\xF5', '\x3', '\x2', '\x2', '\x2', '\xF5', 
 		'\x103', '\x3', '\x2', '\x2', '\x2', '\xF6', '\xF7', '\f', '\x4', '\x2', 
-		'\x2', '\xF7', '\xF8', '\a', 'K', '\x2', '\x2', '\xF8', '\xF9', '\a', 
-		'\x80', '\x2', '\x2', '\xF9', '\xFA', '\a', 'Q', '\x2', '\x2', '\xFA', 
-		'\xFB', '\a', 'R', '\x2', '\x2', '\xFB', '\xFC', '\a', '\x30', '\x2', 
+		'\x2', '\xF7', '\xF8', '\a', 'L', '\x2', '\x2', '\xF8', '\xF9', '\a', 
+		'\x81', '\x2', '\x2', '\xF9', '\xFA', '\a', 'R', '\x2', '\x2', '\xFA', 
+		'\xFB', '\a', 'S', '\x2', '\x2', '\xFB', '\xFC', '\a', '\x30', '\x2', 
 		'\x2', '\xFC', '\x103', '\x5', '\x10', '\t', '\x2', '\xFD', '\xFE', '\f', 
-		'\x3', '\x2', '\x2', '\xFE', '\xFF', '\a', 'K', '\x2', '\x2', '\xFF', 
-		'\x100', '\a', '\x80', '\x2', '\x2', '\x100', '\x101', '\a', '\x30', '\x2', 
+		'\x3', '\x2', '\x2', '\xFE', '\xFF', '\a', 'L', '\x2', '\x2', '\xFF', 
+		'\x100', '\a', '\x81', '\x2', '\x2', '\x100', '\x101', '\a', '\x30', '\x2', 
 		'\x2', '\x101', '\x103', '\x5', '\x10', '\t', '\x2', '\x102', '\xE9', 
 		'\x3', '\x2', '\x2', '\x2', '\x102', '\xEC', '\x3', '\x2', '\x2', '\x2', 
 		'\x102', '\xF6', '\x3', '\x2', '\x2', '\x2', '\x102', '\xFD', '\x3', '\x2', 
@@ -6497,33 +6498,33 @@ public partial class GLSL_ES300Parser : Parser {
 		'\x186', '\x184', '\x3', '\x2', '\x2', '\x2', '\x186', '\x187', '\x3', 
 		'\x2', '\x2', '\x2', '\x187', ')', '\x3', '\x2', '\x2', '\x2', '\x188', 
 		'\x186', '\x3', '\x2', '\x2', '\x2', '\x189', '\x18F', '\x5', '(', '\x15', 
-		'\x2', '\x18A', '\x18B', '\a', 'S', '\x2', '\x2', '\x18B', '\x18C', '\x5', 
-		'@', '!', '\x2', '\x18C', '\x18D', '\a', 'J', '\x2', '\x2', '\x18D', '\x18E', 
+		'\x2', '\x18A', '\x18B', '\a', 'T', '\x2', '\x2', '\x18B', '\x18C', '\x5', 
+		'@', '!', '\x2', '\x18C', '\x18D', '\a', 'K', '\x2', '\x2', '\x18D', '\x18E', 
 		'\x5', '\x12', '\n', '\x2', '\x18E', '\x190', '\x3', '\x2', '\x2', '\x2', 
 		'\x18F', '\x18A', '\x3', '\x2', '\x2', '\x2', '\x18F', '\x190', '\x3', 
 		'\x2', '\x2', '\x2', '\x190', '+', '\x3', '\x2', '\x2', '\x2', '\x191', 
-		'\x19A', '\x5', '\x30', '\x19', '\x2', '\x192', '\x193', '\a', 'G', '\x2', 
+		'\x19A', '\x5', '\x30', '\x19', '\x2', '\x192', '\x193', '\a', 'H', '\x2', 
 		'\x2', '\x193', '\x19A', '\x5', ',', '\x17', '\x2', '\x194', '\x195', 
-		'\a', 'H', '\x2', '\x2', '\x195', '\x19A', '\x5', ',', '\x17', '\x2', 
+		'\a', 'I', '\x2', '\x2', '\x195', '\x19A', '\x5', ',', '\x17', '\x2', 
 		'\x196', '\x197', '\x5', '\x8E', 'H', '\x2', '\x197', '\x198', '\x5', 
 		',', '\x17', '\x2', '\x198', '\x19A', '\x3', '\x2', '\x2', '\x2', '\x199', 
 		'\x191', '\x3', '\x2', '\x2', '\x2', '\x199', '\x192', '\x3', '\x2', '\x2', 
 		'\x2', '\x199', '\x194', '\x3', '\x2', '\x2', '\x2', '\x199', '\x196', 
 		'\x3', '\x2', '\x2', '\x2', '\x19A', '-', '\x3', '\x2', '\x2', '\x2', 
-		'\x19B', '\x19C', '\a', '\x80', '\x2', '\x2', '\x19C', '/', '\x3', '\x2', 
+		'\x19B', '\x19C', '\a', '\x81', '\x2', '\x2', '\x19C', '/', '\x3', '\x2', 
 		'\x2', '\x2', '\x19D', '\x19E', '\b', '\x19', '\x1', '\x2', '\x19E', '\x1A1', 
 		'\x5', '\x42', '\"', '\x2', '\x19F', '\x1A1', '\x5', '\x32', '\x1A', '\x2', 
 		'\x1A0', '\x19D', '\x3', '\x2', '\x2', '\x2', '\x1A0', '\x19F', '\x3', 
 		'\x2', '\x2', '\x2', '\x1A1', '\x1B3', '\x3', '\x2', '\x2', '\x2', '\x1A2', 
-		'\x1A3', '\f', '\b', '\x2', '\x2', '\x1A3', '\x1A4', '\a', 'Q', '\x2', 
+		'\x1A3', '\f', '\b', '\x2', '\x2', '\x1A3', '\x1A4', '\a', 'R', '\x2', 
 		'\x2', '\x1A4', '\x1A5', '\x5', '>', ' ', '\x2', '\x1A5', '\x1A6', '\a', 
-		'R', '\x2', '\x2', '\x1A6', '\x1B2', '\x3', '\x2', '\x2', '\x2', '\x1A7', 
-		'\x1A8', '\f', '\x6', '\x2', '\x2', '\x1A8', '\x1A9', '\a', 'L', '\x2', 
+		'S', '\x2', '\x2', '\x1A6', '\x1B2', '\x3', '\x2', '\x2', '\x2', '\x1A7', 
+		'\x1A8', '\f', '\x6', '\x2', '\x2', '\x1A8', '\x1A9', '\a', 'M', '\x2', 
 		'\x2', '\x1A9', '\x1B2', '\x5', '\x32', '\x1A', '\x2', '\x1AA', '\x1AB', 
-		'\f', '\x5', '\x2', '\x2', '\x1AB', '\x1AC', '\a', 'L', '\x2', '\x2', 
+		'\f', '\x5', '\x2', '\x2', '\x1AB', '\x1AC', '\a', 'M', '\x2', '\x2', 
 		'\x1AC', '\x1B2', '\x5', '.', '\x18', '\x2', '\x1AD', '\x1AE', '\f', '\x4', 
-		'\x2', '\x2', '\x1AE', '\x1B2', '\a', 'G', '\x2', '\x2', '\x1AF', '\x1B0', 
-		'\f', '\x3', '\x2', '\x2', '\x1B0', '\x1B2', '\a', 'H', '\x2', '\x2', 
+		'\x2', '\x2', '\x1AE', '\x1B2', '\a', 'H', '\x2', '\x2', '\x1AF', '\x1B0', 
+		'\f', '\x3', '\x2', '\x2', '\x1B0', '\x1B2', '\a', 'I', '\x2', '\x2', 
 		'\x1B1', '\x1A2', '\x3', '\x2', '\x2', '\x2', '\x1B1', '\x1A7', '\x3', 
 		'\x2', '\x2', '\x2', '\x1B1', '\x1AA', '\x3', '\x2', '\x2', '\x2', '\x1B1', 
 		'\x1AD', '\x3', '\x2', '\x2', '\x2', '\x1B1', '\x1AF', '\x3', '\x2', '\x2', 
@@ -6531,55 +6532,55 @@ public partial class GLSL_ES300Parser : Parser {
 		'\x3', '\x2', '\x2', '\x2', '\x1B3', '\x1B4', '\x3', '\x2', '\x2', '\x2', 
 		'\x1B4', '\x31', '\x3', '\x2', '\x2', '\x2', '\x1B5', '\x1B3', '\x3', 
 		'\x2', '\x2', '\x2', '\x1B6', '\x1B7', '\x5', '\x36', '\x1C', '\x2', '\x1B7', 
-		'\x1B8', '\a', 'P', '\x2', '\x2', '\x1B8', '\x1BD', '\x3', '\x2', '\x2', 
+		'\x1B8', '\a', 'Q', '\x2', '\x2', '\x1B8', '\x1BD', '\x3', '\x2', '\x2', 
 		'\x2', '\x1B9', '\x1BA', '\x5', '\x34', '\x1B', '\x2', '\x1BA', '\x1BB', 
-		'\a', 'P', '\x2', '\x2', '\x1BB', '\x1BD', '\x3', '\x2', '\x2', '\x2', 
+		'\a', 'Q', '\x2', '\x2', '\x1BB', '\x1BD', '\x3', '\x2', '\x2', '\x2', 
 		'\x1BC', '\x1B6', '\x3', '\x2', '\x2', '\x2', '\x1BC', '\x1B9', '\x3', 
 		'\x2', '\x2', '\x2', '\x1BD', '\x33', '\x3', '\x2', '\x2', '\x2', '\x1BE', 
-		'\x1C0', '\x5', '\x38', '\x1D', '\x2', '\x1BF', '\x1C1', '\a', 'T', '\x2', 
+		'\x1C0', '\x5', '\x38', '\x1D', '\x2', '\x1BF', '\x1C1', '\a', 'U', '\x2', 
 		'\x2', '\x1C0', '\x1BF', '\x3', '\x2', '\x2', '\x2', '\x1C0', '\x1C1', 
 		'\x3', '\x2', '\x2', '\x2', '\x1C1', '\x35', '\x3', '\x2', '\x2', '\x2', 
 		'\x1C2', '\x1C3', '\b', '\x1C', '\x1', '\x2', '\x1C3', '\x1C4', '\x5', 
 		'\x38', '\x1D', '\x2', '\x1C4', '\x1C5', '\x5', '\x12', '\n', '\x2', '\x1C5', 
 		'\x1CB', '\x3', '\x2', '\x2', '\x2', '\x1C6', '\x1C7', '\f', '\x3', '\x2', 
-		'\x2', '\x1C7', '\x1C8', '\a', 'K', '\x2', '\x2', '\x1C8', '\x1CA', '\x5', 
+		'\x2', '\x1C7', '\x1C8', '\a', 'L', '\x2', '\x2', '\x1C8', '\x1CA', '\x5', 
 		'\x12', '\n', '\x2', '\x1C9', '\x1C6', '\x3', '\x2', '\x2', '\x2', '\x1CA', 
 		'\x1CD', '\x3', '\x2', '\x2', '\x2', '\x1CB', '\x1C9', '\x3', '\x2', '\x2', 
 		'\x2', '\x1CB', '\x1CC', '\x3', '\x2', '\x2', '\x2', '\x1CC', '\x37', 
 		'\x3', '\x2', '\x2', '\x2', '\x1CD', '\x1CB', '\x3', '\x2', '\x2', '\x2', 
-		'\x1CE', '\x1CF', '\x5', ':', '\x1E', '\x2', '\x1CF', '\x1D0', '\a', 'O', 
+		'\x1CE', '\x1CF', '\x5', ':', '\x1E', '\x2', '\x1CF', '\x1D0', '\a', 'P', 
 		'\x2', '\x2', '\x1D0', '\x39', '\x3', '\x2', '\x2', '\x2', '\x1D1', '\x1D5', 
-		'\x5', '\x92', 'J', '\x2', '\x1D2', '\x1D5', '\a', '\x80', '\x2', '\x2', 
+		'\x5', '\x92', 'J', '\x2', '\x1D2', '\x1D5', '\a', '\x81', '\x2', '\x2', 
 		'\x1D3', '\x1D5', '\x5', '.', '\x18', '\x2', '\x1D4', '\x1D1', '\x3', 
 		'\x2', '\x2', '\x2', '\x1D4', '\x1D2', '\x3', '\x2', '\x2', '\x2', '\x1D4', 
 		'\x1D3', '\x3', '\x2', '\x2', '\x2', '\x1D5', ';', '\x3', '\x2', '\x2', 
-		'\x2', '\x1D6', '\x1D7', '\a', '\x80', '\x2', '\x2', '\x1D7', '=', '\x3', 
+		'\x2', '\x1D6', '\x1D7', '\a', '\x81', '\x2', '\x2', '\x1D7', '=', '\x3', 
 		'\x2', '\x2', '\x2', '\x1D8', '\x1D9', '\x5', '@', '!', '\x2', '\x1D9', 
 		'?', '\x3', '\x2', '\x2', '\x2', '\x1DA', '\x1DB', '\b', '!', '\x1', '\x2', 
 		'\x1DB', '\x1DC', '\x5', '\x12', '\n', '\x2', '\x1DC', '\x1E2', '\x3', 
 		'\x2', '\x2', '\x2', '\x1DD', '\x1DE', '\f', '\x3', '\x2', '\x2', '\x1DE', 
-		'\x1DF', '\a', 'K', '\x2', '\x2', '\x1DF', '\x1E1', '\x5', '\x12', '\n', 
+		'\x1DF', '\a', 'L', '\x2', '\x2', '\x1DF', '\x1E1', '\x5', '\x12', '\n', 
 		'\x2', '\x1E0', '\x1DD', '\x3', '\x2', '\x2', '\x2', '\x1E1', '\x1E4', 
 		'\x3', '\x2', '\x2', '\x2', '\x1E2', '\x1E0', '\x3', '\x2', '\x2', '\x2', 
 		'\x1E2', '\x1E3', '\x3', '\x2', '\x2', '\x2', '\x1E3', '\x41', '\x3', 
 		'\x2', '\x2', '\x2', '\x1E4', '\x1E2', '\x3', '\x2', '\x2', '\x2', '\x1E5', 
 		'\x1EE', '\x5', '<', '\x1F', '\x2', '\x1E6', '\x1EE', '\a', '\x4', '\x2', 
 		'\x2', '\x1E7', '\x1EE', '\a', '\x3', '\x2', '\x2', '\x1E8', '\x1EE', 
-		'\a', '\x5', '\x2', '\x2', '\x1E9', '\x1EA', '\a', 'O', '\x2', '\x2', 
-		'\x1EA', '\x1EB', '\x5', '@', '!', '\x2', '\x1EB', '\x1EC', '\a', 'P', 
+		'\a', '\x5', '\x2', '\x2', '\x1E9', '\x1EA', '\a', 'P', '\x2', '\x2', 
+		'\x1EA', '\x1EB', '\x5', '@', '!', '\x2', '\x1EB', '\x1EC', '\a', 'Q', 
 		'\x2', '\x2', '\x1EC', '\x1EE', '\x3', '\x2', '\x2', '\x2', '\x1ED', '\x1E5', 
 		'\x3', '\x2', '\x2', '\x2', '\x1ED', '\x1E6', '\x3', '\x2', '\x2', '\x2', 
 		'\x1ED', '\x1E7', '\x3', '\x2', '\x2', '\x2', '\x1ED', '\x1E8', '\x3', 
 		'\x2', '\x2', '\x2', '\x1ED', '\x1E9', '\x3', '\x2', '\x2', '\x2', '\x1EE', 
 		'\x43', '\x3', '\x2', '\x2', '\x2', '\x1EF', '\x1F0', '\x5', '\x46', '$', 
-		'\x2', '\x1F0', '\x1F1', '\a', 'P', '\x2', '\x2', '\x1F1', '\x45', '\x3', 
+		'\x2', '\x1F0', '\x1F1', '\a', 'Q', '\x2', '\x2', '\x1F1', '\x45', '\x3', 
 		'\x2', '\x2', '\x2', '\x1F2', '\x1F4', '\x5', 'H', '%', '\x2', '\x1F3', 
 		'\x1F5', '\x5', 'J', '&', '\x2', '\x1F4', '\x1F3', '\x3', '\x2', '\x2', 
 		'\x2', '\x1F4', '\x1F5', '\x3', '\x2', '\x2', '\x2', '\x1F5', 'G', '\x3', 
 		'\x2', '\x2', '\x2', '\x1F6', '\x1F7', '\x5', 't', ';', '\x2', '\x1F7', 
-		'\x1F8', '\a', '\x80', '\x2', '\x2', '\x1F8', '\x1F9', '\a', 'O', '\x2', 
+		'\x1F8', '\a', '\x81', '\x2', '\x2', '\x1F8', '\x1F9', '\a', 'P', '\x2', 
 		'\x2', '\x1F9', 'I', '\x3', '\x2', '\x2', '\x2', '\x1FA', '\x1FF', '\x5', 
-		'L', '\'', '\x2', '\x1FB', '\x1FC', '\a', 'K', '\x2', '\x2', '\x1FC', 
+		'L', '\'', '\x2', '\x1FB', '\x1FC', '\a', 'L', '\x2', '\x2', '\x1FC', 
 		'\x1FE', '\x5', 'L', '\'', '\x2', '\x1FD', '\x1FB', '\x3', '\x2', '\x2', 
 		'\x2', '\x1FE', '\x201', '\x3', '\x2', '\x2', '\x2', '\x1FF', '\x1FD', 
 		'\x3', '\x2', '\x2', '\x2', '\x1FF', '\x200', '\x3', '\x2', '\x2', '\x2', 
@@ -6597,19 +6598,19 @@ public partial class GLSL_ES300Parser : Parser {
 		'\x20F', '\x3', '\x2', '\x2', '\x2', '\x20F', '\x211', '\x5', '\x96', 
 		'L', '\x2', '\x210', '\x203', '\x3', '\x2', '\x2', '\x2', '\x210', '\x20A', 
 		'\x3', '\x2', '\x2', '\x2', '\x211', 'M', '\x3', '\x2', '\x2', '\x2', 
-		'\x212', '\x213', '\x5', '\x96', 'L', '\x2', '\x213', '\x218', '\a', '\x80', 
-		'\x2', '\x2', '\x214', '\x215', '\a', 'Q', '\x2', '\x2', '\x215', '\x216', 
-		'\x5', 'r', ':', '\x2', '\x216', '\x217', '\a', 'R', '\x2', '\x2', '\x217', 
+		'\x212', '\x213', '\x5', '\x96', 'L', '\x2', '\x213', '\x218', '\a', '\x81', 
+		'\x2', '\x2', '\x214', '\x215', '\a', 'R', '\x2', '\x2', '\x215', '\x216', 
+		'\x5', 'r', ':', '\x2', '\x216', '\x217', '\a', 'S', '\x2', '\x2', '\x217', 
 		'\x219', '\x3', '\x2', '\x2', '\x2', '\x218', '\x214', '\x3', '\x2', '\x2', 
 		'\x2', '\x218', '\x219', '\x3', '\x2', '\x2', '\x2', '\x219', 'O', '\x3', 
 		'\x2', '\x2', '\x2', '\x21A', '\x21B', '\t', '\a', '\x2', '\x2', '\x21B', 
 		'Q', '\x3', '\x2', '\x2', '\x2', '\x21C', '\x21D', '\t', '\b', '\x2', 
 		'\x2', '\x21D', 'S', '\x3', '\x2', '\x2', '\x2', '\x21E', '\x21F', '\a', 
 		'\v', '\x2', '\x2', '\x21F', 'U', '\x3', '\x2', '\x2', '\x2', '\x220', 
-		'\x222', '\a', 'M', '\x2', '\x2', '\x221', '\x223', '\x5', 'X', '-', '\x2', 
+		'\x222', '\a', 'N', '\x2', '\x2', '\x221', '\x223', '\x5', 'X', '-', '\x2', 
 		'\x222', '\x221', '\x3', '\x2', '\x2', '\x2', '\x222', '\x223', '\x3', 
 		'\x2', '\x2', '\x2', '\x223', '\x224', '\x3', '\x2', '\x2', '\x2', '\x224', 
-		'\x225', '\a', 'N', '\x2', '\x2', '\x225', 'W', '\x3', '\x2', '\x2', '\x2', 
+		'\x225', '\a', 'O', '\x2', '\x2', '\x225', 'W', '\x3', '\x2', '\x2', '\x2', 
 		'\x226', '\x227', '\b', '-', '\x1', '\x2', '\x227', '\x228', '\x5', 'Z', 
 		'.', '\x2', '\x228', '\x22D', '\x3', '\x2', '\x2', '\x2', '\x229', '\x22A', 
 		'\f', '\x3', '\x2', '\x2', '\x22A', '\x22C', '\x5', 'Z', '.', '\x2', '\x22B', 
@@ -6629,34 +6630,34 @@ public partial class GLSL_ES300Parser : Parser {
 		'\x3', '\x2', '\x2', '\x2', '\x23B', '\x238', '\x3', '\x2', '\x2', '\x2', 
 		'\x23B', '\x239', '\x3', '\x2', '\x2', '\x2', '\x23B', '\x23A', '\x3', 
 		'\x2', '\x2', '\x2', '\x23C', ']', '\x3', '\x2', '\x2', '\x2', '\x23D', 
-		'\x23E', '\a', ' ', '\x2', '\x2', '\x23E', '\x249', '\a', 'I', '\x2', 
+		'\x23E', '\a', ' ', '\x2', '\x2', '\x23E', '\x249', '\a', 'J', '\x2', 
 		'\x2', '\x23F', '\x240', '\a', '!', '\x2', '\x2', '\x240', '\x249', '\a', 
-		'I', '\x2', '\x2', '\x241', '\x243', '\a', '\"', '\x2', '\x2', '\x242', 
+		'J', '\x2', '\x2', '\x241', '\x243', '\a', '\"', '\x2', '\x2', '\x242', 
 		'\x244', '\x5', '@', '!', '\x2', '\x243', '\x242', '\x3', '\x2', '\x2', 
 		'\x2', '\x243', '\x244', '\x3', '\x2', '\x2', '\x2', '\x244', '\x245', 
-		'\x3', '\x2', '\x2', '\x2', '\x245', '\x249', '\a', 'I', '\x2', '\x2', 
-		'\x246', '\x247', '\a', '#', '\x2', '\x2', '\x247', '\x249', '\a', 'I', 
+		'\x3', '\x2', '\x2', '\x2', '\x245', '\x249', '\a', 'J', '\x2', '\x2', 
+		'\x246', '\x247', '\a', '#', '\x2', '\x2', '\x247', '\x249', '\a', 'J', 
 		'\x2', '\x2', '\x248', '\x23D', '\x3', '\x2', '\x2', '\x2', '\x248', '\x23F', 
 		'\x3', '\x2', '\x2', '\x2', '\x248', '\x241', '\x3', '\x2', '\x2', '\x2', 
 		'\x248', '\x246', '\x3', '\x2', '\x2', '\x2', '\x249', '_', '\x3', '\x2', 
 		'\x2', '\x2', '\x24A', '\x251', '\x5', '@', '!', '\x2', '\x24B', '\x24C', 
-		'\x5', 't', ';', '\x2', '\x24C', '\x24D', '\a', '\x80', '\x2', '\x2', 
+		'\x5', 't', ';', '\x2', '\x24C', '\x24D', '\a', '\x81', '\x2', '\x2', 
 		'\x24D', '\x24E', '\a', '\x30', '\x2', '\x2', '\x24E', '\x24F', '\x5', 
 		'\x10', '\t', '\x2', '\x24F', '\x251', '\x3', '\x2', '\x2', '\x2', '\x250', 
 		'\x24A', '\x3', '\x2', '\x2', '\x2', '\x250', '\x24B', '\x3', '\x2', '\x2', 
 		'\x2', '\x251', '\x61', '\x3', '\x2', '\x2', '\x2', '\x252', '\x253', 
-		'\a', '\x1D', '\x2', '\x2', '\x253', '\x254', '\a', 'O', '\x2', '\x2', 
-		'\x254', '\x255', '\x5', '`', '\x31', '\x2', '\x255', '\x256', '\a', 'P', 
+		'\a', '\x1D', '\x2', '\x2', '\x253', '\x254', '\a', 'P', '\x2', '\x2', 
+		'\x254', '\x255', '\x5', '`', '\x31', '\x2', '\x255', '\x256', '\a', 'Q', 
 		'\x2', '\x2', '\x256', '\x257', '\x5', 'Z', '.', '\x2', '\x257', '\x268', 
 		'\x3', '\x2', '\x2', '\x2', '\x258', '\x259', '\a', '\x1E', '\x2', '\x2', 
 		'\x259', '\x25A', '\x5', 'Z', '.', '\x2', '\x25A', '\x25B', '\a', '\x1D', 
-		'\x2', '\x2', '\x25B', '\x25C', '\a', 'O', '\x2', '\x2', '\x25C', '\x25D', 
-		'\x5', '@', '!', '\x2', '\x25D', '\x25E', '\a', 'P', '\x2', '\x2', '\x25E', 
-		'\x25F', '\a', 'I', '\x2', '\x2', '\x25F', '\x268', '\x3', '\x2', '\x2', 
+		'\x2', '\x2', '\x25B', '\x25C', '\a', 'P', '\x2', '\x2', '\x25C', '\x25D', 
+		'\x5', '@', '!', '\x2', '\x25D', '\x25E', '\a', 'Q', '\x2', '\x2', '\x25E', 
+		'\x25F', '\a', 'J', '\x2', '\x2', '\x25F', '\x268', '\x3', '\x2', '\x2', 
 		'\x2', '\x260', '\x261', '\a', '\x1F', '\x2', '\x2', '\x261', '\x262', 
-		'\a', 'O', '\x2', '\x2', '\x262', '\x263', '\x5', '\x64', '\x33', '\x2', 
+		'\a', 'P', '\x2', '\x2', '\x262', '\x263', '\x5', '\x64', '\x33', '\x2', 
 		'\x263', '\x264', '\x5', '\x66', '\x34', '\x2', '\x264', '\x265', '\a', 
-		'P', '\x2', '\x2', '\x265', '\x266', '\x5', 'Z', '.', '\x2', '\x266', 
+		'Q', '\x2', '\x2', '\x265', '\x266', '\x5', 'Z', '.', '\x2', '\x266', 
 		'\x268', '\x3', '\x2', '\x2', '\x2', '\x267', '\x252', '\x3', '\x2', '\x2', 
 		'\x2', '\x267', '\x258', '\x3', '\x2', '\x2', '\x2', '\x267', '\x260', 
 		'\x3', '\x2', '\x2', '\x2', '\x268', '\x63', '\x3', '\x2', '\x2', '\x2', 
@@ -6666,30 +6667,30 @@ public partial class GLSL_ES300Parser : Parser {
 		'\x2', '\x26D', '\x26F', '\x5', '`', '\x31', '\x2', '\x26E', '\x26D', 
 		'\x3', '\x2', '\x2', '\x2', '\x26E', '\x26F', '\x3', '\x2', '\x2', '\x2', 
 		'\x26F', '\x270', '\x3', '\x2', '\x2', '\x2', '\x270', '\x272', '\a', 
-		'I', '\x2', '\x2', '\x271', '\x273', '\x5', '@', '!', '\x2', '\x272', 
+		'J', '\x2', '\x2', '\x271', '\x273', '\x5', '@', '!', '\x2', '\x272', 
 		'\x271', '\x3', '\x2', '\x2', '\x2', '\x272', '\x273', '\x3', '\x2', '\x2', 
 		'\x2', '\x273', 'g', '\x3', '\x2', '\x2', '\x2', '\x274', '\x275', '\a', 
 		'\x1B', '\x2', '\x2', '\x275', '\x276', '\x5', '@', '!', '\x2', '\x276', 
-		'\x277', '\a', 'J', '\x2', '\x2', '\x277', '\x27B', '\x3', '\x2', '\x2', 
+		'\x277', '\a', 'K', '\x2', '\x2', '\x277', '\x27B', '\x3', '\x2', '\x2', 
 		'\x2', '\x278', '\x279', '\a', '\x1C', '\x2', '\x2', '\x279', '\x27B', 
-		'\a', 'J', '\x2', '\x2', '\x27A', '\x274', '\x3', '\x2', '\x2', '\x2', 
+		'\a', 'K', '\x2', '\x2', '\x27A', '\x274', '\x3', '\x2', '\x2', '\x2', 
 		'\x27A', '\x278', '\x3', '\x2', '\x2', '\x2', '\x27B', 'i', '\x3', '\x2', 
 		'\x2', '\x2', '\x27C', '\x27D', '\a', '\x1A', '\x2', '\x2', '\x27D', '\x27E', 
-		'\a', 'O', '\x2', '\x2', '\x27E', '\x27F', '\x5', '@', '!', '\x2', '\x27F', 
-		'\x280', '\a', 'P', '\x2', '\x2', '\x280', '\x282', '\a', 'M', '\x2', 
+		'\a', 'P', '\x2', '\x2', '\x27E', '\x27F', '\x5', '@', '!', '\x2', '\x27F', 
+		'\x280', '\a', 'Q', '\x2', '\x2', '\x280', '\x282', '\a', 'N', '\x2', 
 		'\x2', '\x281', '\x283', '\x5', 'X', '-', '\x2', '\x282', '\x281', '\x3', 
 		'\x2', '\x2', '\x2', '\x282', '\x283', '\x3', '\x2', '\x2', '\x2', '\x283', 
-		'\x284', '\x3', '\x2', '\x2', '\x2', '\x284', '\x285', '\a', 'N', '\x2', 
+		'\x284', '\x3', '\x2', '\x2', '\x2', '\x284', '\x285', '\a', 'O', '\x2', 
 		'\x2', '\x285', 'k', '\x3', '\x2', '\x2', '\x2', '\x286', '\x287', '\a', 
-		'\x18', '\x2', '\x2', '\x287', '\x288', '\a', 'O', '\x2', '\x2', '\x288', 
-		'\x289', '\x5', '@', '!', '\x2', '\x289', '\x28A', '\a', 'P', '\x2', '\x2', 
+		'\x18', '\x2', '\x2', '\x287', '\x288', '\a', 'P', '\x2', '\x2', '\x288', 
+		'\x289', '\x5', '@', '!', '\x2', '\x289', '\x28A', '\a', 'Q', '\x2', '\x2', 
 		'\x28A', '\x28D', '\x5', 'Z', '.', '\x2', '\x28B', '\x28C', '\a', '\x19', 
 		'\x2', '\x2', '\x28C', '\x28E', '\x5', 'Z', '.', '\x2', '\x28D', '\x28B', 
 		'\x3', '\x2', '\x2', '\x2', '\x28D', '\x28E', '\x3', '\x2', '\x2', '\x2', 
 		'\x28E', 'm', '\x3', '\x2', '\x2', '\x2', '\x28F', '\x291', '\x5', '@', 
 		'!', '\x2', '\x290', '\x28F', '\x3', '\x2', '\x2', '\x2', '\x290', '\x291', 
 		'\x3', '\x2', '\x2', '\x2', '\x291', '\x292', '\x3', '\x2', '\x2', '\x2', 
-		'\x292', '\x293', '\a', 'I', '\x2', '\x2', '\x293', 'o', '\x3', '\x2', 
+		'\x292', '\x293', '\a', 'J', '\x2', '\x2', '\x293', 'o', '\x3', '\x2', 
 		'\x2', '\x2', '\x294', '\x295', '\x5', '\n', '\x6', '\x2', '\x295', 'q', 
 		'\x3', '\x2', '\x2', '\x2', '\x296', '\x297', '\x5', '*', '\x16', '\x2', 
 		'\x297', 's', '\x3', '\x2', '\x2', '\x2', '\x298', '\x29A', '\x5', '\x80', 
@@ -6698,9 +6699,9 @@ public partial class GLSL_ES300Parser : Parser {
 		'\x2', '\x29B', '\x29C', '\x5', '\x96', 'L', '\x2', '\x29C', 'u', '\x3', 
 		'\x2', '\x2', '\x2', '\x29D', '\x29E', '\t', '\t', '\x2', '\x2', '\x29E', 
 		'w', '\x3', '\x2', '\x2', '\x2', '\x29F', '\x2A0', '\b', '=', '\x1', '\x2', 
-		'\x2A0', '\x2A1', '\a', '\x80', '\x2', '\x2', '\x2A1', '\x2A7', '\x3', 
+		'\x2A0', '\x2A1', '\a', '\x81', '\x2', '\x2', '\x2A1', '\x2A7', '\x3', 
 		'\x2', '\x2', '\x2', '\x2A2', '\x2A3', '\f', '\x3', '\x2', '\x2', '\x2A3', 
-		'\x2A4', '\a', 'K', '\x2', '\x2', '\x2A4', '\x2A6', '\a', '\x80', '\x2', 
+		'\x2A4', '\a', 'L', '\x2', '\x2', '\x2A4', '\x2A6', '\a', '\x81', '\x2', 
 		'\x2', '\x2A5', '\x2A2', '\x3', '\x2', '\x2', '\x2', '\x2A6', '\x2A9', 
 		'\x3', '\x2', '\x2', '\x2', '\x2A7', '\x2A5', '\x3', '\x2', '\x2', '\x2', 
 		'\x2A7', '\x2A8', '\x3', '\x2', '\x2', '\x2', '\x2A8', 'y', '\x3', '\x2', 
@@ -6712,13 +6713,13 @@ public partial class GLSL_ES300Parser : Parser {
 		'\x2', '\x2B0', '\x2AF', '\x3', '\x2', '\x2', '\x2', '\x2B0', '\x2B1', 
 		'\x3', '\x2', '\x2', '\x2', '\x2B1', '\x2B2', '\x3', '\x2', '\x2', '\x2', 
 		'\x2B2', '\x2B3', '\x5', '\x92', 'J', '\x2', '\x2B3', '\x2B4', '\x5', 
-		'x', '=', '\x2', '\x2B4', '\x2B5', '\a', 'I', '\x2', '\x2', '\x2B5', '}', 
+		'x', '=', '\x2', '\x2B4', '\x2B5', '\a', 'J', '\x2', '\x2', '\x2B5', '}', 
 		'\x3', '\x2', '\x2', '\x2', '\x2B6', '\x2B8', '\a', '\n', '\x2', '\x2', 
-		'\x2B7', '\x2B9', '\a', '\x80', '\x2', '\x2', '\x2B8', '\x2B7', '\x3', 
+		'\x2B7', '\x2B9', '\a', '\x81', '\x2', '\x2', '\x2B8', '\x2B7', '\x3', 
 		'\x2', '\x2', '\x2', '\x2B8', '\x2B9', '\x3', '\x2', '\x2', '\x2', '\x2B9', 
-		'\x2BA', '\x3', '\x2', '\x2', '\x2', '\x2BA', '\x2BB', '\a', 'M', '\x2', 
+		'\x2BA', '\x3', '\x2', '\x2', '\x2', '\x2BA', '\x2BB', '\a', 'N', '\x2', 
 		'\x2', '\x2BB', '\x2BC', '\x5', 'z', '>', '\x2', '\x2BC', '\x2BD', '\a', 
-		'N', '\x2', '\x2', '\x2BD', '\x7F', '\x3', '\x2', '\x2', '\x2', '\x2BE', 
+		'O', '\x2', '\x2', '\x2BD', '\x7F', '\x3', '\x2', '\x2', '\x2', '\x2BE', 
 		'\x2CC', '\x5', '\x8C', 'G', '\x2', '\x2BF', '\x2CC', '\x5', '\x88', '\x45', 
 		'\x2', '\x2C0', '\x2C1', '\x5', '\x88', '\x45', '\x2', '\x2C1', '\x2C2', 
 		'\x5', '\x8C', 'G', '\x2', '\x2C2', '\x2CC', '\x3', '\x2', '\x2', '\x2', 
@@ -6733,20 +6734,20 @@ public partial class GLSL_ES300Parser : Parser {
 		'\x2', '\x2', '\x2', '\x2CB', '\x2C7', '\x3', '\x2', '\x2', '\x2', '\x2CC', 
 		'\x81', '\x3', '\x2', '\x2', '\x2', '\x2CD', '\x2CE', '\t', '\n', '\x2', 
 		'\x2', '\x2CE', '\x83', '\x3', '\x2', '\x2', '\x2', '\x2CF', '\x2D2', 
-		'\a', '\x80', '\x2', '\x2', '\x2D0', '\x2D1', '\a', '\x30', '\x2', '\x2', 
+		'\a', '\x81', '\x2', '\x2', '\x2D0', '\x2D1', '\a', '\x30', '\x2', '\x2', 
 		'\x2D1', '\x2D3', '\a', '\x4', '\x2', '\x2', '\x2D2', '\x2D0', '\x3', 
 		'\x2', '\x2', '\x2', '\x2D2', '\x2D3', '\x3', '\x2', '\x2', '\x2', '\x2D3', 
 		'\x85', '\x3', '\x2', '\x2', '\x2', '\x2D4', '\x2D5', '\b', '\x44', '\x1', 
 		'\x2', '\x2D5', '\x2D6', '\x5', '\x84', '\x43', '\x2', '\x2D6', '\x2DC', 
 		'\x3', '\x2', '\x2', '\x2', '\x2D7', '\x2D8', '\f', '\x3', '\x2', '\x2', 
-		'\x2D8', '\x2D9', '\a', 'K', '\x2', '\x2', '\x2D9', '\x2DB', '\x5', '\x84', 
+		'\x2D8', '\x2D9', '\a', 'L', '\x2', '\x2', '\x2D9', '\x2DB', '\x5', '\x84', 
 		'\x43', '\x2', '\x2DA', '\x2D7', '\x3', '\x2', '\x2', '\x2', '\x2DB', 
 		'\x2DE', '\x3', '\x2', '\x2', '\x2', '\x2DC', '\x2DA', '\x3', '\x2', '\x2', 
 		'\x2', '\x2DC', '\x2DD', '\x3', '\x2', '\x2', '\x2', '\x2DD', '\x87', 
 		'\x3', '\x2', '\x2', '\x2', '\x2DE', '\x2DC', '\x3', '\x2', '\x2', '\x2', 
-		'\x2DF', '\x2E0', '\a', '%', '\x2', '\x2', '\x2E0', '\x2E1', '\a', 'O', 
+		'\x2DF', '\x2E0', '\a', '%', '\x2', '\x2', '\x2E0', '\x2E1', '\a', 'P', 
 		'\x2', '\x2', '\x2E1', '\x2E2', '\x5', '\x86', '\x44', '\x2', '\x2E2', 
-		'\x2E3', '\a', 'P', '\x2', '\x2', '\x2E3', '\x89', '\x3', '\x2', '\x2', 
+		'\x2E3', '\a', 'Q', '\x2', '\x2', '\x2E3', '\x89', '\x3', '\x2', '\x2', 
 		'\x2', '\x2E4', '\x2E5', '\a', '$', '\x2', '\x2', '\x2E5', '\x8B', '\x3', 
 		'\x2', '\x2', '\x2', '\x2E6', '\x2E7', '\t', '\v', '\x2', '\x2', '\x2E7', 
 		'\x8D', '\x3', '\x2', '\x2', '\x2', '\x2E8', '\x2E9', '\t', '\f', '\x2', 
@@ -6756,78 +6757,78 @@ public partial class GLSL_ES300Parser : Parser {
 		'\x2', '\x2', '\x2ED', '\x2EE', '\x3', '\x2', '\x2', '\x2', '\x2EE', '\x2EF', 
 		'\x3', '\x2', '\x2', '\x2', '\x2EF', '\x2F0', '\x5', '\x94', 'K', '\x2', 
 		'\x2F0', '\x93', '\x3', '\x2', '\x2', '\x2', '\x2F1', '\x2F7', '\x5', 
-		'\x96', 'L', '\x2', '\x2F2', '\x2F4', '\a', 'Q', '\x2', '\x2', '\x2F3', 
+		'\x96', 'L', '\x2', '\x2F2', '\x2F4', '\a', 'R', '\x2', '\x2', '\x2F3', 
 		'\x2F5', '\x5', 'r', ':', '\x2', '\x2F4', '\x2F3', '\x3', '\x2', '\x2', 
 		'\x2', '\x2F4', '\x2F5', '\x3', '\x2', '\x2', '\x2', '\x2F5', '\x2F6', 
-		'\x3', '\x2', '\x2', '\x2', '\x2F6', '\x2F8', '\a', 'R', '\x2', '\x2', 
+		'\x3', '\x2', '\x2', '\x2', '\x2F6', '\x2F8', '\a', 'S', '\x2', '\x2', 
 		'\x2F7', '\x2F2', '\x3', '\x2', '\x2', '\x2', '\x2F7', '\x2F8', '\x3', 
 		'\x2', '\x2', '\x2', '\x2F8', '\x95', '\x3', '\x2', '\x2', '\x2', '\x2F9', 
-		'\x328', '\a', 'T', '\x2', '\x2', '\x2FA', '\x328', '\a', 'U', '\x2', 
-		'\x2', '\x2FB', '\x328', '\a', 'V', '\x2', '\x2', '\x2FC', '\x328', '\a', 
-		'W', '\x2', '\x2', '\x2FD', '\x328', '\a', 'X', '\x2', '\x2', '\x2FE', 
-		'\x328', '\a', 'Y', '\x2', '\x2', '\x2FF', '\x328', '\a', 'Z', '\x2', 
-		'\x2', '\x300', '\x328', '\a', '[', '\x2', '\x2', '\x301', '\x328', '\a', 
-		'\\', '\x2', '\x2', '\x302', '\x328', '\a', ']', '\x2', '\x2', '\x303', 
-		'\x328', '\a', '^', '\x2', '\x2', '\x304', '\x328', '\a', '_', '\x2', 
-		'\x2', '\x305', '\x328', '\a', '`', '\x2', '\x2', '\x306', '\x328', '\a', 
-		'\x61', '\x2', '\x2', '\x307', '\x328', '\a', '\x62', '\x2', '\x2', '\x308', 
-		'\x328', '\a', '\x63', '\x2', '\x2', '\x309', '\x328', '\a', '\x64', '\x2', 
-		'\x2', '\x30A', '\x328', '\a', '\x65', '\x2', '\x2', '\x30B', '\x328', 
-		'\a', '\x66', '\x2', '\x2', '\x30C', '\x328', '\a', 'g', '\x2', '\x2', 
-		'\x30D', '\x328', '\a', 'h', '\x2', '\x2', '\x30E', '\x328', '\a', 'i', 
-		'\x2', '\x2', '\x30F', '\x328', '\a', 'j', '\x2', '\x2', '\x310', '\x328', 
-		'\a', 'k', '\x2', '\x2', '\x311', '\x328', '\a', 'l', '\x2', '\x2', '\x312', 
-		'\x328', '\a', 'm', '\x2', '\x2', '\x313', '\x328', '\a', 'n', '\x2', 
-		'\x2', '\x314', '\x328', '\a', 'o', '\x2', '\x2', '\x315', '\x328', '\a', 
-		'p', '\x2', '\x2', '\x316', '\x328', '\a', 'q', '\x2', '\x2', '\x317', 
-		'\x328', '\a', 'r', '\x2', '\x2', '\x318', '\x328', '\a', 's', '\x2', 
-		'\x2', '\x319', '\x328', '\a', 't', '\x2', '\x2', '\x31A', '\x328', '\a', 
-		'u', '\x2', '\x2', '\x31B', '\x328', '\a', 'v', '\x2', '\x2', '\x31C', 
-		'\x328', '\a', 'w', '\x2', '\x2', '\x31D', '\x328', '\a', 'x', '\x2', 
-		'\x2', '\x31E', '\x328', '\a', 'y', '\x2', '\x2', '\x31F', '\x328', '\a', 
-		'z', '\x2', '\x2', '\x320', '\x328', '\a', '{', '\x2', '\x2', '\x321', 
-		'\x328', '\a', '|', '\x2', '\x2', '\x322', '\x328', '\a', '}', '\x2', 
-		'\x2', '\x323', '\x328', '\a', '~', '\x2', '\x2', '\x324', '\x328', '\a', 
-		'\x7F', '\x2', '\x2', '\x325', '\x328', '\x5', '~', '@', '\x2', '\x326', 
-		'\x328', '\a', '\x80', '\x2', '\x2', '\x327', '\x2F9', '\x3', '\x2', '\x2', 
-		'\x2', '\x327', '\x2FA', '\x3', '\x2', '\x2', '\x2', '\x327', '\x2FB', 
-		'\x3', '\x2', '\x2', '\x2', '\x327', '\x2FC', '\x3', '\x2', '\x2', '\x2', 
-		'\x327', '\x2FD', '\x3', '\x2', '\x2', '\x2', '\x327', '\x2FE', '\x3', 
-		'\x2', '\x2', '\x2', '\x327', '\x2FF', '\x3', '\x2', '\x2', '\x2', '\x327', 
-		'\x300', '\x3', '\x2', '\x2', '\x2', '\x327', '\x301', '\x3', '\x2', '\x2', 
-		'\x2', '\x327', '\x302', '\x3', '\x2', '\x2', '\x2', '\x327', '\x303', 
-		'\x3', '\x2', '\x2', '\x2', '\x327', '\x304', '\x3', '\x2', '\x2', '\x2', 
-		'\x327', '\x305', '\x3', '\x2', '\x2', '\x2', '\x327', '\x306', '\x3', 
-		'\x2', '\x2', '\x2', '\x327', '\x307', '\x3', '\x2', '\x2', '\x2', '\x327', 
-		'\x308', '\x3', '\x2', '\x2', '\x2', '\x327', '\x309', '\x3', '\x2', '\x2', 
-		'\x2', '\x327', '\x30A', '\x3', '\x2', '\x2', '\x2', '\x327', '\x30B', 
-		'\x3', '\x2', '\x2', '\x2', '\x327', '\x30C', '\x3', '\x2', '\x2', '\x2', 
-		'\x327', '\x30D', '\x3', '\x2', '\x2', '\x2', '\x327', '\x30E', '\x3', 
-		'\x2', '\x2', '\x2', '\x327', '\x30F', '\x3', '\x2', '\x2', '\x2', '\x327', 
-		'\x310', '\x3', '\x2', '\x2', '\x2', '\x327', '\x311', '\x3', '\x2', '\x2', 
-		'\x2', '\x327', '\x312', '\x3', '\x2', '\x2', '\x2', '\x327', '\x313', 
-		'\x3', '\x2', '\x2', '\x2', '\x327', '\x314', '\x3', '\x2', '\x2', '\x2', 
-		'\x327', '\x315', '\x3', '\x2', '\x2', '\x2', '\x327', '\x316', '\x3', 
-		'\x2', '\x2', '\x2', '\x327', '\x317', '\x3', '\x2', '\x2', '\x2', '\x327', 
-		'\x318', '\x3', '\x2', '\x2', '\x2', '\x327', '\x319', '\x3', '\x2', '\x2', 
-		'\x2', '\x327', '\x31A', '\x3', '\x2', '\x2', '\x2', '\x327', '\x31B', 
-		'\x3', '\x2', '\x2', '\x2', '\x327', '\x31C', '\x3', '\x2', '\x2', '\x2', 
-		'\x327', '\x31D', '\x3', '\x2', '\x2', '\x2', '\x327', '\x31E', '\x3', 
-		'\x2', '\x2', '\x2', '\x327', '\x31F', '\x3', '\x2', '\x2', '\x2', '\x327', 
-		'\x320', '\x3', '\x2', '\x2', '\x2', '\x327', '\x321', '\x3', '\x2', '\x2', 
-		'\x2', '\x327', '\x322', '\x3', '\x2', '\x2', '\x2', '\x327', '\x323', 
-		'\x3', '\x2', '\x2', '\x2', '\x327', '\x324', '\x3', '\x2', '\x2', '\x2', 
-		'\x327', '\x325', '\x3', '\x2', '\x2', '\x2', '\x327', '\x326', '\x3', 
-		'\x2', '\x2', '\x2', '\x328', '\x97', '\x3', '\x2', '\x2', '\x2', 'H', 
-		'\x99', '\xA0', '\xA4', '\xBE', '\xC0', '\xC7', '\xCB', '\xD4', '\xE4', 
-		'\xF4', '\x102', '\x104', '\x10E', '\x118', '\x123', '\x12E', '\x139', 
-		'\x144', '\x14F', '\x15A', '\x165', '\x170', '\x17B', '\x186', '\x18F', 
-		'\x199', '\x1A0', '\x1B1', '\x1B3', '\x1BC', '\x1C0', '\x1CB', '\x1D4', 
-		'\x1E2', '\x1ED', '\x1F4', '\x1FF', '\x203', '\x206', '\x20A', '\x20D', 
-		'\x210', '\x218', '\x222', '\x22D', '\x232', '\x23B', '\x243', '\x248', 
-		'\x250', '\x267', '\x26B', '\x26E', '\x272', '\x27A', '\x282', '\x28D', 
-		'\x290', '\x299', '\x2A7', '\x2AD', '\x2B0', '\x2B8', '\x2CB', '\x2D2', 
-		'\x2DC', '\x2ED', '\x2F4', '\x2F7', '\x327',
+		'\x328', '\a', 'U', '\x2', '\x2', '\x2FA', '\x328', '\a', 'V', '\x2', 
+		'\x2', '\x2FB', '\x328', '\a', 'W', '\x2', '\x2', '\x2FC', '\x328', '\a', 
+		'X', '\x2', '\x2', '\x2FD', '\x328', '\a', 'Y', '\x2', '\x2', '\x2FE', 
+		'\x328', '\a', 'Z', '\x2', '\x2', '\x2FF', '\x328', '\a', '[', '\x2', 
+		'\x2', '\x300', '\x328', '\a', '\\', '\x2', '\x2', '\x301', '\x328', '\a', 
+		']', '\x2', '\x2', '\x302', '\x328', '\a', '^', '\x2', '\x2', '\x303', 
+		'\x328', '\a', '_', '\x2', '\x2', '\x304', '\x328', '\a', '`', '\x2', 
+		'\x2', '\x305', '\x328', '\a', '\x61', '\x2', '\x2', '\x306', '\x328', 
+		'\a', '\x62', '\x2', '\x2', '\x307', '\x328', '\a', '\x63', '\x2', '\x2', 
+		'\x308', '\x328', '\a', '\x64', '\x2', '\x2', '\x309', '\x328', '\a', 
+		'\x65', '\x2', '\x2', '\x30A', '\x328', '\a', '\x66', '\x2', '\x2', '\x30B', 
+		'\x328', '\a', 'g', '\x2', '\x2', '\x30C', '\x328', '\a', 'h', '\x2', 
+		'\x2', '\x30D', '\x328', '\a', 'i', '\x2', '\x2', '\x30E', '\x328', '\a', 
+		'j', '\x2', '\x2', '\x30F', '\x328', '\a', 'k', '\x2', '\x2', '\x310', 
+		'\x328', '\a', 'l', '\x2', '\x2', '\x311', '\x328', '\a', 'm', '\x2', 
+		'\x2', '\x312', '\x328', '\a', 'n', '\x2', '\x2', '\x313', '\x328', '\a', 
+		'o', '\x2', '\x2', '\x314', '\x328', '\a', 'p', '\x2', '\x2', '\x315', 
+		'\x328', '\a', 'q', '\x2', '\x2', '\x316', '\x328', '\a', 'r', '\x2', 
+		'\x2', '\x317', '\x328', '\a', 's', '\x2', '\x2', '\x318', '\x328', '\a', 
+		't', '\x2', '\x2', '\x319', '\x328', '\a', 'u', '\x2', '\x2', '\x31A', 
+		'\x328', '\a', 'v', '\x2', '\x2', '\x31B', '\x328', '\a', 'w', '\x2', 
+		'\x2', '\x31C', '\x328', '\a', 'x', '\x2', '\x2', '\x31D', '\x328', '\a', 
+		'y', '\x2', '\x2', '\x31E', '\x328', '\a', 'z', '\x2', '\x2', '\x31F', 
+		'\x328', '\a', '{', '\x2', '\x2', '\x320', '\x328', '\a', '|', '\x2', 
+		'\x2', '\x321', '\x328', '\a', '}', '\x2', '\x2', '\x322', '\x328', '\a', 
+		'~', '\x2', '\x2', '\x323', '\x328', '\a', '\x7F', '\x2', '\x2', '\x324', 
+		'\x328', '\a', '\x80', '\x2', '\x2', '\x325', '\x328', '\x5', '~', '@', 
+		'\x2', '\x326', '\x328', '\a', '\x81', '\x2', '\x2', '\x327', '\x2F9', 
+		'\x3', '\x2', '\x2', '\x2', '\x327', '\x2FA', '\x3', '\x2', '\x2', '\x2', 
+		'\x327', '\x2FB', '\x3', '\x2', '\x2', '\x2', '\x327', '\x2FC', '\x3', 
+		'\x2', '\x2', '\x2', '\x327', '\x2FD', '\x3', '\x2', '\x2', '\x2', '\x327', 
+		'\x2FE', '\x3', '\x2', '\x2', '\x2', '\x327', '\x2FF', '\x3', '\x2', '\x2', 
+		'\x2', '\x327', '\x300', '\x3', '\x2', '\x2', '\x2', '\x327', '\x301', 
+		'\x3', '\x2', '\x2', '\x2', '\x327', '\x302', '\x3', '\x2', '\x2', '\x2', 
+		'\x327', '\x303', '\x3', '\x2', '\x2', '\x2', '\x327', '\x304', '\x3', 
+		'\x2', '\x2', '\x2', '\x327', '\x305', '\x3', '\x2', '\x2', '\x2', '\x327', 
+		'\x306', '\x3', '\x2', '\x2', '\x2', '\x327', '\x307', '\x3', '\x2', '\x2', 
+		'\x2', '\x327', '\x308', '\x3', '\x2', '\x2', '\x2', '\x327', '\x309', 
+		'\x3', '\x2', '\x2', '\x2', '\x327', '\x30A', '\x3', '\x2', '\x2', '\x2', 
+		'\x327', '\x30B', '\x3', '\x2', '\x2', '\x2', '\x327', '\x30C', '\x3', 
+		'\x2', '\x2', '\x2', '\x327', '\x30D', '\x3', '\x2', '\x2', '\x2', '\x327', 
+		'\x30E', '\x3', '\x2', '\x2', '\x2', '\x327', '\x30F', '\x3', '\x2', '\x2', 
+		'\x2', '\x327', '\x310', '\x3', '\x2', '\x2', '\x2', '\x327', '\x311', 
+		'\x3', '\x2', '\x2', '\x2', '\x327', '\x312', '\x3', '\x2', '\x2', '\x2', 
+		'\x327', '\x313', '\x3', '\x2', '\x2', '\x2', '\x327', '\x314', '\x3', 
+		'\x2', '\x2', '\x2', '\x327', '\x315', '\x3', '\x2', '\x2', '\x2', '\x327', 
+		'\x316', '\x3', '\x2', '\x2', '\x2', '\x327', '\x317', '\x3', '\x2', '\x2', 
+		'\x2', '\x327', '\x318', '\x3', '\x2', '\x2', '\x2', '\x327', '\x319', 
+		'\x3', '\x2', '\x2', '\x2', '\x327', '\x31A', '\x3', '\x2', '\x2', '\x2', 
+		'\x327', '\x31B', '\x3', '\x2', '\x2', '\x2', '\x327', '\x31C', '\x3', 
+		'\x2', '\x2', '\x2', '\x327', '\x31D', '\x3', '\x2', '\x2', '\x2', '\x327', 
+		'\x31E', '\x3', '\x2', '\x2', '\x2', '\x327', '\x31F', '\x3', '\x2', '\x2', 
+		'\x2', '\x327', '\x320', '\x3', '\x2', '\x2', '\x2', '\x327', '\x321', 
+		'\x3', '\x2', '\x2', '\x2', '\x327', '\x322', '\x3', '\x2', '\x2', '\x2', 
+		'\x327', '\x323', '\x3', '\x2', '\x2', '\x2', '\x327', '\x324', '\x3', 
+		'\x2', '\x2', '\x2', '\x327', '\x325', '\x3', '\x2', '\x2', '\x2', '\x327', 
+		'\x326', '\x3', '\x2', '\x2', '\x2', '\x328', '\x97', '\x3', '\x2', '\x2', 
+		'\x2', 'H', '\x99', '\xA0', '\xA4', '\xBE', '\xC0', '\xC7', '\xCB', '\xD4', 
+		'\xE4', '\xF4', '\x102', '\x104', '\x10E', '\x118', '\x123', '\x12E', 
+		'\x139', '\x144', '\x14F', '\x15A', '\x165', '\x170', '\x17B', '\x186', 
+		'\x18F', '\x199', '\x1A0', '\x1B1', '\x1B3', '\x1BC', '\x1C0', '\x1CB', 
+		'\x1D4', '\x1E2', '\x1ED', '\x1F4', '\x1FF', '\x203', '\x206', '\x20A', 
+		'\x20D', '\x210', '\x218', '\x222', '\x22D', '\x232', '\x23B', '\x243', 
+		'\x248', '\x250', '\x267', '\x26B', '\x26E', '\x272', '\x27A', '\x282', 
+		'\x28D', '\x290', '\x299', '\x2A7', '\x2AD', '\x2B0', '\x2B8', '\x2CB', 
+		'\x2D2', '\x2DC', '\x2ED', '\x2F4', '\x2F7', '\x327',
 	};
 
 	public static readonly ATN _ATN =

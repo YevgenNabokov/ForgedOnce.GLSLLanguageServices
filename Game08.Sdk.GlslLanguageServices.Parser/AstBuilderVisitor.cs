@@ -57,6 +57,30 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
                 return this.Visit(functionPrototype);
             }
 
+            var precisionQualifier = context.precision_qualifier();
+            if (precisionQualifier != null)
+            {
+                PrecisionDeclaration result = new PrecisionDeclaration();
+
+                result.PrecisionQualifier = (PrecisionQualifier)Enum.Parse(typeof(PrecisionQualifier), precisionQualifier.GetText(), true);
+
+                var noPrecTypeSpec = context.type_specifier_noprec();
+                var typeSpecifier = (TypeSpecifier)VisitType_specifier_nonarray(noPrecTypeSpec.type_specifier_nonarray());
+                result.Type = typeSpecifier;
+
+                if (noPrecTypeSpec.LeftBracket() != null)
+                {
+                    result.ArraySpecifier = new ArraySpecifier();
+
+                    if (noPrecTypeSpec.constant_expression() != null)
+                    {
+                        result.ArraySpecifier.ArraySizeExpression = (Expression)this.Visit(noPrecTypeSpec.constant_expression());
+                    }
+                }
+
+                return result;
+            }
+
             throw new NotSupportedException();
         }
 
@@ -338,6 +362,459 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
             }
 
             return result;
+        }
+
+        public override AstNode VisitCompound_statement([NotNull] GLSL_ES300Parser.Compound_statementContext context)
+        {
+            var result = new StatementCompound();
+
+            result.Statements = this.VisitStatementList(context.statementlist());
+
+            return result;
+        }
+
+        public List<Statement> VisitStatementList(GLSL_ES300Parser.StatementlistContext context)
+        {
+            var result = new List<Statement>();
+
+            if (context != null)
+            {
+                var currentList = context;
+
+                while (currentList != null)
+                {
+                    result.Add((Statement)this.Visit(currentList.statement()));
+                    currentList = currentList.statementlist();
+                }
+            }
+
+            return result;
+        }
+
+        public override AstNode VisitStatement([NotNull] GLSL_ES300Parser.StatementContext context)
+        {
+            var compound = context.compound_statement();
+            if (compound != null)
+            {
+                return this.VisitCompound_statement(compound);
+            }
+
+            return this.VisitSimple_statement(context.simple_statement());
+        }
+
+        public override AstNode VisitSimple_statement([NotNull] GLSL_ES300Parser.Simple_statementContext context)
+        {
+            var declaration = context.declaration_statement();
+            if (declaration != null)
+            {
+                return this.VisitDeclaration_statement(declaration);
+            }
+
+            var expr = context.expression_statement();
+            if (expr != null)
+            {
+                return this.VisitExpression_statement(expr);
+            }
+
+            var selection = context.selection_statement();
+            if (selection != null)
+            {
+                return this.VisitSelection_statement(selection);
+            }
+
+            var switchStatement = context.switch_statement();
+            if (switchStatement != null)
+            {
+                return this.VisitSwitch_statement(switchStatement);
+            }
+
+            var caseLabel = context.case_label();
+            if (caseLabel != null)
+            {
+                return this.VisitCase_label(caseLabel);
+            }
+
+            var iteration = context.iteration_statement();
+            if (iteration != null)
+            {
+                return this.VisitIteration_statement(iteration);
+            }
+
+            var jump = context.jump_statement();
+            if (jump != null)
+            {
+                return this.VisitJump_statement(jump);
+            }
+
+            throw new NotSupportedException($"Statement is not supported: {context.ToString()}");
+        }
+
+        public override AstNode VisitJump_statement([NotNull] GLSL_ES300Parser.Jump_statementContext context)
+        {
+            if (context.Continue() != null)
+            {
+                return new StatementContinue();
+            }
+
+            if (context.Break() != null)
+            {
+                return new StatementBreak();
+            }
+
+            if (context.Return() != null)
+            {
+                var result = new StatementReturn();
+                var expr = context.expression();
+                if (expr != null)
+                {
+                    result.Expression = (Expression)this.Visit(expr);
+                }
+
+                return result;
+            }
+
+            return new StatementDiscard();
+        }
+
+        public override AstNode VisitIteration_statement([NotNull] GLSL_ES300Parser.Iteration_statementContext context)
+        {
+            if (context.While() != null)
+            {
+                var w = new StatementWhile();
+                if (context.condition().fully_specified_type() != null)
+                {
+                    throw new NotSupportedException($"Expression is not supported as condition for 'while' loop: {context.condition().GetText()}");
+                }
+
+                w.Condition = (Expression)this.Visit(context.condition().expression());
+                w.Body = (Statement)this.Visit(context.statement());
+                return w;
+            }
+
+            if (context.Do() != null)
+            {
+                var d = new StatementDo();
+                d.Body = (Statement)this.Visit(context.statement());
+                d.Condition = (Expression)this.Visit(context.expression());
+                return d;
+            }
+
+            var f = new StatementFor();
+            var init = context.for_init_statement();
+            f.Init = init.expression_statement() != null ? (Statement)this.Visit(init.expression_statement()) : (Statement)this.Visit(init.declaration_statement());
+            var rest = context.for_rest_statement();
+            var condition = rest.condition();
+            if (condition != null)
+            {
+                if (condition.fully_specified_type() != null)
+                {
+                    throw new NotSupportedException($"Expression is not supported as condition for 'for' loop: {condition.GetText()}");
+                }
+
+                f.Condition = (Expression)this.Visit(condition.expression());
+            }
+
+            var incr = rest.expression();
+            if (incr != null)
+            {
+                f.Increment = (Expression)this.Visit(incr.expression());
+            }
+
+            f.Body = (Statement)this.Visit(context.statement());
+
+            return f;
+        }
+
+        public override AstNode VisitCase_label([NotNull] GLSL_ES300Parser.Case_labelContext context)
+        {
+            var expr = context.expression();
+            if (expr != null)
+            {
+                var r = new StatementCase();
+                r.Expression = (Expression)this.VisitExpression(expr);
+                return r;
+            }
+
+            return new StatementDefault();
+        }
+
+        public override AstNode VisitSwitch_statement([NotNull] GLSL_ES300Parser.Switch_statementContext context)
+        {
+            var result = new StatementSwitch();
+            result.Expression = (Expression)this.Visit(context.expression());
+            result.Statements = this.VisitStatementList(context.statementlist());
+            return result;
+        }
+
+        public override AstNode VisitSelection_statement([NotNull] GLSL_ES300Parser.Selection_statementContext context)
+        {
+            var result = new StatementIf();
+            result.Condition = (Expression)this.Visit(context.expression());
+            var statements = context.statement();
+            result.Then = (Statement)this.Visit(statements[0]);
+
+            if (statements.Length > 1)
+            {
+                result.Else = (Statement)this.Visit(statements[1]);
+            }
+
+            return result;
+        }
+
+        public override AstNode VisitDeclaration_statement([NotNull] GLSL_ES300Parser.Declaration_statementContext context)
+        {
+            var result = new StatementDeclaration();
+            result.Declaration = (Declaration)this.VisitDeclaration(context.declaration());
+            return result;
+        }
+
+        public override AstNode VisitExpression_statement([NotNull] GLSL_ES300Parser.Expression_statementContext context)
+        {
+            var result = new StatementExpression();
+
+            var expr = context.expression();
+            if (expr != null)
+            {
+                result.Expression = (Expression)this.Visit(expr);
+            }
+
+            return result;
+        }
+
+        public override AstNode VisitExpression([NotNull] GLSL_ES300Parser.ExpressionContext context)
+        {
+            var expr = context.expression();
+
+            if (expr != null)
+            {
+                var result = new ExpressionSequence();
+
+                while (expr != null)
+                {
+                    result.Expressions.Add((Expression)this.Visit(expr.assignment_expression()));
+                    expr = expr.expression();
+                }
+
+                return result;
+            }
+
+            return this.Visit(context.assignment_expression());
+        }
+
+        public override AstNode VisitAssignment_expression([NotNull] GLSL_ES300Parser.Assignment_expressionContext context)
+        {
+            var cond = context.conditional_expression();
+            if (cond != null)
+            {
+                return this.Visit(cond);
+            }
+
+            throw new NotImplementedException();
+        }
+
+        public override AstNode VisitConditional_expression([NotNull] GLSL_ES300Parser.Conditional_expressionContext context)
+        {
+            if (context.Question() != null)
+            {
+                var result = new ExpressionConditional();
+                result.Condition = (Expression)this.Visit(context.logical_or_expression());
+                result.Then = (Expression)this.Visit(context.expression());
+                result.Else = (Expression)this.Visit(context.assignment_expression());
+                return result;
+            }
+
+            return this.Visit(context.logical_or_expression());
+        }
+
+        public override AstNode VisitLogical_or_expression([NotNull] GLSL_ES300Parser.Logical_or_expressionContext context)
+        {
+            if (context.Or() != null)
+            {
+                var result = new ExpressionBinary();
+                result.Left = (Expression)this.Visit(context.logical_or_expression());
+                result.Right = (Expression)this.Visit(context.logical_xor_expression());
+                result.Operator = Operator.Or;
+                return result;
+            }
+
+            return this.Visit(context.logical_xor_expression());
+        }
+
+        public override AstNode VisitLogical_xor_expression([NotNull] GLSL_ES300Parser.Logical_xor_expressionContext context)
+        {
+            if (context.Xor() != null)
+            {
+                var result = new ExpressionBinary();
+                result.Left = (Expression)this.Visit(context.logical_xor_expression());
+                result.Right = (Expression)this.Visit(context.logical_and_expression());
+                result.Operator = Operator.Xor;
+                return result;
+            }
+
+            return this.Visit(context.logical_and_expression());
+        }
+
+        public override AstNode VisitLogical_and_expression([NotNull] GLSL_ES300Parser.Logical_and_expressionContext context)
+        {
+            if (context.And() != null)
+            {
+                var result = new ExpressionBinary();
+                result.Left = (Expression)this.Visit(context.logical_and_expression());
+                result.Right = (Expression)this.Visit(context.inclusive_or_expression());
+                result.Operator = Operator.And;
+                return result;
+            }
+
+            return this.Visit(context.inclusive_or_expression());
+        }
+
+        public override AstNode VisitInclusive_or_expression([NotNull] GLSL_ES300Parser.Inclusive_or_expressionContext context)
+        {
+            if (context.Pipe() != null)
+            {
+                var result = new ExpressionBinary();
+                result.Left = (Expression)this.Visit(context.inclusive_or_expression());
+                result.Right = (Expression)this.Visit(context.exclusive_or_expression());
+                result.Operator = Operator.Pipe;
+                return result;
+            }
+
+            return this.Visit(context.exclusive_or_expression());
+        }
+
+        public override AstNode VisitExclusive_or_expression([NotNull] GLSL_ES300Parser.Exclusive_or_expressionContext context)
+        {
+            if (context.Caret() != null)
+            {
+                var result = new ExpressionBinary();
+                result.Left = (Expression)this.Visit(context.exclusive_or_expression());
+                result.Right = (Expression)this.Visit(context.and_expression());
+                result.Operator = Operator.Caret;
+                return result;
+            }
+
+            return this.Visit(context.and_expression());
+        }
+
+        public override AstNode VisitAnd_expression([NotNull] GLSL_ES300Parser.And_expressionContext context)
+        {
+            if (context.Ampersand() != null)
+            {
+                var result = new ExpressionBinary();
+                result.Left = (Expression)this.Visit(context.and_expression());
+                result.Right = (Expression)this.Visit(context.equality_expression());
+                result.Operator = Operator.Ampersand;
+                return result;
+            }
+
+            return this.Visit(context.equality_expression());
+        }
+
+        public override AstNode VisitEquality_expression([NotNull] GLSL_ES300Parser.Equality_expressionContext context)
+        {
+            if (context.Equal() != null || context.NotEqual() != null)
+            {
+                var result = new ExpressionBinary();
+                result.Left = (Expression)this.Visit(context.equality_expression());
+                result.Right = (Expression)this.Visit(context.relational_expression());
+                result.Operator = context.Equal() != null ? Operator.Caret : Operator.NotEqual;
+                return result;
+            }
+
+            return this.Visit(context.relational_expression());
+        }
+
+        public override AstNode VisitRelational_expression([NotNull] GLSL_ES300Parser.Relational_expressionContext context)
+        {
+            if (context.Less() != null || context.Greater() != null || context.LessOrEqual() != null || context.GreaterOrEqual() != null)
+            {
+                var result = new ExpressionBinary();
+                result.Left = (Expression)this.Visit(context.relational_expression());
+                result.Right = (Expression)this.Visit(context.shift_expression());
+                if (context.Less() != null)
+                {
+                    result.Operator = Operator.Less;
+                }
+                
+                if (context.Greater() != null)
+                {
+                    result.Operator = Operator.Greater;
+                }
+
+                if (context.LessOrEqual() != null)
+                {
+                    result.Operator = Operator.LessOrEqual;
+                }
+
+                if (context.GreaterOrEqual() != null)
+                {
+                    result.Operator = Operator.GreaterOrEqual;
+                }
+
+                return result;
+            }
+
+            return this.Visit(context.shift_expression());
+        }
+
+        public override AstNode VisitShift_expression([NotNull] GLSL_ES300Parser.Shift_expressionContext context)
+        {
+            if (context.Left() != null || context.Right() != null)
+            {
+                var result = new ExpressionBinary();
+                result.Left = (Expression)this.Visit(context.shift_expression());
+                result.Right = (Expression)this.Visit(context.additive_expression());
+                result.Operator = context.Left() != null ? Operator.Left : Operator.Right;
+                return result;
+            }
+
+            return this.Visit(context.additive_expression());
+        }
+
+        public override AstNode VisitAdditive_expression([NotNull] GLSL_ES300Parser.Additive_expressionContext context)
+        {
+            if (context.Plus() != null || context.Minus() != null)
+            {
+                var result = new ExpressionBinary();
+                result.Left = (Expression)this.Visit(context.additive_expression());
+                result.Right = (Expression)this.Visit(context.multiplicative_expression());
+                result.Operator = context.Plus() != null ? Operator.Plus : Operator.Minus;
+                return result;
+            }
+
+            return this.Visit(context.multiplicative_expression());
+        }
+
+        public override AstNode VisitMultiplicative_expression([NotNull] GLSL_ES300Parser.Multiplicative_expressionContext context)
+        {
+            if (context.Mul() != null || context.Div() != null || context.Percent() != null)
+            {
+                var result = new ExpressionBinary();
+                result.Left = (Expression)this.Visit(context.multiplicative_expression());
+                result.Right = (Expression)this.Visit(context.unary_expression());
+                if (context.Mul() != null)
+                {
+                    result.Operator = Operator.Mul;
+                }
+
+                if (context.Div() != null)
+                {
+                    result.Operator = Operator.Div;
+                }
+
+                if (context.Percent() != null)
+                {
+                    result.Operator = Operator.Percent;
+                }
+                return result;
+            }
+
+            return this.Visit(context.unary_expression());
+        }
+
+        public override AstNode VisitUnary_expression([NotNull] GLSL_ES300Parser.Unary_expressionContext context)
+        {
+            throw new NotImplementedException();
         }
 
         private List<TOut> UnwrapList<TRecursive, TItem, TOut>(Func<TRecursive, TItem> itemGetter, Func<TItem, TOut> itemMapper, Func<TRecursive, TRecursive> nextGetter, TRecursive subject)

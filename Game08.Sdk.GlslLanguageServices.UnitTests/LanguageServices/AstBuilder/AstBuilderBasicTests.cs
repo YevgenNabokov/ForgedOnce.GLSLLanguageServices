@@ -19,6 +19,8 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.AstBuilder
 
         private readonly string FunctionProtoInput = "int DoSomething(const float a, int b);";
 
+        private readonly string PrecisionDeclarationInput = "precision highp float;";
+
         [Test]
         public void CanParseVariablesInRoot()
         {
@@ -134,6 +136,29 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.AstBuilder
 
             Assert.AreEqual("int", ((TypeNameSpecifier)funcDeclaration.Parameters[1].TypeSpecifier).Identifier.Name);
             Assert.AreEqual("b", funcDeclaration.Parameters[1].Name.Name);
+        }
+
+        [Test]
+        public void CanParsePrecisionDeclarationInRoot()
+        {
+            var parser = TestUtils.SetupParser(this.PrecisionDeclarationInput);
+            var context = parser.external_declaration_list();
+
+            var subject = new AstBuilderVisitor();
+
+            var result = subject.Visit(context);
+
+            Assert.IsTrue(result is Root);
+            var root = result as Root;
+
+            Assert.AreEqual(1, root.Declarations.Count);
+            var precDeclaration = root.Declarations[0] as PrecisionDeclaration;
+
+            var typeSpec = precDeclaration.Type as TypeNameSpecifier;
+            Assert.IsNotNull(typeSpec);
+            Assert.AreEqual("float", typeSpec.Identifier.Name);
+
+            Assert.AreEqual(PrecisionQualifier.HighP, precDeclaration.PrecisionQualifier);
         }
     }
 }

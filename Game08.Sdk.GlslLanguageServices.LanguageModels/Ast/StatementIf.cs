@@ -4,8 +4,12 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
-    public class StatementCompound : Statement
+    public class StatementIf : Statement
     {
-        public List<Statement> Statements = new List<Statement>();
+        public Expression Condition;
+
+        public Statement Then;
+
+        public Statement Else;
     }
 }

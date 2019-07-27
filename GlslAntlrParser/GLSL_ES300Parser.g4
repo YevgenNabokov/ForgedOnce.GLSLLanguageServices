@@ -29,18 +29,18 @@ declaration
 
 declarator
    : fully_specified_type Identifier?
-   | fully_specified_type Identifier LeftBracket constant_expression RightBracket (Equal initializer)?
-   | fully_specified_type Identifier LeftBracket RightBracket Equal initializer
-   | fully_specified_type Identifier Equal initializer
+   | fully_specified_type Identifier LeftBracket constant_expression RightBracket (Assign initializer)?
+   | fully_specified_type Identifier LeftBracket RightBracket Assign initializer
+   | fully_specified_type Identifier Assign initializer
    | Invariant Identifier
    ;
 
 declaratorlist
    : declarator
    | declaratorlist Comma Identifier
-   | declaratorlist Comma Identifier LeftBracket constant_expression RightBracket (Equal initializer)?
-   | declaratorlist Comma Identifier LeftBracket RightBracket Equal initializer
-   | declaratorlist Comma Identifier Equal initializer
+   | declaratorlist Comma Identifier LeftBracket constant_expression RightBracket (Assign initializer)?
+   | declaratorlist Comma Identifier LeftBracket RightBracket Assign initializer
+   | declaratorlist Comma Identifier Assign initializer
    ;
 
 initializer
@@ -251,7 +251,7 @@ jump_statement
 
 condition
    : expression
-   | fully_specified_type Identifier Equal initializer
+   | fully_specified_type Identifier Assign initializer
    ;
 
 iteration_statement
@@ -335,7 +335,7 @@ interpolation_qualifier
    ;
 
 layout_qualifier_id
-   : Identifier (Equal IntegerLiteral)?
+   : Identifier (Assign IntegerLiteral)?
    ;
 
 layout_qualifier_idlist
@@ -368,7 +368,7 @@ unary_operator
    ;
 
 assignment_operator
-   : Equal
+   : Assign
    | MulAssign
    | DivAssign
    | ModAssign
