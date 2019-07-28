@@ -388,6 +388,7 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
                 }
             }
 
+            result.Reverse();
             return result;
         }
 
@@ -517,7 +518,7 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
             var incr = rest.expression();
             if (incr != null)
             {
-                f.Increment = (Expression)this.Visit(incr.expression());
+                f.Increment = (Expression)this.Visit(incr);
             }
 
             f.Body = (Statement)this.Visit(context.statement());
@@ -609,7 +610,67 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
                 return this.Visit(cond);
             }
 
-            throw new NotImplementedException();
+            var result = new ExpressionBinary();
+            result.Left = (Expression)this.Visit(context.unary_expression());
+            result.Right = (Expression)this.Visit(context.assignment_expression());
+
+            var op = context.assignment_operator();
+            if (op.Assign() != null)
+            {
+                result.Operator = Operator.Assign;
+            }
+
+            if (op.MulAssign() != null)
+            {
+                result.Operator = Operator.MulAssign;
+            }
+
+            if (op.DivAssign() != null)
+            {
+                result.Operator = Operator.DivAssign;
+            }
+
+            if (op.ModAssign() != null)
+            {
+                result.Operator = Operator.ModAssign;
+            }
+
+            if (op.AddAssign() != null)
+            {
+                result.Operator = Operator.AddAssign;
+            }
+
+            if (op.SubAssign() != null)
+            {
+                result.Operator = Operator.SubAssign;
+            }
+
+            if (op.LeftAssign() != null)
+            {
+                result.Operator = Operator.LeftAssign;
+            }
+
+            if (op.RightAssign() != null)
+            {
+                result.Operator = Operator.RightAssign;
+            }
+
+            if (op.AndAssign() != null)
+            {
+                result.Operator = Operator.AndAssign;
+            }
+
+            if (op.XorAssign() != null)
+            {
+                result.Operator = Operator.XorAssign;
+            }
+
+            if (op.OrAssign() != null)
+            {
+                result.Operator = Operator.OrAssign;
+            }
+
+            return result;
         }
 
         public override AstNode VisitConditional_expression([NotNull] GLSL_ES300Parser.Conditional_expressionContext context)
@@ -814,7 +875,207 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
 
         public override AstNode VisitUnary_expression([NotNull] GLSL_ES300Parser.Unary_expressionContext context)
         {
-            throw new NotImplementedException();
+            var postfix = context.postfix_expression();
+            if (postfix != null)
+            {
+                return this.VisitPostfix_expression(postfix);
+            }
+
+            var result = new ExpressionUnary();
+            if (context.Increment() != null)
+            {
+                result.Operator = Operator.Increment;
+            }
+
+            if (context.Decrement() != null)
+            {
+                result.Operator = Operator.Decrement;
+            }
+
+            var unaryOp = context.unary_operator();
+            if (unaryOp.Plus() != null)
+            {
+                result.Operator = Operator.Plus;
+            }
+
+            if (unaryOp.Minus() != null)
+            {
+                result.Operator = Operator.Minus;
+            }
+
+            if (unaryOp.Bang() != null)
+            {
+                result.Operator = Operator.Bang;
+            }
+
+            if (unaryOp.Tilde() != null)
+            {
+                result.Operator = Operator.Tilde;
+            }
+
+            result.Right = (Expression)this.Visit(context.unary_expression());
+
+            return result;
+        }
+
+        public override AstNode VisitPostfix_expression([NotNull] GLSL_ES300Parser.Postfix_expressionContext context)
+        {
+            if (context.Increment() != null || context.Decrement() != null)
+            {
+                var rUnary = new ExpressionUnaryPostfix();
+                if (context.Increment() != null)
+                {
+                    rUnary.Operator = Operator.Increment;
+                }
+                else
+                {
+                    rUnary.Operator = Operator.Decrement;
+                }
+
+                rUnary.Left = (Expression)this.Visit(context.postfix_expression());
+                return rUnary;
+            }
+
+            var field = context.field_selection();
+            if (field != null)
+            {
+                return new ExpressionFieldSelection()
+                {
+                    Name = new Identifier()
+                    {
+                        Name = field.Identifier().Symbol.Text
+                    },
+                    Left = (Expression)this.Visit(context.postfix_expression())
+                };
+            }
+
+            var func = context.function_call_generic();
+            if (func != null)
+            {
+                var rFunc = this.VisitFunctionCall(func);
+                if (context.postfix_expression() != null)
+                {
+                    rFunc.Left = (Expression)this.Visit(context.postfix_expression());
+                }
+
+                return rFunc;
+            }
+
+            var intExpr = context.integer_expression();
+            if (intExpr != null)
+            {
+                return new ExpressionIndexAccess()
+                {
+                    Left = (Expression)this.Visit(context.postfix_expression()),
+                    Index = (Expression)this.Visit(context.integer_expression())
+                };
+            }
+
+            return this.Visit(context.primary_expression());
+        }
+
+        public override AstNode VisitPrimary_expression([NotNull] GLSL_ES300Parser.Primary_expressionContext context)
+        {
+            var varId = context.variable_identifier();
+            if (varId != null)
+            {
+                return new ExpressionVariableIdentifier()
+                {
+                    Identifier = new Identifier()
+                    {
+                        Name = varId.Identifier().Symbol.Text
+                    }
+                };
+            }
+
+            var intLiteral = context.IntegerLiteral();
+            if (intLiteral != null)
+            {
+                return new IntegerLiteral() { LiteralValue = intLiteral.GetText() };
+            }
+
+            var floatLiteral = context.FloatingLiteral();
+            if (floatLiteral != null)
+            {
+                return new FloatLiteral() { LiteralValue = floatLiteral.GetText() };
+            }
+
+            var boolLiteral = context.BoolLiteral();
+            if (boolLiteral != null)
+            {
+                return new BooleanLiteral() { LiteralValue = boolLiteral.GetText() };
+            }
+
+            var result = new ExpressionParenGroup();
+            result.Content = (Expression)this.Visit(context.expression());
+            return result;
+        }
+
+        private ExpressionFunctionCall VisitFunctionCall(GLSL_ES300Parser.Function_call_genericContext context)
+        {
+            var result = new ExpressionFunctionCall();
+
+            GLSL_ES300Parser.Function_call_headerContext header = null;
+            var headerNoParams = context.function_call_header_no_parameters();
+            if (headerNoParams != null)
+            {
+                header = headerNoParams.function_call_header();
+            }
+
+            var headerWithParams = context.function_call_header_with_parameters();
+            if (headerWithParams != null)
+            {
+                while (headerWithParams != null)
+                {
+                    result.Parameters.Add((Expression)this.Visit(headerWithParams.assignment_expression()));
+                    header = headerWithParams.function_call_header();
+                    headerWithParams = headerWithParams.function_call_header_with_parameters();
+                }
+            }
+
+            var identifier = header.function_identifier();
+            var id = identifier.Identifier();
+            if (id != null)
+            {
+                result.Identifier = new Identifier()
+                {
+                    Name = id.Symbol.Text
+                };
+            }
+
+            var field = identifier.field_selection();
+            if (field != null)
+            {
+                result.Identifier = new Identifier()
+                {
+                    Name = field.Identifier().Symbol.Text
+                };
+            }
+
+            var type = identifier.type_specifier();
+            if (type != null)
+            {
+                if (type.precision_qualifier() != null)
+                {
+                    throw new NotSupportedException("Precision qualifier is not supported for type as function identifier.");
+                }
+
+                var typeSpec = type.type_specifier_noprec();
+                if (typeSpec.LeftBracket() != null)
+                {
+                    throw new NotSupportedException("Array specifier is not supported for type as function identifier.");
+                }
+
+                var typeSpecNonArr = typeSpec.type_specifier_nonarray();
+                if (typeSpecNonArr.struct_specifier() != null)
+                {
+                    throw new NotSupportedException("Struct specifier is not supported for type as function identifier.");
+                }
+
+                result.Identifier = new Identifier() { Name = typeSpec.GetText() };
+            }
+
+            return result;
         }
 
         private List<TOut> UnwrapList<TRecursive, TItem, TOut>(Func<TRecursive, TItem> itemGetter, Func<TItem, TOut> itemMapper, Func<TRecursive, TRecursive> nextGetter, TRecursive subject)

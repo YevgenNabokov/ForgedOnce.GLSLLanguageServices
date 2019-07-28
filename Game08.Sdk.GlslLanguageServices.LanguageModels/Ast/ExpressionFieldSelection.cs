@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
-    public class IntegerLiteral : Expression
+    public class ExpressionFieldSelection : Expression
     {
-        public string LiteralValue;
+        public Identifier Name;
+
+        public Expression Left;
     }
 }

@@ -25,5 +25,20 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
         Mul,
         Div,
         Percent,
+        Increment,
+        Decrement,
+        Bang,
+        Tilde,
+        Assign,
+        MulAssign,
+        DivAssign,
+        ModAssign,
+        AddAssign,
+        SubAssign,
+        LeftAssign,
+        RightAssign,
+        AndAssign,
+        XorAssign,
+        OrAssign
     }
 }

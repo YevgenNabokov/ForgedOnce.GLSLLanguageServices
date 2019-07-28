@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
-    public class IntegerLiteral : Expression
+    public class FloatLiteral : Expression
     {
         public string LiteralValue;
     }
