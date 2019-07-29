@@ -12,6 +12,8 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.AstBuilder
     public class AstBuilderAcceptanceTests
     {
         private readonly string ShaderInput = @"
+#version 300 es
+
 precision highp int;
 
 precision highp float;

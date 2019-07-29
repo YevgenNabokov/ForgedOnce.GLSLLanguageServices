@@ -22,6 +22,7 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.Lexer
             "Id12_23",
             "_Id",
             "Id12_a23",
+            "es"
         };
 
         private readonly string[] invalidIdentifiers = new[]

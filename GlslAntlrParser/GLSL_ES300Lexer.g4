@@ -354,6 +354,10 @@ Usampler2DArray_type
    : 'usampler2DArray'
    ;
 
+VersionMarker300ES
+   : '#version 300 es'
+   ;
+
 fragment IdentifierNonDigit
    : NONDIGIT;
 

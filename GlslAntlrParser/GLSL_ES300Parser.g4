@@ -7,7 +7,11 @@ translation_unit
    ;
 
 external_declaration_list
-   : external_declaration+   
+   : shader_version_marker? external_declaration+   
+   ;
+
+shader_version_marker
+   : VersionMarker300ES
    ;
 
 external_declaration

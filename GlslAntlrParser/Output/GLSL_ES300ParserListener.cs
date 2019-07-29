@@ -51,6 +51,16 @@ public interface IGLSL_ES300ParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitExternal_declaration_list([NotNull] GLSL_ES300Parser.External_declaration_listContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.shader_version_marker"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterShader_version_marker([NotNull] GLSL_ES300Parser.Shader_version_markerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GLSL_ES300Parser.shader_version_marker"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitShader_version_marker([NotNull] GLSL_ES300Parser.Shader_version_markerContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="GLSL_ES300Parser.external_declaration"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

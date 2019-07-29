@@ -13,7 +13,7 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
             var declarations = context.external_declaration_list();
             if (declarations != null)
             {
-                return this.Visit(declarations);
+                return (Root)this.Visit(declarations);
             }
 
             return new Root();
@@ -22,6 +22,15 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
         public override AstNode VisitExternal_declaration_list([NotNull] GLSL_ES300Parser.External_declaration_listContext context)
         {
             var result = new Root();
+
+            var version = context.shader_version_marker();
+            if (version != null)
+            {                
+                if (version.VersionMarker300ES() != null)
+                {
+                    result.Version = ShaderVersion.GlslEs300;
+                }
+            }
 
             foreach (var exdec in context.external_declaration())
             {
