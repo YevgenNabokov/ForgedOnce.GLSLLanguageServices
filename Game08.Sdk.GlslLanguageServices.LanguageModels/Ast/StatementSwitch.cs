@@ -8,6 +8,6 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
     {
         public Expression Expression;
 
-        public List<Statement> Statements;
+        public List<Statement> Statements = new List<Statement>();
     }
 }

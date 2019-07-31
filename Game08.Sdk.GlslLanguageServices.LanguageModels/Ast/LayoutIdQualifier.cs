@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
-    public class LayoutIdQualifier
+    public class LayoutIdQualifier : AstNode
     {
         public Identifier Id;
 
