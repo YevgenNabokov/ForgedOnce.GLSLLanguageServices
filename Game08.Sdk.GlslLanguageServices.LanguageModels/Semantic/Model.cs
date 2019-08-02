@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Semantic
 {
-    public class ModelRoot
+    public class Model
     {
-        public Scope Scope;
+        public Scope RootScope;
     }
 }
