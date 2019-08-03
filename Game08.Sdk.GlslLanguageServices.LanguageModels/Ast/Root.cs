@@ -8,6 +8,11 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
     {
         public ShaderVersion Version;
 
-        public List<Declaration> Declarations = new List<Declaration>();
+        public Root()
+        {
+            this.Declarations = new AstNodeCollection<Declaration>(this);
+        }
+
+        public AstNodeCollection<Declaration> Declarations { get; private set; }
     }
 }

@@ -11,6 +11,6 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Semantic
 
         public string Name;
 
-        public Symbol Symbol;
+        public Symbol ResolvedSymbol;
     }
 }

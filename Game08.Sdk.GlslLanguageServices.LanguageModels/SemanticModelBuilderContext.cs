@@ -41,12 +41,9 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels
             }
         }
 
-        public void AddSymbol(string name, AstNode node)
+        public void AddSymbol(string name, AstNode node, bool isType = false)
         {
-            if (this.CurrentScope == null)
-            {
-                throw new InvalidOperationException("No current scope defined.");
-            }
+            this.EnsureCurrentScopeDefined();
 
             if (this.CurrentScope.Symbols.ContainsKey(name))
             {
@@ -58,10 +55,37 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels
                 {
                     Name = name,
                     Parent = this.CurrentScope,
-                    AstNodes = new List<AstNode>() { node }
+                    AstNodes = new List<AstNode>() { node },
+                    IsType = isType
                 };
 
                 this.CurrentScope.Symbols.Add(name, result);
+            }
+        }
+
+        public void AddSymbolReference(string name, AstNode node)
+        {
+            this.EnsureCurrentScopeDefined();
+
+            var newRef = new SymbolReference()
+            {
+                Name = name,
+                Node = node
+            };
+
+            if (!this.CurrentScope.References.ContainsKey(name))
+            {
+                this.CurrentScope.References.Add(name, new List<SymbolReference>());
+            }
+
+            this.CurrentScope.References[name].Add(newRef);
+        }
+
+        private void EnsureCurrentScopeDefined()
+        {
+            if (this.CurrentScope == null)
+            {
+                throw new InvalidOperationException("No current scope defined.");
             }
         }
     }

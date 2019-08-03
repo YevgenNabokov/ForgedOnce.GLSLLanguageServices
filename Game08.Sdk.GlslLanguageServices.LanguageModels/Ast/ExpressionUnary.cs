@@ -8,6 +8,18 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
     {
         public Operator Operator;
 
-        public Expression Right;
+        private Expression right;
+
+        public Expression Right
+        {
+
+            get => right;
+
+            set
+            {
+                this.SetParent(this.right, value);
+                this.right = value;
+            }
+        }
     }
 }

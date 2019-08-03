@@ -6,8 +6,25 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public class StatementSwitch : Statement
     {
-        public Expression Expression;
+        private Expression expression;
 
-        public List<Statement> Statements = new List<Statement>();
+        public StatementSwitch()
+        {
+            this.Statements = new AstNodeCollection<Statement>(this);
+        }
+
+        public Expression Expression
+        {
+
+            get => expression;
+
+            set
+            {
+                this.SetParent(this.expression, value);
+                this.expression = value;
+            }
+        }
+
+        public AstNodeCollection<Statement> Statements { get; private set; }
     }
 }

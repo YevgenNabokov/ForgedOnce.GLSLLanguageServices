@@ -10,10 +10,46 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
         public ParameterQualifier? ParameterQualifier;
 
-        public TypeSpecifier TypeSpecifier;
+        private TypeSpecifier typeSpecifier;
 
-        public ArraySpecifier ArraySpecifier;
+        private ArraySpecifier arraySpecifier;
 
-        public Identifier Name;
+        private Identifier name;
+
+        public TypeSpecifier TypeSpecifier
+        {
+
+            get => typeSpecifier;
+
+            set
+            {
+                this.SetParent(this.typeSpecifier, value);
+                this.typeSpecifier = value;
+            }
+        }
+
+        public ArraySpecifier ArraySpecifier
+        {
+
+            get => arraySpecifier;
+
+            set
+            {
+                this.SetParent(this.arraySpecifier, value);
+                this.arraySpecifier = value;
+            }
+        }
+
+        public Identifier Name
+        {
+
+            get => name;
+
+            set
+            {
+                this.SetParent(this.name, value);
+                this.name = value;
+            }
+        }
     }
 }

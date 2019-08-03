@@ -12,5 +12,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Semantic
         public string Name;
 
         public List<AstNode> AstNodes = new List<AstNode>();
+
+        public bool IsType;
     }
 }

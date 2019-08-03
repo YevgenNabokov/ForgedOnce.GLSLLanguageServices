@@ -222,7 +222,7 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
                     {
                         var idQualifier = new LayoutIdQualifier();
                         var layoutId = layoutIdList.layout_qualifier_id();
-                        idQualifier.Id = new Identifier()
+                        idQualifier.Identifier = new Identifier()
                         {
                             Name = layoutId.Identifier().Symbol.Text
                         };
@@ -377,7 +377,7 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
         {
             var result = new StatementCompound();
 
-            result.Statements = this.VisitStatementList(context.statementlist());
+            result.Statements.AddRange(this.VisitStatementList(context.statementlist()));
 
             return result;
         }
@@ -552,7 +552,7 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
         {
             var result = new StatementSwitch();
             result.Expression = (Expression)this.Visit(context.expression());
-            result.Statements = this.VisitStatementList(context.statementlist());
+            result.Statements.AddRange(this.VisitStatementList(context.statementlist()));
             return result;
         }
 

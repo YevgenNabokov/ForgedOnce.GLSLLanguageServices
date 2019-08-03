@@ -14,6 +14,11 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
         public PrecisionQualifier? Precision;
 
-        public List<LayoutIdQualifier> Layout = new List<LayoutIdQualifier>();
+        public TypeQualifier()
+        {
+            this.Layout = new AstNodeCollection<LayoutIdQualifier>(this);
+        }
+
+        public AstNodeCollection<LayoutIdQualifier> Layout { get; private set; }
     }
 }

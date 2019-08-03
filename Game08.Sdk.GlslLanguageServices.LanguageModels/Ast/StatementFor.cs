@@ -6,12 +6,60 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public class StatementFor : Statement
     {
-        public Statement Init;
+        private Statement init;
 
-        public Expression Condition;
+        private Expression condition;
 
-        public Expression Increment;
+        private Expression increment;
 
-        public Statement Body;
+        private Statement body;
+
+        public Statement Init
+        {
+
+            get => init;
+
+            set
+            {
+                this.SetParent(this.init, value);
+                this.init = value;
+            }
+        }
+
+        public Expression Condition
+        {
+
+            get => condition;
+
+            set
+            {
+                this.SetParent(this.condition, value);
+                this.condition = value;
+            }
+        }
+
+        public Expression Increment
+        {
+
+            get => increment;
+
+            set
+            {
+                this.SetParent(this.increment, value);
+                this.increment = value;
+            }
+        }
+
+        public Statement Body
+        {
+
+            get => body;
+
+            set
+            {
+                this.SetParent(this.body, value);
+                this.body = value;
+            }
+        }
     }
 }

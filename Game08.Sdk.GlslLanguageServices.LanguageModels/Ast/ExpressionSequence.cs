@@ -6,6 +6,11 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public class ExpressionSequence : Expression
     {
-        public List<Expression> Expressions = new List<Expression>();
+        public ExpressionSequence()
+        {
+            this.Expressions = new AstNodeCollection<Expression>(this);
+        }
+
+        public AstNodeCollection<Expression> Expressions { get; private set; }
     }
 }

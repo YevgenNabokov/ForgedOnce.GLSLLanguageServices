@@ -6,10 +6,33 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public class ExpressionBinary : Expression
     {
-        public Expression Left;
+        private Expression left;
 
         public Operator Operator;
 
-        public Expression Right;
+        private Expression right;
+
+        public Expression Left
+        {
+            get => left;
+
+            set
+            {                
+                this.SetParent(this.left, value);
+                this.left = value;
+            }
+        }
+
+        public Expression Right
+        {
+
+            get => right;
+
+            set
+            {
+                this.SetParent(this.right, value);
+                this.right = value;
+            }
+        }
     }
 }

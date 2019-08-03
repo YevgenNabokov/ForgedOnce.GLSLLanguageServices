@@ -464,7 +464,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels
 
         public virtual void VisitLayoutIdQualifier(LayoutIdQualifier node, TContext context)
         {
-            this.Visit(node.Id, context);
+            this.Visit(node.Identifier, context);
             this.Visit(node.Order, context);
         }
 

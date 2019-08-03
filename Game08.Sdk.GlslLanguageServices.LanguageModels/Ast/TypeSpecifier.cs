@@ -6,6 +6,23 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public abstract class TypeSpecifier : AstNode
     {
-        public TypeQualifier Qualifier = new TypeQualifier();
+        private TypeQualifier qualifier;
+
+        public TypeSpecifier()
+        {
+            this.Qualifier = new TypeQualifier();
+        }
+
+        public TypeQualifier Qualifier
+        {
+
+            get => qualifier;
+
+            set
+            {
+                this.SetParent(this.qualifier, value);
+                this.qualifier = value;
+            }
+        }
     }
 }
