@@ -13,6 +13,6 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Semantic
 
         public List<AstNode> AstNodes = new List<AstNode>();
 
-        public bool IsType;
+        public SymbolKind Kind;        
     }
 }

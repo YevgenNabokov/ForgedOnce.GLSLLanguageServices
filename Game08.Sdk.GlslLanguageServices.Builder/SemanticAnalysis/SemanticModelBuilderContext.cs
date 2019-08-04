@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game08.Sdk.GlslLanguageServices.LanguageModels
+namespace Game08.Sdk.GlslLanguageServices.Builder.SemanticAnalysis
 {
     public class SemanticModelBuilderContext
     {
@@ -41,13 +41,24 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels
             }
         }
 
-        public void AddSymbol(string name, AstNode node, bool isType = false)
+        public void AddSymbol(string name, AstNode node, SymbolKind kind)
         {
             this.EnsureCurrentScopeDefined();
 
+            if (this.Result.NodeSymbols.ContainsKey(node))
+            {
+                throw new InvalidOperationException("AstNode cannot have more than one symbol.");
+            }
+
             if (this.CurrentScope.Symbols.ContainsKey(name))
             {
+                if (this.CurrentScope.Symbols[name].Kind != kind)
+                {
+                    throw new InvalidOperationException($"Symbol with different kind ({this.CurrentScope.Symbols[name].Kind}) already present in the scope.");
+                }
+
                 this.CurrentScope.Symbols[name].AstNodes.Add(node);
+                this.Result.NodeSymbols.Add(node, this.CurrentScope.Symbols[name]);
             }
             else
             {
@@ -56,29 +67,31 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels
                     Name = name,
                     Parent = this.CurrentScope,
                     AstNodes = new List<AstNode>() { node },
-                    IsType = isType
+                    Kind = kind
                 };
 
                 this.CurrentScope.Symbols.Add(name, result);
+                this.Result.NodeSymbols.Add(node, result);
             }
         }
 
-        public void AddSymbolReference(string name, AstNode node)
+        public void AddSymbolReference(Identifier identifier, AstNode ownerNode)
         {
             this.EnsureCurrentScopeDefined();
 
             var newRef = new SymbolReference()
             {
-                Name = name,
-                Node = node
+                Name = identifier.Name,
+                IdentifierNode = identifier,
+                OwnerNode = ownerNode
             };
 
-            if (!this.CurrentScope.References.ContainsKey(name))
+            if (!this.CurrentScope.References.ContainsKey(identifier.Name))
             {
-                this.CurrentScope.References.Add(name, new List<SymbolReference>());
+                this.CurrentScope.References.Add(identifier.Name, new List<SymbolReference>());
             }
 
-            this.CurrentScope.References[name].Add(newRef);
+            this.CurrentScope.References[identifier.Name].Add(newRef);
         }
 
         private void EnsureCurrentScopeDefined()

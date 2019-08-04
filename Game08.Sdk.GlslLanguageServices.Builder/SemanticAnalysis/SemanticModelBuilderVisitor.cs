@@ -1,12 +1,13 @@
-﻿using Game08.Sdk.GlslLanguageServices.LanguageModels.Ast;
+﻿using Game08.Sdk.GlslLanguageServices.LanguageModels;
+using Game08.Sdk.GlslLanguageServices.LanguageModels.Ast;
 using Game08.Sdk.GlslLanguageServices.LanguageModels.Semantic;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game08.Sdk.GlslLanguageServices.LanguageModels
+namespace Game08.Sdk.GlslLanguageServices.Builder.SemanticAnalysis
 {
-    public class SemanticModelBuilder : AstVisitor<SemanticModelBuilderContext>
+    public class SemanticModelBuilderVisitor : AstVisitor<SemanticModelBuilderContext>
     {
         public override void VisitRoot(Root node, SemanticModelBuilderContext context)
         {
@@ -19,7 +20,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels
         {
             this.Visit(node.Qualifier, context);
             this.Visit(node.Identifier, context);
-            this.SafeAddSymbol(node.Identifier, node.Identifier, context, true);
+            this.SafeAddSymbol(node.Identifier, node.Identifier, context, SymbolKind.Type);
 
             context.EnterNewScope(node, true);
             foreach (var n in node.Members)
@@ -36,7 +37,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels
             this.Visit(node.ArraySpecifier, context);
             foreach (var n in node.Identifiers)
             {
-                this.SafeAddSymbol(n, n, context);
+                this.SafeAddSymbol(n, n, context, SymbolKind.TypeMember | SymbolKind.Variable);
                 this.Visit(n, context);
             }
         }
@@ -97,7 +98,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels
         public override void VisitFunctionDeclaration(FunctionDeclaration node, SemanticModelBuilderContext context)
         {
             this.Visit(node.Name, context);
-            this.SafeAddSymbol(node.Name, node.Name, context);
+            this.SafeAddSymbol(node.Name, node.Name, context, SymbolKind.Function);
             context.EnterNewScope(node);
             this.Visit(node.TypeSpecifier, context);
             foreach (var p in node.Parameters)
@@ -113,58 +114,58 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels
         public override void VisitFunctionParameter(FunctionParameter node, SemanticModelBuilderContext context)
         {
             base.VisitFunctionParameter(node, context);
-            this.SafeAddSymbol(node.Name, node.Name, context);
+            this.SafeAddSymbol(node.Name, node.Name, context, SymbolKind.Variable | SymbolKind.FunctionParameter);
         }
 
         public override void VisitVariableDeclaration(VariableDeclaration node, SemanticModelBuilderContext context)
         {
             base.VisitVariableDeclaration(node, context);
-            this.SafeAddSymbol(node.Name, node.Name, context);
+            this.SafeAddSymbol(node.Name, node.Name, context, SymbolKind.Variable);
         }
 
         public override void VisitExpressionFieldSelection(ExpressionFieldSelection node, SemanticModelBuilderContext context)
         {
-            this.SafeAddSymbolReference(node.Name, node.Name, context);
+            this.SafeAddSymbolReference(node.Name, node, context);
             base.VisitExpressionFieldSelection(node, context);
         }
 
         public override void VisitExpressionFunctionCall(ExpressionFunctionCall node, SemanticModelBuilderContext context)
         {
-            this.SafeAddSymbolReference(node.Identifier, node.Identifier, context);
+            this.SafeAddSymbolReference(node.Identifier, node, context);
             base.VisitExpressionFunctionCall(node, context);
         }
 
         public override void VisitExpressionVariableIdentifier(ExpressionVariableIdentifier node, SemanticModelBuilderContext context)
         {
-            this.SafeAddSymbolReference(node.Identifier, node.Identifier, context);
+            this.SafeAddSymbolReference(node.Identifier, node, context);
             base.VisitExpressionVariableIdentifier(node, context);
         }
 
         public override void VisitLayoutIdQualifier(LayoutIdQualifier node, SemanticModelBuilderContext context)
         {
-            this.SafeAddSymbolReference(node.Identifier, node.Identifier, context);
+            this.SafeAddSymbolReference(node.Identifier, node, context);
             base.VisitLayoutIdQualifier(node, context);
         }
 
         public override void VisitTypeNameSpecifier(TypeNameSpecifier node, SemanticModelBuilderContext context)
         {
-            this.SafeAddSymbolReference(node.Identifier, node.Identifier, context);
+            this.SafeAddSymbolReference(node.Identifier, node, context);
             base.VisitTypeNameSpecifier(node, context);
         }
 
-        private void SafeAddSymbol(Identifier id, AstNode node, SemanticModelBuilderContext context, bool isType = false)
+        private void SafeAddSymbol(Identifier id, AstNode node, SemanticModelBuilderContext context, SymbolKind kind)
         {
             if (id != null)
             {
-                context.AddSymbol(id.Name, node, isType);
+                context.AddSymbol(id.Name, node, kind);
             }
         }
 
-        private void SafeAddSymbolReference(Identifier id, AstNode node, SemanticModelBuilderContext context)
+        private void SafeAddSymbolReference(Identifier id, AstNode ownerNode, SemanticModelBuilderContext context)
         {
             if (id != null)
             {
-                context.AddSymbolReference(id.Name, node);
+                context.AddSymbolReference(id, ownerNode);
             }
         }
     }

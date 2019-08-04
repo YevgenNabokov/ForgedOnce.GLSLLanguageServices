@@ -7,7 +7,9 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Semantic
 {
     public class SymbolReference
     {
-        public AstNode Node;
+        public AstNode IdentifierNode;
+
+        public AstNode OwnerNode;
 
         public string Name;
 
