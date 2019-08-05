@@ -1,13 +1,15 @@
-﻿using Game08.Sdk.GlslLanguageServices.LanguageModels.Semantic;
+﻿using Game08.Sdk.GlslLanguageServices.Builder.Interface;
+using Game08.Sdk.GlslLanguageServices.LanguageModels.Ast;
+using Game08.Sdk.GlslLanguageServices.LanguageModels.Semantic;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.Builder.SemanticAnalysis
 {
-    public class GlobalScopeFactory
+    public class GlobalScopeFactory : IGlobalScopeFactory
     {
-        public static Scope Construct()
+        public Scope Construct(ShaderVersion shaderVersion)
         {
             var result = new Scope();
 

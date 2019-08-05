@@ -6,6 +6,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Game08.Sdk.GlslLanguageServices.LanguageModels\Game08.Sdk.GlslLanguageServices.LanguageModels.csproj" />
+    <ProjectReference Include="..\Game08.Sdk.GlslLanguageServices.Parser\Game08.Sdk.GlslLanguageServices.Parser.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="AstAnalysis\" />
   </ItemGroup>
 
 </Project>
