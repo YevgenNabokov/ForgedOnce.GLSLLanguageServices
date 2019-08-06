@@ -12,5 +12,20 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
         }
 
         public AstNodeCollection<Expression> Expressions { get; private set; }
+
+        public override int GetChildIndex(AstNode child)
+        {
+            if (child == null)
+            {
+                return -1;
+            }
+
+            if (child is Expression && this.Expressions.Contains((Expression)child))
+            {
+                return this.Expressions.IndexOf((Expression)child);
+            }
+
+            return -1;
+        }
     }
 }

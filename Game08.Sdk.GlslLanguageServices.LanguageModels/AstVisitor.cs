@@ -7,7 +7,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels
 {
     public class AstVisitor<TContext>
     {
-        public void Visit(AstNode node, TContext context)
+        public virtual void Visit(AstNode node, TContext context)
         {
             if (node == null)
             {

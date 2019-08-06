@@ -18,5 +18,15 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
                 this.arraySizeExpression = value;
             }
         }
+
+        public override int GetChildIndex(AstNode child)
+        {
+            if (child == null || child != this.arraySizeExpression)
+            {
+                return -1;
+            }
+
+            return 0;
+        }
     }
 }

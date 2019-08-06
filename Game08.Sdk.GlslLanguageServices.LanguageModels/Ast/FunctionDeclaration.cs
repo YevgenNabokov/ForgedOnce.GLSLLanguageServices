@@ -54,5 +54,35 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
         }
 
         public AstNodeCollection<FunctionParameter> Parameters { get; private set; }
+
+        public override int GetChildIndex(AstNode child)
+        {
+            if (child == null)
+            {
+                return -1;
+            }
+
+            if (child == this.typeSpecifier)
+            {
+                return 0;
+            }
+
+            if (child == this.name)
+            {
+                return 1;
+            }
+
+            if (child is FunctionParameter && this.Parameters.Contains((FunctionParameter)child))
+            {
+                return 2 + this.Parameters.IndexOf((FunctionParameter)child);
+            }
+
+            if (child == this.statement)
+            {
+                return 1 + this.Parameters.Count + 1;
+            }
+
+            return -1;
+        }
     }
 }

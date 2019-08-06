@@ -61,5 +61,35 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
                 this.body = value;
             }
         }
+
+        public override int GetChildIndex(AstNode child)
+        {
+            if (child == null)
+            {
+                return -1;
+            }
+
+            if (child == this.init)
+            {
+                return 0;
+            }
+
+            if (child == this.condition)
+            {
+                return 1;
+            }
+
+            if (child == this.increment)
+            {
+                return 2;
+            }
+
+            if (child == this.body)
+            {
+                return 3;
+            }
+
+            return -1;
+        }
     }
 }

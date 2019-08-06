@@ -26,5 +26,25 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
         }
 
         public AstNodeCollection<VariableDeclaration> Declarations { get; private set; }
+
+        public override int GetChildIndex(AstNode child)
+        {
+            if (child == null)
+            {
+                return -1;
+            }
+
+            if (child == type)
+            {
+                return 0;
+            }
+
+            if (child is VariableDeclaration && this.Declarations.Contains((VariableDeclaration)child))
+            {
+                return 1 + this.Declarations.IndexOf((VariableDeclaration)child);
+            }
+
+            return -1;
+        }
     }
 }

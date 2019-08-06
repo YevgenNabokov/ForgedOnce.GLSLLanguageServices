@@ -130,7 +130,39 @@ namespace Game08.Sdk.GlslLanguageServices.Builder.SemanticAnalysis
 
         private bool VerifyNodePrecendence(AstNode firstNode, AstNode secondNode)
         {
-            //// Not implemented at the moment.
+            if (firstNode == secondNode)
+            {
+                return true;
+            }
+
+            List<AstNode> firstPath = new List<AstNode>() { firstNode };
+            var f = firstNode;
+            while (f.Parent != null)
+            {
+                firstPath.Add(f.Parent);
+                f = f.Parent;
+            }
+
+            List<AstNode> secondPath = new List<AstNode>() { secondNode };
+            var s = secondNode;
+            while (s.Parent != null)
+            {
+                secondPath.Add(s.Parent);
+                s = s.Parent;
+            }
+
+            for (var n = 0; n < firstPath.Count; n++)
+            {
+                for (var n2 = 0; n2 < secondPath.Count; n2++)
+                {
+                    if (firstPath[n] == secondPath[n2])
+                    {
+                        var commonNode = firstPath[n];
+                        return commonNode.GetChildIndex(firstPath[n - 1]) <= commonNode.GetChildIndex(secondPath[n2 - 1]);
+                    }
+                }
+            }
+            
             return true;
         }
     }

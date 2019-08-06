@@ -20,5 +20,10 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
                 newValue.Parent = this;
             }
         }
+
+        public virtual int GetChildIndex(AstNode child)
+        {
+            return -1;
+        }
     }
 }

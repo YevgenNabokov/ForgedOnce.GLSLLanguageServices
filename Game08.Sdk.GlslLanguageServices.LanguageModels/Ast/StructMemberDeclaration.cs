@@ -40,5 +40,30 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
         }
 
         public AstNodeCollection<Identifier> Identifiers { get; private set; }
+
+        public override int GetChildIndex(AstNode child)
+        {
+            if (child == null)
+            {
+                return -1;
+            }
+
+            if (child == this.type)
+            {
+                return 0;
+            }
+
+            if (child == this.arraySpecifier)
+            {
+                return 1;
+            }
+
+            if (child is Identifier && this.Identifiers.Contains((Identifier)child))
+            {
+                return 2 + this.Identifiers.IndexOf((Identifier)child);
+            }
+
+            return -1;
+        }
     }
 }

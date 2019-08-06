@@ -42,6 +42,11 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
             }
         }
 
+        public int IndexOf(TItem item)
+        {
+            return this.items.IndexOf(item);
+        }
+
         public void Add(TItem item)
         {
             if (item != null)
