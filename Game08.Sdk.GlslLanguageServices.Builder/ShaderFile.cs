@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.Builder
 {
-    public class ShaderFileBuilder
+    public class ShaderFile
     {
         private SearchVisitor syntaxTreeSearchVisitor = new SearchVisitor();
 
@@ -18,9 +18,9 @@ namespace Game08.Sdk.GlslLanguageServices.Builder
 
         public Root SyntaxTree { get; private set; }
 
-        public static ShaderFileBuilder CreateFromText(IGlobalScopeFactory globalScopeFactory, string payload)
+        public static ShaderFile CreateFromText(IGlobalScopeFactory globalScopeFactory, string payload)
         {
-            ShaderFileBuilder result = new ShaderFileBuilder();
+            ShaderFile result = new ShaderFile();
             AstParser parser = new AstParser();
             result.SyntaxTree = parser.Parse(payload);
 
@@ -36,9 +36,9 @@ namespace Game08.Sdk.GlslLanguageServices.Builder
             return result;
         }
 
-        public static ShaderFileBuilder CreateEmpty(IGlobalScopeFactory globalScopeFactory, ShaderVersion shaderVersion = ShaderVersion.GlslEs300)
+        public static ShaderFile CreateEmpty(IGlobalScopeFactory globalScopeFactory, ShaderVersion shaderVersion = ShaderVersion.GlslEs300)
         {
-            ShaderFileBuilder result = new ShaderFileBuilder();
+            ShaderFile result = new ShaderFile();
             result.SyntaxTree = new Root()
             {
                 Version = shaderVersion
