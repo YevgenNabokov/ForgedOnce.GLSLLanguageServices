@@ -10,7 +10,7 @@
     <IntermediatePackDir>$(MSBuildProjectDirectory)/bin/$(Configuration)/publish/</IntermediatePackDir>
     <PublishDir>$(IntermediatePackDir)$(TargetFramework)/</PublishDir>
     <NuspecProperties>publishDir=$([MSBuild]::NormalizeDirectory($(IntermediatePackDir)))</NuspecProperties>
-    <PackageOutputPath>$(SolutionDir)/NugetOutputs</PackageOutputPath>
+    <PackageOutputPath>$(SolutionDir)NugetOutputs</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
