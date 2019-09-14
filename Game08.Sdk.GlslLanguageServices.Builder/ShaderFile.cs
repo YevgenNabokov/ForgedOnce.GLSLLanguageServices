@@ -81,5 +81,15 @@ namespace Game08.Sdk.GlslLanguageServices.Builder
 
             return result;
         }
+
+        public void RebuildSemanticContext()
+        {
+            SemanticModelBuilderVisitor sBuilder = new SemanticModelBuilderVisitor();
+            SemanticModelBuilderContext sContext = new SemanticModelBuilderContext();
+            sBuilder.Visit(this.SyntaxTree, sContext);
+
+            this.semanticContext = new SemanticContext(sContext.Result, this.semanticContext.GlobalScope);
+            this.semanticContext.ResolveSymbolReferences();
+        }
     }
 }

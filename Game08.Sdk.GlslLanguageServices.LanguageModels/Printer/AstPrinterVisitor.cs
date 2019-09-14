@@ -17,5 +17,12 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Printer
 
             return context.Output.ToString();
         }
+
+        private void WithIndent(AstPrinterContext context, Action action)
+        {
+            context.IncreaseNextLineIndent();
+            action();
+            context.DecreaseNextLineIndent();
+        }
     }
 }
