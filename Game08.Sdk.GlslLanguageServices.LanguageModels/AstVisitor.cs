@@ -260,7 +260,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels
         public virtual void VisitPrecisionDeclaration(PrecisionDeclaration node, TContext context)
         {
             this.Visit(node.Type, context);
-            this.Visit(node.ArraySpecifier, context);            
+            this.Visit(node.ArraySpecifier, context);
         }
 
         public virtual void VisitTypeNameSpecifier(TypeNameSpecifier node, TContext context)
@@ -373,7 +373,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels
         {
             this.Visit(node.TypeSpecifier, context);
             this.Visit(node.ArraySpecifier, context);
-            this.Visit(node.Name, context);            
+            this.Visit(node.Name, context);
         }
 
         public virtual void VisitFunctionDeclaration(FunctionDeclaration node, TContext context)
