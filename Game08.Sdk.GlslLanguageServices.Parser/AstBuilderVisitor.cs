@@ -114,21 +114,23 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
                         {
                             Name = dec.Identifier().Symbol.Text
                         };
-                    }
-                    if (dec.LeftBracket() != null)
-                    {
-                        declaration.ArraySpecifier = new ArraySpecifier();
-                        if (dec.constant_expression() != null)
+
+                        if (dec.LeftBracket() != null)
                         {
-                            declaration.ArraySpecifier.ArraySizeExpression = (Expression)this.Visit(dec.constant_expression());
+                            declaration.ArraySpecifier = new ArraySpecifier();
+                            if (dec.constant_expression() != null)
+                            {
+                                declaration.ArraySpecifier.ArraySizeExpression = (Expression)this.Visit(dec.constant_expression());
+                            }
                         }
-                    }
-                    if (dec.initializer() != null)
-                    {
-                        declaration.Initializer = (Expression)this.Visit(dec.initializer().assignment_expression());
+                        if (dec.initializer() != null)
+                        {
+                            declaration.Initializer = (Expression)this.Visit(dec.initializer().assignment_expression());
+                        }
+
+                        declaratorList.Declarations.Add(declaration);
                     }
 
-                    declaratorList.Declarations.Add(declaration);
                     currentContext = null;                    
                 }
                 else
@@ -787,7 +789,7 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
                 var result = new ExpressionBinary();
                 result.Left = (Expression)this.Visit(context.equality_expression());
                 result.Right = (Expression)this.Visit(context.relational_expression());
-                result.Operator = context.Equal() != null ? Operator.Caret : Operator.NotEqual;
+                result.Operator = context.Equal() != null ? Operator.Equal : Operator.NotEqual;
                 return result;
             }
 
@@ -1040,6 +1042,8 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
                     header = headerWithParams.function_call_header();
                     headerWithParams = headerWithParams.function_call_header_with_parameters();
                 }
+
+                result.Parameters.Reverse();
             }
 
             var identifier = header.function_identifier();

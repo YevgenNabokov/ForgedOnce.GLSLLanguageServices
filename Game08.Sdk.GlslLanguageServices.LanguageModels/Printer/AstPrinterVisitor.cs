@@ -59,22 +59,26 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Printer
 
             this.Visit(startNode, context);
 
+            context.StartNewLine();
+
             return context.Output.ToString();
         }
 
         public override void VisitVariableDeclarationList(VariableDeclarationList node, AstPrinterContext context)
         {
-            context.StartNewLine();
             this.Visit(node.Type, context);
-            context.Write(" ");
-            var i = 0;
-            foreach (var n in node.Declarations)
+            if (node.Declarations.Count > 0)
             {
-                this.Visit(n, context);
-                i++;
-                if (i < node.Declarations.Count)
+                context.Write(" ");
+                var i = 0;
+                foreach (var n in node.Declarations)
                 {
-                    context.Write(", ");
+                    this.Visit(n, context);
+                    i++;
+                    if (i < node.Declarations.Count)
+                    {
+                        context.Write(", ");
+                    }
                 }
             }
 
@@ -84,13 +88,13 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Printer
         public override void VisitStructTypeSpecifier(StructTypeSpecifier node, AstPrinterContext context)
         {
             context.Write("struct");
-            if (node.Qualifier != null)
+            if (node.Qualifier != null && node.Qualifier.HasAnyMembers())
             {
                 context.Write(" ");
                 this.Visit(node.Qualifier, context);
             }
 
-            if (node.Qualifier != null)
+            if (node.Identifier != null)
             {
                 context.Write(" ");
                 this.Visit(node.Identifier, context);
@@ -132,7 +136,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Printer
 
         public override void VisitTypeNameSpecifier(TypeNameSpecifier node, AstPrinterContext context)
         {
-            if (node.Qualifier != null)
+            if (node.Qualifier != null && node.Qualifier.HasAnyMembers())
             {
                 this.Visit(node.Qualifier, context);
                 context.Write(" ");
@@ -377,6 +381,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Printer
         {
             context.Write("precision ");
             context.Write(node.PrecisionQualifier.ToString().ToLower());
+            context.Write(" ");
             this.Visit(node.Type, context);
             this.Visit(node.ArraySpecifier, context);
             context.Write(";");
@@ -535,6 +540,12 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Printer
 
         public override void VisitRoot(Root node, AstPrinterContext context)
         {
+            if (node.Version == ShaderVersion.GlslEs300)
+            {
+                context.Write("#version 300 es");
+                context.StartNewLine();
+            }
+
             var i = 0;
             foreach (var n in node.Declarations)
             {

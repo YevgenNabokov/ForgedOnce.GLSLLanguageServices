@@ -22,9 +22,8 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.Printer
 
             var subject = new AstPrinterVisitor();
             AstPrinterContext printerContext = new AstPrinterContext();
-            subject.Visit(tree, printerContext);
-
-            var result = printerContext.Output.ToString();
+            
+            var result = subject.Print(tree);
         }
     }
 }

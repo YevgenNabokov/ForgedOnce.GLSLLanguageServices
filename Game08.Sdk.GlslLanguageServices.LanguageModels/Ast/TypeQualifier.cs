@@ -35,5 +35,14 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
             return -1;
         }
+
+        public bool HasAnyMembers()
+        {
+            return this.Invariant 
+                || this.Interpolation != null
+                || this.Storage != null
+                || this.Precision != null
+                || (this.Layout != null && this.Layout.Count > 0);
+        }
     }
 }
