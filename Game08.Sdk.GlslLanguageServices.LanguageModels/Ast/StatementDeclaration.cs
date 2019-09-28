@@ -15,7 +15,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
             set
             {
-                this.SetParent(this.declaration, value);
+                this.SetAsParentFor(this.declaration, value);
                 this.declaration = value;
             }
         }

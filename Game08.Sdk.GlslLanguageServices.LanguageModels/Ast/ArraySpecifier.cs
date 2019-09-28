@@ -14,7 +14,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
             set
             {
-                this.SetParent(this.arraySizeExpression, value);
+                this.SetAsParentFor(this.arraySizeExpression, value);
                 this.arraySizeExpression = value;
             }
         }

@@ -24,7 +24,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
             set
             {
-                this.SetParent(this.typeSpecifier, value);
+                this.SetAsParentFor(this.typeSpecifier, value);
                 this.typeSpecifier = value;
             }
         }
@@ -36,7 +36,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
             set
             {
-                this.SetParent(this.name, value);
+                this.SetAsParentFor(this.name, value);
                 this.name = value;
             }
         }
@@ -48,7 +48,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
             set
             {
-                this.SetParent(this.statement, value);
+                this.SetAsParentFor(this.statement, value);
                 this.statement = value;
             }
         }

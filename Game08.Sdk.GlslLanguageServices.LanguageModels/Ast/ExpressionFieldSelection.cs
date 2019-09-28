@@ -17,7 +17,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
             set
             {
-                this.SetParent(this.name, value);
+                this.SetAsParentFor(this.name, value);
                 this.name = value;
             }
         }
@@ -29,7 +29,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
             set
             {
-                this.SetParent(this.left, value);
+                this.SetAsParentFor(this.left, value);
                 this.left = value;
             }
         }

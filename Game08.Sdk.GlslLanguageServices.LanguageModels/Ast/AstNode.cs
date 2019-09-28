@@ -8,7 +8,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
     {
         public AstNode Parent;
 
-        protected void SetParent(AstNode oldValue, AstNode newValue)
+        protected void SetAsParentFor(AstNode oldValue, AstNode newValue)
         {
             if (oldValue != null)
             {

@@ -20,7 +20,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
             set
             {
-                this.SetParent(this.qualifier, value);
+                this.SetAsParentFor(this.qualifier, value);
                 this.qualifier = value;
             }
         }
