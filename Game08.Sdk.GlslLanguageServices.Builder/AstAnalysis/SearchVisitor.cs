@@ -14,7 +14,7 @@ namespace Game08.Sdk.GlslLanguageServices.Builder.AstAnalysis
             {
                 SearchDepth = searchDepth,
                 StartNode = startNode,
-                SearchNodeTypes = new HashSet<Type>(nodeTypes),
+                SearchNodeTypes = nodeTypes != null ? new HashSet<Type>(nodeTypes) : null,
                 CurrentDepth = 0
             };
 
