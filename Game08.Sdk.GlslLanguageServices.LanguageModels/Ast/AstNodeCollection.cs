@@ -56,6 +56,15 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
             }
         }
 
+        public void Insert(int index, TItem item)
+        {
+            if (item != null)
+            {
+                item.Parent = this.owner;
+                this.items.Insert(index, item);
+            }
+        }
+
         public void AddRange(IEnumerable<TItem> values)
         {
             if (values != null)

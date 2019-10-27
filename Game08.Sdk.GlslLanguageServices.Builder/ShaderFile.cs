@@ -17,9 +17,13 @@ namespace Game08.Sdk.GlslLanguageServices.Builder
 
         private AstPrinterVisitor printer = new AstPrinterVisitor();
 
-        private SemanticContext semanticContext;
-
         public Root SyntaxTree { get; private set; }
+
+        public SemanticContext SemanticContext
+        {
+            get;
+            private set;
+        }
 
         public static ShaderFile CreateFromText(string payload, IGlobalScopeFactory globalScopeFactory = null)
         {
@@ -34,8 +38,8 @@ namespace Game08.Sdk.GlslLanguageServices.Builder
             SemanticModelBuilderContext sContext = new SemanticModelBuilderContext();
             sBuilder.Visit(result.SyntaxTree, sContext);
 
-            result.semanticContext = new SemanticContext(sContext.Result, globalScope);
-            result.semanticContext.ResolveSymbolReferences();
+            result.SemanticContext = new SemanticContext(sContext.Result, globalScope);
+            result.SemanticContext.ResolveSymbolReferences();
 
             return result;
         }
@@ -55,7 +59,7 @@ namespace Game08.Sdk.GlslLanguageServices.Builder
             SemanticModelBuilderContext sContext = new SemanticModelBuilderContext();
             sBuilder.Visit(result.SyntaxTree, sContext);
 
-            result.semanticContext = new SemanticContext(sContext.Result, globalScope);
+            result.SemanticContext = new SemanticContext(sContext.Result, globalScope);
 
             return result;
         }
@@ -88,8 +92,8 @@ namespace Game08.Sdk.GlslLanguageServices.Builder
             SemanticModelBuilderContext sContext = new SemanticModelBuilderContext();
             sBuilder.Visit(this.SyntaxTree, sContext);
 
-            this.semanticContext = new SemanticContext(sContext.Result, this.semanticContext.GlobalScope);
-            this.semanticContext.ResolveSymbolReferences();
+            this.SemanticContext = new SemanticContext(sContext.Result, this.SemanticContext.GlobalScope);
+            this.SemanticContext.ResolveSymbolReferences();
         }
     }
 }

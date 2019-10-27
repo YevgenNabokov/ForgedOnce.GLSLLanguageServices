@@ -7,20 +7,20 @@ using System.Text;
 namespace Game08.Sdk.GlslLanguageServices.Builder.SemanticAnalysis
 {
     public class SemanticContext
-    {
-        private Model model;
-
+    {        
         public SemanticContext(Model model, Scope globalScope)
         {
-            this.model = model;
+            this.Model = model;
             this.GlobalScope = globalScope;
         }
 
         public Scope GlobalScope { get; private set; }
 
+        public Model Model { get; private set; }
+
         public void ResolveSymbolReferences(bool renewAll = false)
         {
-            this.ResolveSymbolReferencesInScope(this.model.RootScope, renewAll);
+            this.ResolveSymbolReferencesInScope(this.Model.RootScope, renewAll);
         }
 
         private void ResolveSymbolReferencesInScope(Scope scope, bool renewAll = false)
@@ -89,9 +89,9 @@ namespace Game08.Sdk.GlslLanguageServices.Builder.SemanticAnalysis
             var currentScope = scope;
             while (currentScope != null)
             {
-                if (scope.Symbols.ContainsKey(name))
+                if (currentScope.Symbols.ContainsKey(name))
                 {
-                    var symbol = scope.Symbols[name];
+                    var symbol = currentScope.Symbols[name];
                     if (shouldPreceedThisNode != null)
                     {
                         foreach (var node in symbol.AstNodes)
@@ -108,9 +108,9 @@ namespace Game08.Sdk.GlslLanguageServices.Builder.SemanticAnalysis
                     }
                 }
 
-                if (scope.Parent != null)
+                if (currentScope.Parent != null)
                 {
-                    currentScope = scope.Parent;
+                    currentScope = currentScope.Parent;
                 }
                 else
                 {
