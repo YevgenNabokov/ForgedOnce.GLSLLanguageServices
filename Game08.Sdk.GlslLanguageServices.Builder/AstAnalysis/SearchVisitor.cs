@@ -1,4 +1,5 @@
-﻿using Game08.Sdk.GlslLanguageServices.LanguageModels;
+﻿using Game08.Sdk.GlslLanguageServices.Builder.Interface;
+using Game08.Sdk.GlslLanguageServices.LanguageModels;
 using Game08.Sdk.GlslLanguageServices.LanguageModels.Ast;
 using System;
 using System.Collections.Generic;
@@ -6,57 +7,79 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.Builder.AstAnalysis
 {
-    public class SearchVisitor : AstVisitor<SearchContext>
+    public class SearchVisitor : AstVisitor<ISearchContext>
     {
         public List<AstNode> Select(AstNode startNode, Type[] nodeTypes, int? searchDepth)
         {
-            var context = new SearchContext()
+            var types = nodeTypes != null ? new HashSet<Type>(nodeTypes) : null;
+
+            var context = new SearchContext(startNode, (n) =>
             {
-                SearchDepth = searchDepth,
-                StartNode = startNode,
-                SearchNodeTypes = nodeTypes != null ? new HashSet<Type>(nodeTypes) : null,
-                CurrentDepth = 0
-            };
+                if (types == null)
+                {
+                    return TraverseInstruction.Match;
+                }
 
-            this.Visit(startNode, context);
-
-            return context.Result;
-        }
-
-        public override void Visit(AstNode node, SearchContext context)
-        {
-            if (context.SearchDepth != null && context.CurrentDepth == context.SearchDepth)
-            {
-                return;
-            }
-
-            if (context.CurrentDepth >= 0 || node == context.StartNode)
-            {
-                context.CurrentDepth++;
-            }            
-
-            if (context.SearchNodeTypes != null)
-            {
-                var nType = node.GetType();
-                foreach (var t in context.SearchNodeTypes)
+                var nType = n.GetType();
+                foreach (var t in types)
                 {
                     if (t == nType || t.IsAssignableFrom(nType))
                     {
-                        context.Result.Add(node);
+                        return TraverseInstruction.Match;
                     }
                 }
-            }
-            else
+
+                return TraverseInstruction.Continue;
+            }, searchDepth);
+
+            return this.Search(context);
+        }
+
+        public bool ContainsNode(AstNode startNode, AstNode nodeToFind)
+        {
+            var result = false;
+            var context = new SearchContext(startNode, (n) =>
             {
-                context.Result.Add(node);
+                if (n == nodeToFind)
+                {
+                    result = true;
+                }
+
+                if (result)
+                {
+                    return TraverseInstruction.ExitBranch;
+                }
+                else
+                {
+                    return TraverseInstruction.Continue;
+                }
+
+            }, null);
+
+            return result;
+        }
+
+        public List<AstNode> Search(ISearchContext context)
+        {
+            this.Visit(context.StartNode, context);
+            return context.Result;
+        }
+
+        public override void Visit(AstNode node, ISearchContext context)
+        {
+            context.IncreaseDepth();
+
+            var nextStep = context.TestNode(node);
+
+            if (nextStep.HasFlag(TraverseInstruction.ExitBranch))
+            {
+                context.DecreaseDepth();
+                return;
             }
 
             base.Visit(node, context);
 
-            if (context.CurrentDepth >= 0)
-            {
-                context.CurrentDepth--;
-            }
+            context.DecreaseDepth();
         }
     }
 }

@@ -12,6 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Game08.Sdk.GlslLanguageServices.Builder\Game08.Sdk.GlslLanguageServices.Builder.csproj" />
+    <ProjectReference Include="..\Game08.Sdk.GlslLanguageServices.LanguageModels\Game08.Sdk.GlslLanguageServices.LanguageModels.csproj" />
     <ProjectReference Include="..\Game08.Sdk.GlslLanguageServices.Parser\Game08.Sdk.GlslLanguageServices.Parser.csproj" />
   </ItemGroup>
 
