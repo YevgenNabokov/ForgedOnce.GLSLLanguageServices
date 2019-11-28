@@ -11,5 +11,10 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Semantic
         {
             return scope.References.Values.SelectMany(l => l).Where(r => r.ResolvedSymbol == null).Concat(scope.Scopes.SelectMany(c => c.GetUnresolvedReferences()));
         }
+
+        public static IEnumerable<SymbolReference> GetReferences(this Scope scope)
+        {
+            return scope.References.Values.SelectMany(l => l).Concat(scope.Scopes.SelectMany(c => c.GetReferences()));
+        }
     }
 }
