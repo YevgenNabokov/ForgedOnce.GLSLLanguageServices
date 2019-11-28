@@ -25,5 +25,20 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
         {
             return -1;
         }
+
+        public bool EqualsOrSubNodeOf(AstNode node)
+        {
+            if (this == node)
+            {
+                return true;
+            }
+
+            if (this.Parent != null)
+            {
+                return this.Parent.EqualsOrSubNodeOf(node);
+            }
+
+            return false;
+        }
     }
 }

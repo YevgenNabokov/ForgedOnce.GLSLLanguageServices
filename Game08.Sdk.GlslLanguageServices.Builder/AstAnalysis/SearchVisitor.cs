@@ -35,30 +35,6 @@ namespace Game08.Sdk.GlslLanguageServices.Builder.AstAnalysis
             return this.Search(context);
         }
 
-        public bool ContainsNode(AstNode startNode, AstNode nodeToFind)
-        {
-            var result = false;
-            var context = new SearchContext(startNode, (n) =>
-            {
-                if (n == nodeToFind)
-                {
-                    result = true;
-                }
-
-                if (result)
-                {
-                    return TraverseInstruction.ExitBranch;
-                }
-                else
-                {
-                    return TraverseInstruction.Continue;
-                }
-
-            }, null);
-
-            return result;
-        }
-
         public List<AstNode> Search(ISearchContext context)
         {
             this.Visit(context.StartNode, context);
