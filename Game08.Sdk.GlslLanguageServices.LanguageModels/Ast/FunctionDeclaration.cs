@@ -55,6 +55,11 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
         public AstNodeCollection<FunctionParameter> Parameters { get; private set; }
 
+        public override string GetPrintableName()
+        {
+            return $"Function:{this.Name?.Name ?? PrintableUnknownName}";
+        }
+
         public override int GetChildIndex(AstNode child)
         {
             if (child == null)

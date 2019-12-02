@@ -13,6 +13,8 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
             this.Qualifier = new TypeQualifier();
         }
 
+        public abstract string GetPrintableName();
+
         public TypeQualifier Qualifier
         {
 

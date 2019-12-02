@@ -414,8 +414,15 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Printer
             }
 
             context.Write(")");
-            context.StartNewLine();
-            this.Visit(node.Statement, context);
+            if (node.Statement != null)
+            {
+                context.StartNewLine();
+                this.Visit(node.Statement, context);
+            }
+            else
+            {
+                context.Write(";");
+            }
         }
 
         public override void VisitFunctionParameter(FunctionParameter node, AstPrinterContext context)

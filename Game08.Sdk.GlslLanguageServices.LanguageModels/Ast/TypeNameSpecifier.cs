@@ -20,6 +20,11 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
             }
         }
 
+        public override string GetPrintableName()
+        {
+            return $"TypeName:{this.Identifier?.Name ?? PrintableUnknownName}";
+        }
+
         public override int GetChildIndex(AstNode child)
         {
             if (child == null)

@@ -36,6 +36,12 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
             }
         }
 
+        public override string GetPrintableName()
+        {
+            var typeName = this.Type != null ? this.Type.GetPrintableName() : PrintableUnknownName;
+            return $"Precision:{typeName}";
+        }
+
         public override int GetChildIndex(AstNode child)
         {
             if (child == null)

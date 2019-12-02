@@ -5,6 +5,7 @@ using System.Text;
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public abstract class Declaration : AstNode
-    {
+    {        
+        public abstract string GetPrintableName();
     }
 }

@@ -6,6 +6,8 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public abstract class AstNode
     {
+        public const string PrintableUnknownName = "$unnamed$";
+
         public AstNode Parent;
 
         protected void SetAsParentFor(AstNode oldValue, AstNode newValue)

@@ -27,6 +27,22 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
         public AstNodeCollection<VariableDeclaration> Declarations { get; private set; }
 
+        public override string GetPrintableName()
+        {
+            List<string> vars = new List<string>();
+            foreach (var d in this.Declarations)
+            {
+                if (d.Name?.Name != null)
+                {
+                    vars.Add(d.Name?.Name);
+                }
+            }
+
+            var varsJoined = string.Join(",", vars);
+            varsJoined = varsJoined != string.Empty ? varsJoined : PrintableUnknownName;
+            return $"VariableList:{varsJoined}";
+        }
+
         public override int GetChildIndex(AstNode child)
         {
             if (child == null)
