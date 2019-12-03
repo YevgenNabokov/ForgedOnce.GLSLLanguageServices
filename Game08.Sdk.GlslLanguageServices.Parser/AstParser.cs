@@ -16,7 +16,7 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
             GLSL_ES300Parser parser = new GLSL_ES300Parser(tokens);
             parser.BuildParseTree = true;
 
-            var context = parser.external_declaration_list();
+            var context = parser.translation_unit();
             var subject = new AstBuilderVisitor();
             var result = (Root)subject.Visit(context);
             return result;

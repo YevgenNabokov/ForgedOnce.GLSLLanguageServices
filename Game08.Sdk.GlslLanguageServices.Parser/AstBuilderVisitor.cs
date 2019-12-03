@@ -9,45 +9,61 @@ namespace Game08.Sdk.GlslLanguageServices.Parser
     public class AstBuilderVisitor : GLSL_ES300ParserBaseVisitor<AstNode>
     {
         public override AstNode VisitTranslation_unit([NotNull] GLSL_ES300Parser.Translation_unitContext context)
-        {            
+        {
+            Root result = null;
+
             var declarations = context.external_declaration_list();
             if (declarations != null)
             {
-                return (Root)this.Visit(declarations);
+                result = (Root)this.Visit(declarations);
             }
 
-            return new Root();
-        }
-
-        public override AstNode VisitExternal_declaration_list([NotNull] GLSL_ES300Parser.External_declaration_listContext context)
-        {
-            var result = new Root();
+            result = result ?? new Root();
 
             var version = context.shader_version_marker();
             if (version != null)
-            {                
+            {
                 if (version.VersionMarker300ES() != null)
                 {
                     result.Version = ShaderVersion.GlslEs300;
                 }
             }
 
-            foreach (var exdec in context.external_declaration())
+            return result;
+        }
+
+        public override AstNode VisitExternal_declaration_list([NotNull] GLSL_ES300Parser.External_declaration_listContext context)
+        {
+            var result = new Root();
+
+            List<Declaration> declaratorList = new List<Declaration>();
+            var currentContext = context;
+
+            while (currentContext != null)
             {
-                var dec = exdec.declaration();
-                if (dec != null)
+                var exdec = currentContext.external_declaration();
+                if (exdec != null)
                 {
-                    result.Declarations.Add((Declaration)this.Visit(dec));
-                }
-                else
-                {
-                    var func = exdec.function_definition();
-                    if (func != null)
+                    var dec = exdec.declaration();
+                    if (dec != null)
                     {
-                        result.Declarations.Add((Declaration)this.Visit(func));
+                        declaratorList.Add((Declaration)this.Visit(dec));
+                    }
+                    else
+                    {
+                        var func = exdec.function_definition();
+                        if (func != null)
+                        {
+                            declaratorList.Add((Declaration)this.Visit(func));
+                        }
                     }
                 }
+
+                currentContext = currentContext.external_declaration_list();
             }
+
+            declaratorList.Reverse();
+            result.Declarations.AddRange(declaratorList);
 
             return result;
         }

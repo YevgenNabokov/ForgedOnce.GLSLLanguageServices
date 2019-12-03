@@ -28,7 +28,7 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.Builder.Sem
             ShaderFile file = ShaderFile.CreateFromText(shaderText);
 
             Assert.IsNotNull(file.SemanticContext);
-            Assert.AreEqual(1, file.SemanticContext.Model.NodeSymbols.Count);
+            Assert.AreEqual(2, file.SemanticContext.Model.NodeSymbols.Count);
         }
     }
 }

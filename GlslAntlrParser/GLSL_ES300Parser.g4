@@ -3,11 +3,12 @@ parser grammar GLSL_ES300Parser;
 options { tokenVocab = GLSL_ES300Lexer; }
 
 translation_unit
-   : external_declaration_list? EOF
+   : shader_version_marker? external_declaration_list? EOF
    ;
 
 external_declaration_list
-   : shader_version_marker? external_declaration+   
+   : external_declaration
+   | external_declaration_list external_declaration
    ;
 
 shader_version_marker

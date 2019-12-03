@@ -82,8 +82,7 @@ namespace Game08.Sdk.GlslLanguageServices.UnitTests.Parser
             Assert.IsNull(context.exception);
             var declarations = context.external_declaration();
             Assert.IsNotNull(declarations);
-            Assert.AreEqual(1, declarations.Length);
-            var d = declarations[0];
+            var d = declarations;
             var declaration = d.declaration();
             Assert.NotNull(declaration);
             var dList = declaration.declaratorlist();
