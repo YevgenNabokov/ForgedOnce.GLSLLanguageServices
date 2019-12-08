@@ -224,6 +224,26 @@ namespace Game08.Sdk.GlslLanguageServices.Builder.AstAnalysis
             }
 
             return true;
+        }        
+
+        public static int ParseConstantExpressionAsInt32(Expression expression)
+        {
+            var intLiteral = expression as IntegerLiteral;
+            if (intLiteral != null)
+            {
+                int result = 0;
+                if (!TryParseIntLiteralToInt32(intLiteral.LiteralValue, out result))
+                {
+                    throw new InvalidOperationException($"Unable to parse integer literal with vlaue: {intLiteral.LiteralValue}");
+                }
+
+                return result;
+            }
+            else
+            {
+                //// In future should implement conversion of expression to C# expression tree and evaluate the result.
+                throw new InvalidOperationException("Unable to parse any constant expression except IntegerLiteral.");
+            }
         }
 
         public static bool IntegerLiteralsAreEquivalent(IntegerLiteral literal1, IntegerLiteral literal2)
