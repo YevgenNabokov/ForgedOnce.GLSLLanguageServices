@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
-    public class AstNodeCollection<TItem> : ICollection<TItem> where TItem : AstNode
+    public class AstNodeCollection<TItem> : IReadOnlyList<TItem>, ICollection<TItem> where TItem : AstNode
     {
         private AstNode owner;
 

@@ -6,9 +6,43 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public abstract class AstNode
     {
+        protected Dictionary<string, string> annotations;
+
         public const string PrintableUnknownName = "$unnamed$";
 
         public AstNode Parent;
+
+        public void SetAnnotation(string key, string value)
+        {
+            if (this.annotations == null)
+            {
+                this.annotations = new Dictionary<string, string>();
+            }
+
+            if (this.annotations.ContainsKey(key))
+            {
+                this.annotations[key] = value;
+            }
+            else
+            {
+                this.annotations.Add(key, value);
+            }
+        }
+
+        public bool HasAnnotation(string key)
+        {
+            return this.annotations != null && this.annotations.ContainsKey(key);
+        }
+
+        public string GetAnnotation(string key)
+        {
+            if (this.annotations == null || !this.annotations.ContainsKey(key))
+            {
+                return null;
+            }
+
+            return this.annotations[key];
+        }
 
         protected void SetAsParentFor(AstNode oldValue, AstNode newValue)
         {
