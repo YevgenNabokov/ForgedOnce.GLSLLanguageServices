@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.TestResources
+namespace Game08.Sdk.GlslLanguageServices.Tests.LanguageServices.TestResources
 {
     public static class DeclarationMaker
     {

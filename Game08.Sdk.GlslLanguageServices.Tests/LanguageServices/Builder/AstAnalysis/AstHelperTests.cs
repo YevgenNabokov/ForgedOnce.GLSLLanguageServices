@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.Builder.AstAnalysis
+namespace Game08.Sdk.GlslLanguageServices.Tests.LanguageServices.Builder.AstAnalysis
 {
     [TestFixture]
     public class AstHelperTests

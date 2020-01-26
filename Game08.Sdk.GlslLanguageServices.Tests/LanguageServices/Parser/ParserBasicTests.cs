@@ -1,12 +1,12 @@
 ﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
-using Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.TestResources;
+using Game08.Sdk.GlslLanguageServices.Tests.LanguageServices.TestResources;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game08.Sdk.GlslLanguageServices.UnitTests.Parser
+namespace Game08.Sdk.GlslLanguageServices.Tests.Parser
 {
     [TestFixture]
     public class ParserBasicTests

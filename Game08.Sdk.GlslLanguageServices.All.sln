@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game08.Sdk.GlslLanguageServices.Parser", "Game08.Sdk.GlslLanguageServices.Parser\Game08.Sdk.GlslLanguageServices.Parser.csproj", "{212929A8-9619-4BCA-947C-F40B889E83F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game08.Sdk.GlslLanguageServices.UnitTests", "Game08.Sdk.GlslLanguageServices.UnitTests\Game08.Sdk.GlslLanguageServices.UnitTests.csproj", "{2D716D7A-A333-4CA2-A50A-D74623B8075A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game08.Sdk.GlslLanguageServices.LanguageModels", "Game08.Sdk.GlslLanguageServices.LanguageModels\Game08.Sdk.GlslLanguageServices.LanguageModels.csproj", "{27616D36-DE7C-4FDA-B008-B371BE051C61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game08.Sdk.GlslLanguageServices.Builder", "Game08.Sdk.GlslLanguageServices.Builder\Game08.Sdk.GlslLanguageServices.Builder.csproj", "{8AA6D2BD-0BA7-4481-B514-44BD73D8FE86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game08.Sdk.GlslLanguageServices.Builder", "Game08.Sdk.GlslLanguageServices.Builder\Game08.Sdk.GlslLanguageServices.Builder.csproj", "{8AA6D2BD-0BA7-4481-B514-44BD73D8FE86}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game08.Sdk.GlslLanguageServices.Tests", "Game08.Sdk.GlslLanguageServices.Tests\Game08.Sdk.GlslLanguageServices.Tests.csproj", "{EC6926CC-6D3C-40D3-AE4A-0D6A0DB2C402}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		{212929A8-9619-4BCA-947C-F40B889E83F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{212929A8-9619-4BCA-947C-F40B889E83F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{212929A8-9619-4BCA-947C-F40B889E83F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D716D7A-A333-4CA2-A50A-D74623B8075A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D716D7A-A333-4CA2-A50A-D74623B8075A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D716D7A-A333-4CA2-A50A-D74623B8075A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D716D7A-A333-4CA2-A50A-D74623B8075A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{27616D36-DE7C-4FDA-B008-B371BE051C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27616D36-DE7C-4FDA-B008-B371BE051C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27616D36-DE7C-4FDA-B008-B371BE051C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{8AA6D2BD-0BA7-4481-B514-44BD73D8FE86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AA6D2BD-0BA7-4481-B514-44BD73D8FE86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AA6D2BD-0BA7-4481-B514-44BD73D8FE86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC6926CC-6D3C-40D3-AE4A-0D6A0DB2C402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC6926CC-6D3C-40D3-AE4A-0D6A0DB2C402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC6926CC-6D3C-40D3-AE4A-0D6A0DB2C402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC6926CC-6D3C-40D3-AE4A-0D6A0DB2C402}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

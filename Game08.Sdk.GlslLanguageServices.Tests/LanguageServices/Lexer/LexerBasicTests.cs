@@ -1,10 +1,10 @@
-﻿using Game08.Sdk.GlslLanguageServices.UnitTests.Parser;
+﻿using Game08.Sdk.GlslLanguageServices.Tests.Parser;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.Lexer
+namespace Game08.Sdk.GlslLanguageServices.Tests.LanguageServices.Lexer
 {
     [TestFixture]
     public class LexerBasicTests

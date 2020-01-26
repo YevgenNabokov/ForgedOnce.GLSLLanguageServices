@@ -1,13 +1,13 @@
 ﻿using Game08.Sdk.GlslLanguageServices.LanguageModels.Printer;
 using Game08.Sdk.GlslLanguageServices.Parser;
-using Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.TestResources;
-using Game08.Sdk.GlslLanguageServices.UnitTests.Parser;
+using Game08.Sdk.GlslLanguageServices.Tests.LanguageServices.TestResources;
+using Game08.Sdk.GlslLanguageServices.Tests.Parser;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.Printer
+namespace Game08.Sdk.GlslLanguageServices.Tests.LanguageServices.Printer
 {
     [TestFixture]
     public class AstPrinterVisitorAcceptanceTests

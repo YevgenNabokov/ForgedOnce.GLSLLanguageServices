@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game08.Sdk.GlslLanguageServices.UnitTests.Parser
+namespace Game08.Sdk.GlslLanguageServices.Tests.Parser
 {
     [TestFixture]
     public class ParserTests

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.Models
+namespace Game08.Sdk.GlslLanguageServices.Tests.LanguageServices.Models
 {
     [TestFixture]
     public class AstVisitorTests

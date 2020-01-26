@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game08.Sdk.GlslLanguageServices.UnitTests.LanguageServices.Builder.SemanticAnalysis
+namespace Game08.Sdk.GlslLanguageServices.Tests.LanguageServices.Builder.SemanticAnalysis
 {
     [TestFixture]
     public class ShaderFileTests
