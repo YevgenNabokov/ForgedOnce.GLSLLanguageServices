@@ -6,7 +6,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public class Root : AstNode
     {
-        public ShaderVersion Version;
+        private ShaderVersion version;
 
         public Root()
         {
@@ -14,6 +14,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
         }
 
         public AstNodeCollection<Declaration> Declarations { get; private set; }
+        public ShaderVersion Version { get => version; set { this.EnsureIsEditable(); version = value; } }
 
         public override int GetChildIndex(AstNode child)
         {

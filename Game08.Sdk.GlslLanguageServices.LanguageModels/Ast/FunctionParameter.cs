@@ -6,9 +6,9 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public class FunctionParameter : AstNode
     {
-        public bool IsConst;
+        private bool isConst;
 
-        public ParameterQualifier? ParameterQualifier;
+        private ParameterQualifier? parameterQualifier;
 
         private TypeSpecifier typeSpecifier;
 
@@ -51,6 +51,10 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
                 this.name = value;
             }
         }
+
+        public ParameterQualifier? ParameterQualifier { get => parameterQualifier; set { this.EnsureIsEditable(); parameterQualifier = value; } }
+
+        public bool IsConst { get => isConst; set { this.EnsureIsEditable(); isConst = value; } }
 
         public override int GetChildIndex(AstNode child)
         {

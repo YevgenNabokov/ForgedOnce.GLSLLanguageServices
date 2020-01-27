@@ -6,13 +6,13 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public class TypeQualifier : AstNode
     {
-        public bool Invariant;
+        private bool invariant;
 
-        public InterpolationQualifier? Interpolation;
+        private InterpolationQualifier? interpolation;
 
-        public StorageQualifier? Storage;
+        private StorageQualifier? storage;
 
-        public PrecisionQualifier? Precision;
+        private PrecisionQualifier? precision;
 
         public TypeQualifier()
         {
@@ -20,6 +20,13 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
         }
 
         public AstNodeCollection<LayoutIdQualifier> Layout { get; private set; }
+        public bool Invariant { get => invariant; set { this.EnsureIsEditable(); invariant = value; } }
+
+        public InterpolationQualifier? Interpolation { get => interpolation; set { this.EnsureIsEditable(); interpolation = value; } }
+
+        public StorageQualifier? Storage { get => storage; set { this.EnsureIsEditable(); storage = value; } }
+
+        public PrecisionQualifier? Precision { get => precision; set { this.EnsureIsEditable(); precision = value; } }
 
         public override int GetChildIndex(AstNode child)
         {

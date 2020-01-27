@@ -6,6 +6,8 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public class BooleanLiteral : Expression
     {
-        public string LiteralValue;
+        private string literalValue;
+
+        public string LiteralValue { get => literalValue; set { this.EnsureIsEditable(); literalValue = value; } }
     }
 }

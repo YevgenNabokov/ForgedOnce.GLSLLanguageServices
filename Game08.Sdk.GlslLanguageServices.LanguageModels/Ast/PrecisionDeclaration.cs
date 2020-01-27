@@ -10,7 +10,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
         private ArraySpecifier arraySpecifier;
 
-        public PrecisionQualifier PrecisionQualifier;
+        private PrecisionQualifier precisionQualifier;
 
         public TypeSpecifier Type
         {
@@ -35,6 +35,8 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
                 this.arraySpecifier = value;
             }
         }
+
+        public PrecisionQualifier PrecisionQualifier { get => precisionQualifier; set { this.EnsureIsEditable(); precisionQualifier = value; } }
 
         public override string GetPrintableName()
         {

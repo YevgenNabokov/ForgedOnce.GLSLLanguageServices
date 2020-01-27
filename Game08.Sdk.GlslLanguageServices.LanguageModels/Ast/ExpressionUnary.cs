@@ -6,7 +6,7 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 {
     public class ExpressionUnary : Expression
     {
-        public Operator Operator;
+        private Operator @operator;
 
         private Expression right;
 
@@ -21,6 +21,8 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
                 this.right = value;
             }
         }
+
+        public Operator Operator { get => @operator; set { this.EnsureIsEditable(); @operator = value; } }
 
         public override int GetChildIndex(AstNode child)
         {

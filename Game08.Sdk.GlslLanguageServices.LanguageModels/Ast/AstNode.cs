@@ -10,7 +10,36 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
 
         public const string PrintableUnknownName = "$unnamed$";
 
-        public AstNode Parent;
+        protected AstNode parent;
+
+        private bool isReadonly;
+
+        protected List<AstNode> childNodes = new List<AstNode>();
+
+        public AstNode Parent
+        {
+            get
+            {
+                return this.parent;
+            }
+
+            set
+            {
+                if (this.parent != null)
+                {
+                    this.parent.EnsureIsEditable();
+                    this.parent.childNodes.Remove(this);
+                }
+                
+                if (value != null)
+                {
+                    value.EnsureIsEditable();
+                    value.childNodes.Add(this);
+                }
+
+                this.parent = value;
+            }
+        }
 
         public void SetAnnotation(string key, string value)
         {
@@ -75,6 +104,23 @@ namespace Game08.Sdk.GlslLanguageServices.LanguageModels.Ast
             }
 
             return false;
+        }
+
+        public void MakeReadonly()
+        {
+            this.isReadonly = true;
+            foreach (var item in this.childNodes)
+            {
+                item.MakeReadonly();
+            }
+        }
+
+        protected void EnsureIsEditable()
+        {
+            if (this.isReadonly)
+            {
+                throw new InvalidOperationException("Attempt to modify a readonly node.");
+            }
         }
     }
 }
