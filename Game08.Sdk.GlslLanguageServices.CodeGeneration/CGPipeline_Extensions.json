@@ -1,0 +1,46 @@
+{
+  "codeFileHandlers": [
+    { "type": "Game08.Sdk.CodeMixer.CSharp.CSharpCodeFileHandlerFactory, Game08.Sdk.CodeMixer.CSharp" }
+  ],
+  "inputs": {
+    "DefinitionTree": "CSharp:Project:Game08.Sdk.GlslLanguageServices.LanguageModels/Ast/*.cs"
+  },
+  "batches": [
+    {
+      "name": "Batch01",
+      "stages": [
+        {
+          "name": "ExtensionMethods",
+          "plugin": {
+            "pluginFactory": {
+              "type": "Game08.Sdk.SyntaxTreeExtensionsPlugin.PluginFactory, Game08.Sdk.SyntaxTreeExtensionsPlugin",
+              "config": {
+                "outputNamespace": "Game08.Sdk.GlslLanguageServices.LanguageModels.ExtensionMethods",
+                "requiredClassBaseType": "Game08.Sdk.GlslLanguageServices.LanguageModels.Ast.AstNode",
+                "typesToUnfold": "Game08.Sdk.GlslLanguageServices.LanguageModels.Ast.Identifier",
+                "ignorePropertyNames": "Parent",
+                "unpluralizeVariables": "true"
+              }
+            }
+          },
+          "input": {
+            "settings": {
+              "DefinitionTree": "*.cs"
+            }
+          },
+          "output": {
+            "settings": {
+              "PassThrough": "*"
+            }
+          },
+          "destinationMapping": {
+            "PassThrough": {
+              "settings": { "path": "Game08.Sdk.GlslLanguageServices.LanguageModels/ExtensionMethods/Generated" }
+            }
+          },
+          "cleanDestinations": true
+        }
+      ]
+    }
+  ]
+}

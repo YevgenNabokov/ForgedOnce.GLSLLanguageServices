@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Game08.Sdk.GlslLanguageServices.CodeGeneration": {
+      "commandName": "Project",
+      "commandLineArgs": "$(SolutionDir)Game08.Sdk.GlslLanguageServices.SyntaxTrees.sln $(ProjectDir)CGPipeline_Extensions.json"
+    }
+  }
+}
