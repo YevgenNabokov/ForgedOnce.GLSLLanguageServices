@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Game08.Sdk.CodeMixer.Launcher.MSBuild.WithDefaultAdapters" Version="1.0.71" />
-    <PackageReference Include="Game08.Sdk.SyntaxTreeExtensionsPlugin" Version="1.0.0" />
+    <PackageReference Include="Game08.Sdk.CodeMixer.Launcher.MSBuild.WithDefaultAdapters" Version="1.0.73" />
+    <PackageReference Include="Game08.Sdk.SyntaxTreeExtensionsPlugin" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
