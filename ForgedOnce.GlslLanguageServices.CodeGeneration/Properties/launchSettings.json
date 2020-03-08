@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ForgedOnce.GlslLanguageServices.CodeGeneration": {
+      "commandName": "Project",
+      "commandLineArgs": "$(SolutionDir)ForgedOnce.GlslLanguageServices.SyntaxTrees.sln $(ProjectDir)CGPipeline_Extensions.json"
+    }
+  }
+}

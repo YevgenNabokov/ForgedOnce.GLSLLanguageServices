@@ -1,0 +1,46 @@
+{
+  "codeFileHandlers": [
+    { "type": "ForgedOnce.CodeMixer.CSharp.CSharpCodeFileHandlerFactory, ForgedOnce.CodeMixer.CSharp" }
+  ],
+  "inputs": {
+    "DefinitionTree": "CSharp:Project:ForgedOnce.GlslLanguageServices.LanguageModels/Ast/*.cs"
+  },
+  "batches": [
+    {
+      "name": "Batch01",
+      "stages": [
+        {
+          "name": "ExtensionMethods",
+          "plugin": {
+            "pluginFactory": {
+              "type": "ForgedOnce.SyntaxTreeExtensionsPlugin.PluginFactory, ForgedOnce.SyntaxTreeExtensionsPlugin",
+              "config": {
+                "outputNamespace": "ForgedOnce.GlslLanguageServices.LanguageModels.ExtensionMethods",
+                "requiredClassBaseType": "ForgedOnce.GlslLanguageServices.LanguageModels.Ast.AstNode",
+                "typesToUnfold": "ForgedOnce.GlslLanguageServices.LanguageModels.Ast.Identifier",
+                "ignorePropertyNames": "Parent",
+                "unpluralizeVariables": "true"
+              }
+            }
+          },
+          "input": {
+            "settings": {
+              "DefinitionTree": "*.cs"
+            }
+          },
+          "output": {
+            "settings": {
+              "PassThrough": "*"
+            }
+          },
+          "destinationMapping": {
+            "PassThrough": {
+              "settings": { "path": "ForgedOnce.GlslLanguageServices.LanguageModels/ExtensionMethods/Generated" }
+            }
+          },
+          "cleanDestinations": true
+        }
+      ]
+    }
+  ]
+}

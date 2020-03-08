@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\GlslAntlrParser\Output\GLSL_ES300Lexer.cs" Link="Generated\GLSL_ES300Lexer.cs" />
+    <Compile Include="..\GlslAntlrParser\Output\GLSL_ES300Parser.cs" Link="Generated\GLSL_ES300Parser.cs" />
+    <Compile Include="..\GlslAntlrParser\Output\GLSL_ES300ParserBaseListener.cs" Link="Generated\GLSL_ES300ParserBaseListener.cs" />
+    <Compile Include="..\GlslAntlrParser\Output\GLSL_ES300ParserBaseVisitor.cs" Link="Generated\GLSL_ES300ParserBaseVisitor.cs" />
+    <Compile Include="..\GlslAntlrParser\Output\GLSL_ES300ParserListener.cs" Link="Generated\GLSL_ES300ParserListener.cs" />
+    <Compile Include="..\GlslAntlrParser\Output\GLSL_ES300ParserVisitor.cs" Link="Generated\GLSL_ES300ParserVisitor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Generated\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ForgedOnce.GlslLanguageServices.LanguageModels\ForgedOnce.GlslLanguageServices.LanguageModels.csproj" />
+  </ItemGroup>
+
+</Project>
