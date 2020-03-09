@@ -1,4 +1,4 @@
-﻿using ForgedOnce.CodeMixer.Launcher.MSBuild.WithDefaultAdapters;
+﻿using L = ForgedOnce.Launcher.MSBuild.WithDefaultAdapters;
 using System;
 
 namespace ForgedOnce.GlslLanguageServices.CodeGeneration
@@ -7,7 +7,7 @@ namespace ForgedOnce.GlslLanguageServices.CodeGeneration
     {
         static void Main(string[] args)
         {
-            Launcher launcher = new Launcher();
+            L.Launcher launcher = new L.Launcher();
             launcher.Launch(args[0], args[1]);
         }
     }

@@ -6,12 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ForgedOnce.CodeMixer.Launcher.MSBuild.WithDefaultAdapters" Version="1.0.73" />
-    <PackageReference Include="ForgedOnce.SyntaxTreeExtensionsPlugin" Version="1.0.1" />
+    <PackageReference Include="ForgedOnce.Launcher.MSBuild.WithDefaultAdapters" Version="0.1.0" />
+    <PackageReference Include="ForgedOnce.TsLanguageServices.SyntaxTreeExtensionsPlugin" Version="0.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="ForgedOnce.CodeMixer.Launcher.MSBuild.WithDefaultAdapters.CliTool" Version="*" />
+    <DotNetCliToolReference Include="ForgedOnce.Launcher.MSBuild.WithDefaultAdapters.CliTool" Version="*" />
   </ItemGroup>
 
 </Project>

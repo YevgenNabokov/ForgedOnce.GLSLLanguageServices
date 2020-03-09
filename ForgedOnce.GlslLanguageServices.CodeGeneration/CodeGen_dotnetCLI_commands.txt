@@ -1,0 +1,2 @@
+﻿dotnet restore --force
+dotnet forgedonce-cg-msbuild ..\ForgedOnce.GlslLanguageServices.SyntaxTrees.sln CGPipeline_Extensions.json
