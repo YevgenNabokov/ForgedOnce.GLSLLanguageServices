@@ -1,4 +1,4 @@
-﻿using L = ForgedOnce.Launcher.MSBuild.WithDefaultAdapters;
+﻿using L = ForgedOnce.Launcher.MSBuild.Default;
 using System;
 
 namespace ForgedOnce.GlslLanguageServices.CodeGeneration
