@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ForgedOnce.Launcher.MSBuild.Default" Version="0.1.0" />
-    <PackageReference Include="ForgedOnce.TsLanguageServices.SyntaxTreeExtensionsPlugin" Version="0.1.0" />
+    <PackageReference Include="ForgedOnce.Launcher.MSBuild.Default" Version="0.2.1" />
+    <PackageReference Include="ForgedOnce.TsLanguageServices.SyntaxTreeExtensionsPlugin" Version="0.1.1" />
   </ItemGroup>
 
   <ItemGroup>
