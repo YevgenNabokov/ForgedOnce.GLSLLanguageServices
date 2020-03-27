@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ForgedOnce.Launcher.MSBuild.Default" Version="0.2.1" />
-    <PackageReference Include="ForgedOnce.TsLanguageServices.SyntaxTreeExtensionsPlugin" Version="0.1.1" />
+    <Content Include=".config\dotnet-tools.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="ForgedOnce.Launcher.MSBuild.Default.CliTool" Version="*" />
+    <PackageReference Include="ForgedOnce.Launcher.MSBuild.Default" Version="0.3.1" />
+    <PackageReference Include="ForgedOnce.TsLanguageServices.SyntaxTreeExtensionsPlugin" Version="0.1.1" />
   </ItemGroup>
 
 </Project>
