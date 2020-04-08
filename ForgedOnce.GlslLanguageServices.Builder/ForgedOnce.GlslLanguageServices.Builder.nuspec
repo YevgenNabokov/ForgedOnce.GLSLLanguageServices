@@ -3,6 +3,10 @@
     <id>ForgedOnce.GlslLanguageServices.Builder</id>
     <version>0.1.1</version>
     <authors>Yevgen Nabokov</authors>
+    <owners>Yevgen Nabokov</owners>
+    <licenseUrl>https://github.com/yevgennabokov/forgedonce.glsllanguageservices/blob/master/license</licenseUrl>
+    <projectUrl>https://github.com/yevgennabokov/forgedonce.glsllanguageservices</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>Language services for GLSL.</description>
     <dependencies>      
     </dependencies>
