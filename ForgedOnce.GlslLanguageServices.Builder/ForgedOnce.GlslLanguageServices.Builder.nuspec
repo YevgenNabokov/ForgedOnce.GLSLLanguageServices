@@ -1,9 +1,10 @@
 ﻿<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>ForgedOnce.GlslLanguageServices.Builder</id>
-    <version>0.1.6</version>
+    <version>0.1.7</version>
     <authors>Yevgen Nabokov</authors>
     <owners>Yevgen Nabokov</owners>
+    <copyright>Yevgen Nabokov</copyright>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/yevgennabokov/forgedonce.glsllanguageservices</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
