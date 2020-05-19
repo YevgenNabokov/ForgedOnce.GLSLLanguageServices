@@ -4,6 +4,18 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageOutputPath>$(SolutionDir)NugetOutputs</PackageOutputPath>
+    <Version>0.1.8</Version>
+    <PackageId>ForgedOnce.GlslLanguageServices.LanguageModels</PackageId>
+    <Authors>Yevgen Nabokov</Authors>
+    <Company />
+    <Description>.NET library for GLSL language abstract syntax tree and semantic model</Description>
+    <Copyright>Yevgen Nabokov</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/yevgennabokov/forgedonce.glsllanguageservices</PackageProjectUrl>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="ExtensionMethods\Generated\" />
   </ItemGroup>

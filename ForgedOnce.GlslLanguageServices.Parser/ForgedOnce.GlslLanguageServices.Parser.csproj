@@ -4,6 +4,18 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageOutputPath>$(SolutionDir)NugetOutputs</PackageOutputPath>
+    <Version>0.1.8</Version>
+    <PackageId>ForgedOnce.GlslLanguageServices.Parser</PackageId>
+    <Authors>Yevgen Nabokov</Authors>
+    <Company />
+    <Description>.NET library for GLSL language syntax tree parsing into AST</Description>
+    <Copyright>Yevgen Nabokov</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/yevgennabokov/forgedonce.glsllanguageservices</PackageProjectUrl>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\GlslAntlrParser\Output\GLSL_ES300Lexer.cs" Link="Generated\GLSL_ES300Lexer.cs" />
     <Compile Include="..\GlslAntlrParser\Output\GLSL_ES300Parser.cs" Link="Generated\GLSL_ES300Parser.cs" />
@@ -11,6 +23,12 @@
     <Compile Include="..\GlslAntlrParser\Output\GLSL_ES300ParserBaseVisitor.cs" Link="Generated\GLSL_ES300ParserBaseVisitor.cs" />
     <Compile Include="..\GlslAntlrParser\Output\GLSL_ES300ParserListener.cs" Link="Generated\GLSL_ES300ParserListener.cs" />
     <Compile Include="..\GlslAntlrParser\Output\GLSL_ES300ParserVisitor.cs" Link="Generated\GLSL_ES300ParserVisitor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\ThirdPartyNotice.txt" Link="ThirdPartyNotice.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
