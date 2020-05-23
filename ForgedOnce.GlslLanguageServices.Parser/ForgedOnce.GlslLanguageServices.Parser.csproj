@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,7 +6,7 @@
 
   <PropertyGroup>
     <PackageOutputPath>$(SolutionDir)NugetOutputs</PackageOutputPath>
-    <Version>0.1.8</Version>
+    <Version>0.1.10</Version>
     <PackageId>ForgedOnce.GlslLanguageServices.Parser</PackageId>
     <Authors>Yevgen Nabokov</Authors>
     <Company />
@@ -26,9 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\ThirdPartyNotice.txt" Link="ThirdPartyNotice.txt">
+    <None Include="..\ThirdPartyNotice.txt" Link="ThirdPartyNotice.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+      <Pack>true</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
