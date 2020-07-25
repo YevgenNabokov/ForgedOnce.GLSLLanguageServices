@@ -10,10 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ForgedOnce.Launcher.MSBuild.Default" Version="0.6.20">
+    <PackageReference Include="ForgedOnce.Launcher.MSBuild.Default" Version="0.7.0">
       <GeneratePathProperty>true</GeneratePathProperty>
     </PackageReference>
-    <PackageReference Include="ForgedOnce.TsLanguageServices.SyntaxTreeExtensionsPlugin" Version="0.4.6" />
+    <PackageReference Include="ForgedOnce.TsLanguageServices.SyntaxTreeExtensionsPlugin" Version="0.5.0" />
   </ItemGroup>
 
   <ItemGroup>
