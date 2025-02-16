@@ -1,4 +1,5 @@
-﻿using ForgedOnce.GlslLanguageServices.LanguageModels.Ast;
+﻿using FluentAssertions;
+using ForgedOnce.GlslLanguageServices.LanguageModels.Ast;
 using ForgedOnce.GlslLanguageServices.Parser;
 using ForgedOnce.GlslLanguageServices.Tests.Parser;
 using NUnit.Framework;
@@ -31,23 +32,23 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.AstBuilder
 
             var result = subject.Visit(context);
 
-            Assert.IsTrue(result is Root);
+            result.Should().BeOfType<Root>();
             var root = result as Root;
 
-            Assert.AreEqual(1, root.Declarations.Count);
+            root.Declarations.Should().HaveCount(1);
             var declarationList = root.Declarations[0] as VariableDeclarationList;
 
             var typeNameSpecifier = declarationList.Type as TypeNameSpecifier;
-            Assert.IsNotNull(typeNameSpecifier);
+            typeNameSpecifier.Should().NotBeNull();
 
-            Assert.AreEqual("int", typeNameSpecifier.Identifier.Name);
+            typeNameSpecifier.Identifier.Name.Should().Be("int");
 
-            Assert.IsNotNull(declarationList);
-            Assert.AreEqual(3, declarationList.Declarations.Count);
+            declarationList.Should().NotBeNull();
+            declarationList.Declarations.Should().HaveCount(3);
 
-            Assert.AreEqual("a", declarationList.Declarations[0].Name.Name);
-            Assert.AreEqual("b", declarationList.Declarations[1].Name.Name);
-            Assert.AreEqual("c", declarationList.Declarations[2].Name.Name);
+            declarationList.Declarations[0].Name.Name.Should().Be("a");
+            declarationList.Declarations[1].Name.Name.Should().Be("b");
+            declarationList.Declarations[2].Name.Name.Should().Be("c");
         }
 
         [Test]
@@ -60,21 +61,21 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.AstBuilder
 
             var result = subject.Visit(context);
 
-            Assert.IsTrue(result is Root);
+            result.Should().BeOfType<Root>();
             var root = result as Root;
 
-            Assert.AreEqual(1, root.Declarations.Count);
+            root.Declarations.Should().HaveCount(1);
             var declarationList = root.Declarations[0] as VariableDeclarationList;
 
             var typeNameSpecifier = declarationList.Type as TypeNameSpecifier;
-            Assert.IsNotNull(typeNameSpecifier);
-            Assert.AreEqual("int", typeNameSpecifier.Identifier.Name);
+            typeNameSpecifier.Should().NotBeNull();
+            typeNameSpecifier.Identifier.Name.Should().Be("int");
 
-            Assert.AreEqual(StorageQualifier.Uniform, typeNameSpecifier.Qualifier.Storage);
+            typeNameSpecifier.Qualifier.Storage.Should().Be(StorageQualifier.Uniform);
 
-            Assert.IsNotNull(declarationList);
-            Assert.AreEqual(1, declarationList.Declarations.Count);
-            Assert.AreEqual("a", declarationList.Declarations[0].Name.Name);
+            declarationList.Should().NotBeNull();
+            declarationList.Declarations.Should().HaveCount(1);
+            declarationList.Declarations[0].Name.Name.Should().Be("a");
         }
 
         [Test]
@@ -87,23 +88,23 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.AstBuilder
 
             var result = subject.Visit(context);
 
-            Assert.IsTrue(result is Root);
+            result.Should().BeOfType<Root>();
             var root = result as Root;
 
-            Assert.AreEqual(1, root.Declarations.Count);
+            root.Declarations.Should().HaveCount(1);
             var declarationList = root.Declarations[0] as VariableDeclarationList;
 
             var structTypeSpecifier = declarationList.Type as StructTypeSpecifier;
-            Assert.AreEqual(1, structTypeSpecifier.Members.Count);
+            structTypeSpecifier.Members.Should().HaveCount(1);
 
             var memberType = structTypeSpecifier.Members[0].Type as TypeNameSpecifier;
-            Assert.IsNotNull(memberType);
-            Assert.AreEqual("int", memberType.Identifier.Name);
+            memberType.Should().NotBeNull();
+            memberType.Identifier.Name.Should().Be("int");
 
-            Assert.AreEqual(1, structTypeSpecifier.Members[0].Identifiers.Count);
-            Assert.AreEqual("a", structTypeSpecifier.Members[0].Identifiers[0].Name);
+            structTypeSpecifier.Members[0].Identifiers.Should().HaveCount(1);
+            structTypeSpecifier.Members[0].Identifiers[0].Name.Should().Be("a");
 
-            Assert.AreEqual("b", declarationList.Declarations[0].Name.Name);
+            declarationList.Declarations[0].Name.Name.Should().Be("b");
         }
 
         [Test]
@@ -116,26 +117,26 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.AstBuilder
 
             var result = subject.Visit(context);
 
-            Assert.IsTrue(result is Root);
+            result.Should().BeOfType<Root>();
             var root = result as Root;
 
-            Assert.AreEqual(1, root.Declarations.Count);
+            root.Declarations.Should().HaveCount(1);
             var funcDeclaration = root.Declarations[0] as FunctionDeclaration;
 
-            Assert.AreEqual("DoSomething", funcDeclaration.Name.Name);
+            funcDeclaration.Name.Name.Should().Be("DoSomething");
 
             var typeSpec = funcDeclaration.TypeSpecifier as TypeNameSpecifier;
-            Assert.IsNotNull(typeSpec);
+            typeSpec.Should().NotBeNull();
 
-            Assert.AreEqual("int", typeSpec.Identifier.Name);
+            typeSpec.Identifier.Name.Should().Be("int");
 
-            Assert.AreEqual(2, funcDeclaration.Parameters.Count);
+            funcDeclaration.Parameters.Should().HaveCount(2);
 
-            Assert.AreEqual("float", ((TypeNameSpecifier)funcDeclaration.Parameters[0].TypeSpecifier).Identifier.Name);
-            Assert.AreEqual("a", funcDeclaration.Parameters[0].Name.Name);
+            ((TypeNameSpecifier)funcDeclaration.Parameters[0].TypeSpecifier).Identifier.Name.Should().Be("float");
+            funcDeclaration.Parameters[0].Name.Name.Should().Be("a");
 
-            Assert.AreEqual("int", ((TypeNameSpecifier)funcDeclaration.Parameters[1].TypeSpecifier).Identifier.Name);
-            Assert.AreEqual("b", funcDeclaration.Parameters[1].Name.Name);
+            ((TypeNameSpecifier)funcDeclaration.Parameters[1].TypeSpecifier).Identifier.Name.Should().Be("int");
+            funcDeclaration.Parameters[1].Name.Name.Should().Be("b");
         }
 
         [Test]
@@ -148,17 +149,17 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.AstBuilder
 
             var result = subject.Visit(context);
 
-            Assert.IsTrue(result is Root);
+            result.Should().BeOfType<Root>();
             var root = result as Root;
 
-            Assert.AreEqual(1, root.Declarations.Count);
+            root.Declarations.Should().HaveCount(1);
             var precDeclaration = root.Declarations[0] as PrecisionDeclaration;
 
             var typeSpec = precDeclaration.Type as TypeNameSpecifier;
-            Assert.IsNotNull(typeSpec);
-            Assert.AreEqual("float", typeSpec.Identifier.Name);
+            typeSpec.Should().NotBeNull();
+            typeSpec.Identifier.Name.Should().Be("float");
 
-            Assert.AreEqual(PrecisionQualifier.HighP, precDeclaration.PrecisionQualifier);
+            precDeclaration.PrecisionQualifier.Should().Be(PrecisionQualifier.HighP);
         }
     }
 }

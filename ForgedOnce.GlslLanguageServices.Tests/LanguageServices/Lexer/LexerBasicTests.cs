@@ -1,4 +1,5 @@
-﻿using ForgedOnce.GlslLanguageServices.Tests.Parser;
+﻿using FluentAssertions;
+using ForgedOnce.GlslLanguageServices.Tests.Parser;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -39,9 +40,9 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.Lexer
                 var lexer = TestUtils.SetupLexer(id);
 
                 var tokens = lexer.GetAllTokens();
-                Assert.AreEqual(1, tokens.Count);                
-                Assert.AreEqual(id, tokens[0].Text);
-                Assert.AreEqual(GLSL_ES300Lexer.Identifier, tokens[0].Type);
+                tokens.Should().HaveCount(1);
+                tokens[0].Text.Should().Be(id);
+                tokens[0].Type.Should().Be(GLSL_ES300Lexer.Identifier);
             }
 
             foreach (var id in this.invalidIdentifiers)
@@ -49,7 +50,7 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.Lexer
                 var lexer = TestUtils.SetupLexer(id);
 
                 var tokens = lexer.GetAllTokens();
-                Assert.IsTrue(tokens.Count == 0 || tokens[0].Type != GLSL_ES300Lexer.Identifier);                
+                (tokens.Count == 0 || tokens[0].Type != GLSL_ES300Lexer.Identifier).Should().BeTrue();           
             }
         }
 
@@ -65,9 +66,9 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.Lexer
         {
             var lexer = TestUtils.SetupLexer(payload);
             var tokens = lexer.GetAllTokens();
-            Assert.AreEqual(1, tokens.Count);
-            Assert.AreEqual(expectedTokenType, tokens[0].Type);
-            Assert.AreEqual(payload, tokens[0].Text);
+            tokens.Should().HaveCount(1);
+            tokens[0].Type.Should().Be(expectedTokenType);
+            tokens[0].Text.Should().Be(payload);
         }
 
         [Test]
@@ -77,9 +78,9 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.Lexer
             var lexer = TestUtils.SetupLexer(payload);
             var tokens = lexer.GetAllTokens();
 
-            Assert.AreEqual(1, tokens.Count);
-            Assert.AreEqual(GLSL_ES300Lexer.IntegerLiteral, tokens[0].Type);
-            Assert.AreEqual(payload, tokens[0].Text);
+            tokens.Should().HaveCount(1);
+            tokens[0].Type.Should().Be(GLSL_ES300Lexer.IntegerLiteral);
+            tokens[0].Text.Should().Be(payload);
         }
 
         [Test]
@@ -99,9 +100,9 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.Lexer
         {
             var lexer = TestUtils.SetupLexer(payload);
             var tokens = lexer.GetAllTokens();
-            Assert.AreEqual(1, tokens.Count);
-            Assert.AreEqual(GLSL_ES300Lexer.FloatingLiteral, tokens[0].Type);
-            Assert.AreEqual(payload, tokens[0].Text);
+            tokens.Should().HaveCount(1);
+            tokens[0].Type.Should().Be(GLSL_ES300Lexer.FloatingLiteral);
+            tokens[0].Text.Should().Be(payload);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ForgedOnce.GlslLanguageServices.Builder;
+﻿using FluentAssertions;
+using ForgedOnce.GlslLanguageServices.Builder;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.Builder.Semanti
 
             ShaderFile file = ShaderFile.CreateFromText(shaderText);
 
-            Assert.IsNotNull(file.SemanticContext);
-            Assert.AreEqual(2, file.SemanticContext.Model.NodeSymbols.Count);
+            file.SemanticContext.Should().NotBeNull();
+            file.SemanticContext.Model.NodeSymbols.Should().HaveCount(2);
         }
 
         [Test]
@@ -27,8 +28,8 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.Builder.Semanti
 
             ShaderFile file = ShaderFile.CreateFromText(shaderText);
 
-            Assert.IsNotNull(file.SemanticContext);
-            Assert.AreEqual(2, file.SemanticContext.Model.NodeSymbols.Count);
+            file.SemanticContext.Should().NotBeNull();
+            file.SemanticContext.Model.NodeSymbols.Should().HaveCount(2);
         }
     }
 }

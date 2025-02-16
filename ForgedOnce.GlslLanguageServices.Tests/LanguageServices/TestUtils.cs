@@ -9,7 +9,7 @@ namespace ForgedOnce.GlslLanguageServices.Tests.Parser
     {
         public static GLSL_ES300Parser SetupParser(string input)
         {
-            ICharStream stream = CharStreams.fromstring(input);
+            ICharStream stream = CharStreams.fromString(input);
             GLSL_ES300Lexer lexer = new GLSL_ES300Lexer(stream);            
             ITokenStream tokens = new CommonTokenStream(lexer);
             GLSL_ES300Parser parser = new GLSL_ES300Parser(tokens);
@@ -19,7 +19,7 @@ namespace ForgedOnce.GlslLanguageServices.Tests.Parser
 
         public static GLSL_ES300Lexer SetupLexer(string input)
         {
-            ICharStream stream = CharStreams.fromstring(input);
+            ICharStream stream = CharStreams.fromString(input);
             GLSL_ES300Lexer lexer = new GLSL_ES300Lexer(stream);
             return lexer;
         }

@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <NodeRedist Include="$(PkgForgedOnce_Launcher_MSBuild_Default)\lib\netcoreapp3.1\NodeRedist\**\*.*" />
-    <CodeGeneratorJs Include="$(PkgForgedOnce_Launcher_MSBuild_Default)\lib\netcoreapp3.1\CodeGeneratorJs\**\*.*" />
+    <NodeRedist Include="$(PkgForgedOnce_Launcher_MSBuild_Default)\lib\net8.0\NodeRedist\**\*.*" />
+    <CodeGeneratorJs Include="$(PkgForgedOnce_Launcher_MSBuild_Default)\lib\net8.0\CodeGeneratorJs\**\*.*" />
   </ItemGroup>
 
   <Target Name="CopyRedist" AfterTargets="Build">

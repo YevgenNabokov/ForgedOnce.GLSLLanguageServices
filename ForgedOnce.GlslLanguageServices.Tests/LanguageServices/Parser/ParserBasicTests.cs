@@ -1,5 +1,6 @@
 ﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
+using FluentAssertions;
 using ForgedOnce.GlslLanguageServices.Tests.LanguageServices.TestResources;
 using NUnit.Framework;
 using System;
@@ -23,10 +24,10 @@ namespace ForgedOnce.GlslLanguageServices.Tests.Parser
         {
             var parser = TestUtils.SetupParser(payload);
             var context = parser.literal();
-            Assert.AreEqual(1, context.children.Count);
+            context.children.Should().HaveCount(1);
 
-            Assert.IsTrue(context.children[0] is ITerminalNode);
-            Assert.AreEqual(expectedTokenType, ((ITerminalNode)context.children[0]).Symbol.Type);
+            context.children[0].Should().BeAssignableTo<ITerminalNode>();
+            ((ITerminalNode)context.children[0]).Symbol.Type.Should().Be(expectedTokenType);
         }
 
         [Test]
@@ -40,8 +41,8 @@ namespace ForgedOnce.GlslLanguageServices.Tests.Parser
 
             var parser = TestUtils.SetupParser(payload);
             var context = parser.struct_specifier();
-            
-            Assert.IsNull(context.exception);
+
+            context.exception.Should().BeNull();
         }
 
         [Test]
@@ -52,23 +53,24 @@ namespace ForgedOnce.GlslLanguageServices.Tests.Parser
             var parser = TestUtils.SetupParser(payload);
             var context = parser.declaration();
 
-            Assert.IsNull(context.exception);
+            context.exception.Should().BeNull();
             var declarators = context.declaratorlist();
-            Assert.IsNotNull(declarators);
-            Assert.IsNotNull(context.Semicolon());
-            Assert.AreEqual(GLSL_ES300Lexer.Semicolon, context.Semicolon().Symbol.Type);
+
+            declarators.Should().NotBeNull();
+            context.Semicolon().Should().NotBeNull();
+            context.Semicolon().Symbol.Type.Should().Be(GLSL_ES300Lexer.Semicolon);
             var declarator = declarators.declarator();
-            Assert.IsNotNull(declarator);
+            declarator.Should().NotBeNull();
             var type = declarator.fully_specified_type();
-            Assert.NotNull(type);
+            type.Should().NotBeNull();
             var typeSpec = type.type_specifier_nonarray();
-            Assert.NotNull(typeSpec);
+            typeSpec.Should().NotBeNull();
             var intT = typeSpec.Int_type();
-            Assert.NotNull(intT);
+            intT.Should().NotBeNull();
 
             var id = declarator.Identifier();
-            Assert.NotNull(id);
-            Assert.AreEqual(varName, id.Symbol.Text);
+            id.Should().NotBeNull();
+            id.Symbol.Text.Should().Be(varName);
         }
 
         [Test]
@@ -79,26 +81,26 @@ namespace ForgedOnce.GlslLanguageServices.Tests.Parser
             var parser = TestUtils.SetupParser(payload);
             var context = parser.external_declaration_list();
 
-            Assert.IsNull(context.exception);
+            context.exception.Should().BeNull();
             var declarations = context.external_declaration();
-            Assert.IsNotNull(declarations);
+            declarations.Should().NotBeNull();
             var d = declarations;
             var declaration = d.declaration();
-            Assert.NotNull(declaration);
+            declaration.Should().NotBeNull();
             var dList = declaration.declaratorlist();
-            Assert.NotNull(dList);
+            dList.Should().NotBeNull();
             var declarator = dList.declarator();
-            Assert.NotNull(declarator);
+            declarator.Should().NotBeNull();
             var type = declarator.fully_specified_type();
-            Assert.NotNull(type);
+            type.Should().NotBeNull();
             var typeSpec = type.type_specifier_nonarray();
-            Assert.NotNull(typeSpec);
+            typeSpec.Should().NotBeNull();
             var intT = typeSpec.Int_type();
-            Assert.NotNull(intT);
+            intT.Should().NotBeNull();
 
             var id = declarator.Identifier();
-            Assert.NotNull(id);
-            Assert.AreEqual(varName, id.Symbol.Text);
+            id.Should().NotBeNull();
+            id.Symbol.Text.Should().Be(varName);
         }
     }
 }

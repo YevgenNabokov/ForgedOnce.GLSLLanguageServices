@@ -10,7 +10,7 @@ namespace ForgedOnce.GlslLanguageServices.Parser
     {
         public Root Parse(string payload)
         {
-            ICharStream stream = CharStreams.fromstring(payload);
+            ICharStream stream = CharStreams.fromString(payload);
             GLSL_ES300Lexer lexer = new GLSL_ES300Lexer(stream);
             ITokenStream tokens = new CommonTokenStream(lexer);
             GLSL_ES300Parser parser = new GLSL_ES300Parser(tokens);

@@ -1,4 +1,5 @@
 ﻿using Antlr4.Runtime;
+using FluentAssertions;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -31,14 +32,14 @@ out vec4 color;
         [Test]
         public void CanParseNoDeclarations()
         {
-            ICharStream stream = CharStreams.fromstring(NoDeclarationsPayload);
+            ICharStream stream = CharStreams.fromString(NoDeclarationsPayload);
             GLSL_ES300Lexer lexer = new GLSL_ES300Lexer(stream);
             ITokenStream tokens = new CommonTokenStream(lexer);
             GLSL_ES300Parser parser = new GLSL_ES300Parser(tokens);
             parser.BuildParseTree = true;
 
             var context = parser.translation_unit();
-            Assert.IsNull(context.exception);
+            context.exception.Should().BeNull();
         }
     }
 }

@@ -6,7 +6,7 @@
 
   <PropertyGroup>
     <PackageOutputPath>$(SolutionDir)NugetOutputs</PackageOutputPath>
-    <Version>0.1.10</Version>
+    <Version>0.1.11</Version>
     <PackageId>ForgedOnce.GlslLanguageServices.Parser</PackageId>
     <Authors>Yevgen Nabokov</Authors>
     <Company />
@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.8.0" />
+    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
   </ItemGroup>
 
   <ItemGroup>

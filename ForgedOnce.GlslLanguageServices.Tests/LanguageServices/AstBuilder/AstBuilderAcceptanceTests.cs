@@ -1,4 +1,5 @@
-﻿using ForgedOnce.GlslLanguageServices.LanguageModels.Ast;
+﻿using FluentAssertions;
+using ForgedOnce.GlslLanguageServices.LanguageModels.Ast;
 using ForgedOnce.GlslLanguageServices.Parser;
 using ForgedOnce.GlslLanguageServices.Tests.LanguageServices.TestResources;
 using ForgedOnce.GlslLanguageServices.Tests.Parser;
@@ -22,7 +23,7 @@ namespace ForgedOnce.GlslLanguageServices.Tests.LanguageServices.AstBuilder
 
             var result = subject.Visit(context);
 
-            Assert.IsTrue(result is Root);
+            result.Should().BeOfType<Root>();
             var root = result as Root;
         }
 
